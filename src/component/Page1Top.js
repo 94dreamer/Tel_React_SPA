@@ -2,6 +2,7 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
+import StatItem from '../component/StatItem';
 
 class Page1Top extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Page1Top extends Component {
             <p className="g-lastu">按时间查看统计结果</p>
           </div>
           <div className="stat-item clearfix">
-
+            <StatItem />
             {this.props.level &&
             (<div className="stat_start" style={this.props.isCallCenter && {paddingTop:40}}>
               <div id="stratWork">{this.props.isCallCenter ? "正在登录" : "开始工作"}</div>
