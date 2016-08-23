@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page1Top from './component/Page1Top';
+import Page1Bottom from './component/Page1Bottom';
 import './App.css';
 
 class App extends Component {
@@ -20,7 +21,8 @@ class App extends Component {
           <header id="tel-bar" className="telemarket-hd clearfix" style={{position: "relative"}}>
             <a className="bkl dn"><em className="ico-n"></em>保存并退出</a>
           </header>
-          <Page1Top level={this.state.level} isCallCenter={this.state.isCallCenter}/>
+          <Page1Top level={this.state.level} isCallCenter={this.state.isCallCenter} />
+          <Page1Bottom />
         </section>
       </div>
     );
