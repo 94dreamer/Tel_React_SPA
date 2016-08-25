@@ -195,7 +195,7 @@ class TableTr extends Component {
       this.props.telvisitinfo.remark && tel_content.push('备注说明：' + this.props.telvisitinfo.remark);
     } else {
       this.props.telvisitinfo.tag && tel_content.push(this.props.telvisitinfo.tag);
-      this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig, "$&" + "\n"))
+      this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig,"$&"+"\n"))
     }
     var tel_content_join = tel_content.join('');
     return (
