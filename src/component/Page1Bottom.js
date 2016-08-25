@@ -3,7 +3,8 @@
  */
 import React,{Component} from 'react';
 import FootPage from '../component/FootPage';
-
+import jquery from 'jquery';
+window.$ = window.jquery = jquery;
 class Page1Bottom extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +22,29 @@ class Page1Bottom extends Component {
 
   componentDidMount() {
     /*装载完成阶段调用ajax渲染table明细*/
-    fetch("./table.json", {credentials: 'include'}).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      if (data.result.code === 0) {
-        this.setState(data.result)
-      } else {
-        alert("data.result.message");
+    //一、此处为什么放弃fetch？原因有几个
+    //1.fetch的兼容性较差
+    //2.fetch暂时不支持中断，没有相关API。
+    // 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
+    /*fetch("./table.json", {credentials: 'include'}).then(function (response) {
+     return response.json();
+     }).then(function (data) {
+     if (data.result.code === 0) {
+     this.setState(data.result)
+     } else {
+     alert("data.result.message");
+     }
+     }).catch(function (e) {
+     console.log("Oops, error");
+     });*/
+    //二、ajax的坑
+    // 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。
+    //或者是bind(this)。
+    // 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
+    $.ajax({
+      url: './table.json', success: function () {
       }
-    }).catch(function (e) {
-      console.log("Oops, error");
-    });
+    })
   }
 
   render() {
@@ -76,79 +89,30 @@ class Page1Bottom extends Component {
           <div className="log-table log-table-sales">
             {!this.state.data || !this.state.data.list.length ?
               <div className="side-null"></div>
-              : (!this.props.level?
+              : (!this.props.level ?
               <div>
-              <table cellpadding="0" cellspacing="0" style={{width:100+"%"}} data-total="<%=data.total%>">
-              <tr>
-                (this.props.xkTel.jobid===this.props.xkTel.login_jobid?<th width="3%"><i class="btn-check"></i></th>:null)
-                <th width="3%">序号</th>
-                <th width="6%">客户</th>
-                <th width="10%">归属</th>
-                <th width="8%">责任销售</th>
-                <th width="8%">拜访时间</th>
-                <th width="8%">通话时长</th>
-                <th width="8%">客户意向</th>
-                <th >沟通详情</th>
-                <th width="6%">跟进结果</th>
-                <th width="6%">呼叫状态</th>
-                <th width="6%">呼叫类型</th>
-                <th width="10%">电销姓名</th>
-              </tr>
-              for(let i=0;i< this.state.data.list.length;i++){
-              var list = data.list[i]
-              <tr>
-              <%if(window.xkTel.jobid==window.xkTel.login_jobid){%>
-              <td><%if(list.queueinfo.is_call=="1"){%><i data-uid="<%=list.basicinfo.uid%>" class="btn-check"></i><%}%></td>
-              <%}%>
-              <td><%=list.prekey%></td>
-
-              <%if(window.$_GET['groupid']){%>
-              <td><a target='_blank'
-              href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&groupid=<%=window.$_GET['groupid']%>"><%=list.basicinfo.name%></a>
-              </td><!--客户-->
-              <%}else{%>
-              <td><a target='_blank'
-              href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&jobid=<%=window.$_GET['jobid']%>"><%=list.basicinfo.name%></a>
-              </td><!--客户-->
-              <%}%>
-
-              <td><%=list.basicinfo.companyshortname%> <%=list.basicinfo.storename%></td><!--公司归属-->
-
-              <%if(list.saleinfo.major){%>
-              <td><%=list.saleinfo.major.name%></td><!--责任销售-->
-              <%}else{%>
-              <td><%=list.saleinfo.server_line && list.saleinfo.server_line.name%></td><!--服务销售-->
-              <%}%>
-
-              <td><%if(list.telvisitinfo.visit_time_view){%><%=list.telvisitinfo.visit_time_view%><%}%></td><!--拜访时间-->
-              <td><%=list.telvisitinfo.holdingtime%></td><!--通话时长-->
-              <td><%=list.telvisitinfo.buylevel_view%></td><!--客户意向-->
-              <%var tel_content=[];%>
-              <%if(list.telvisitinfo.visitway==3){%>
-              <%list.telvisitinfo.tomeet_view && tel_content.push('销售是否面见：'+list.telvisitinfo.tomeet_view);
-              list.telvisitinfo.isremembersale_view && tel_content.push('是否记得销售姓名：'+list.telvisitinfo.isremembersale_view);
-              list.telvisitinfo.isknowtopshow_view && tel_content.push('是否知道认证房置顶展示：'+list.telvisitinfo.isknowtopshow_view);
-              list.telvisitinfo.howlongtostore_view && tel_content.push('销售多久去一次门店：'+list.telvisitinfo.howlongtostore_view);
-              list.telvisitinfo.howlongcommunicate_view && tel_content.push('沟通了多久：'+list.telvisitinfo.howlongcommunicate_view);
-              list.telvisitinfo.satisfiedservice_view && tel_content.push('是否满意销售服务：'+list.telvisitinfo.satisfiedservice_view);
-              list.telvisitinfo.remark && tel_content.push('备注说明：'+list.telvisitinfo.remark);%>
-              <%}else{list.telvisitinfo.tag && tel_content.push(list.telvisitinfo.tag);list.telvisitinfo.remark && tel_content.push(list.telvisitinfo.remark.replace(/.{30}/ig,"$&"+"\n"));}%>
-              <td title="<%=tel_content.join('\r')%>" style="cursor: help;">
-              <%var tel_content_join=tel_content.join('');%>
-              <%if(tel_content_join.length>10){%>
-              <%=tel_content_join.substring(0,10)+"..."%>
-              <%}else{%>
-              <%=tel_content_join%>
-              <%}%>
-              </td><!--沟通详情-->
-              <td><%=list.queueinfo.follow_status_view%></td><!--跟进结果-->
-              <td><%=list.queueinfo.call_status_view%></td><!--呼叫状态-->
-              <td><%=list.telvisitinfo.calltype_view%></td><!--呼叫类型-->
-              <td><%if(list.telvisitinfo.visitway==3 && list.telsaleinfo){%><%=list.telsaleinfo.group_name%>-<%=list.telsaleinfo.name%><%}%></td><!--电销姓名-->
-              </tr>
-              <%}%>
-            </table>
-              <p class="callnum">共找到经纪人<span><%=data.total%></span>位</p></div>:null)
+                <table cellpadding="0" cellspacing="0" style={{width:100+"%"}} data-total="<%=data.total%>">
+                  <tr>
+                    (this.props.xkTel.jobid===this.props.xkTel.login_jobid?
+                    <th width="3%"><i class="btn-check"></i></th>
+                    :null)
+                    <th width="3%">序号</th>
+                    <th width="6%">客户</th>
+                    <th width="10%">归属</th>
+                    <th width="8%">责任销售</th>
+                    <th width="8%">拜访时间</th>
+                    <th width="8%">通话时长</th>
+                    <th width="8%">客户意向</th>
+                    <th >沟通详情</th>
+                    <th width="6%">跟进结果</th>
+                    <th width="6%">呼叫状态</th>
+                    <th width="6%">呼叫类型</th>
+                    <th width="10%">电销姓名</th>
+                  </tr>
+                  {}
+                </table>
+                <p class="callnum">共找到经纪人<span></span>位</p>
+              </div> : null)
             }
           </div>
           <div className="main-foot">
@@ -159,5 +123,49 @@ class Page1Bottom extends Component {
     )
   }
 }
-class TableTr extends
+class TableTr extends Component {
+  constructor(props) {
+  }
+
+  render() {
+    var tel_content = [];
+    if (this.props.telvisitinfo.visitway == 3) {
+      this.props.telvisitinfo.tomeet_view && tel_content.push('销售是否面见：' + this.props.telvisitinfo.tomeet_view);
+      this.props.telvisitinfo.isremembersale_view && tel_content.push('是否记得销售姓名：' + this.props.telvisitinfo.isremembersale_view);
+      this.props.telvisitinfo.isknowtopshow_view && tel_content.push('是否知道认证房置顶展示：' + this.props.telvisitinfo.isknowtopshow_view);
+      this.props.telvisitinfo.howlongtostore_view && tel_content.push('销售多久去一次门店：' + this.props.telvisitinfo.howlongtostore_view);
+      this.props.telvisitinfo.howlongcommunicate_view && tel_content.push('沟通了多久：' + this.props.telvisitinfo.howlongcommunicate_view);
+      this.props.telvisitinfo.satisfiedservice_view && tel_content.push('是否满意销售服务：' + this.props.telvisitinfo.satisfiedservice_view);
+      this.props.telvisitinfo.remark && tel_content.push('备注说明：' + this.props.telvisitinfo.remark)
+    } else {
+      this.props.telvisitinfo.tag && tel_content.push(this.props.telvisitinfo.tag);
+      this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig, "$&" + "\n"))
+    }
+    var tel_content_join = tel_content.join('');
+    return (
+      <tr>
+        {this.props.xkTel.jobid === this.props.xkTel.login_jobid ?
+          <td>(this.props.queueinfo.is_call==="1"?<i data-uid={this.props..basicinfo.uid} className="btn-check"></i>:null)
+          </td>
+          : null}
+        <td>{this.props.prekey}</td>
+        <td>
+          <a target='_blank' href={"/saletel/record?citycode="+window.xkTel.citycode+"&uid="+this.props.basicinfo.uid+(window.$_GET['groupid']?"&groupid="+window.$_GET["groupid"]:"&jobid="+window.$_GET["jobid"])}>{this.props.basicinfo.name}</a>
+        </td>
+        <td>{this.props.basicinfo.companyshortname} {this.props.basicinfo.storename}</td>
+        <td>{this.props.saleinfo.major ? this.props.saleinfo.major.name : (this.props.saleinfo.server_line ? this.props.saleinfo.server_line.name : null)}</td>
+
+        <td>{this.props.telvisitinfo.visit_time_view ? this.props.telvisitinfo.visit_time_view : null}</td>
+        <td>{this.props.telvisitinfo.holdingtime}</td>
+        <td>{this.props.telvisitinfo.buylevel_view}</td>
+        <td title={tel_content.join('\r')} style={{cursor: "help"}}>
+          {tel_content_join.length > 10 ? tel_content_join.substring(0, 10) + "..." : tel_content_join}
+        </td>
+        <td>{this.props.queueinfo.follow_status_view}</td>
+        <td>{this.props.queueinfo.call_status_view}</td>
+        <td>{this.props.telvisitinfo.calltype_view}</td>
+        <td>{(this.props.telvisitinfo.visitway === 3 && this.props.telsaleinfo) ? this.props.telsaleinfo.group_name + "-" + this.props.telsaleinfo.name : null}</td>
+      </tr>)
+  }
+}
 export default Page1Bottom;

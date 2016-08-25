@@ -20,6 +20,11 @@ class StatItem extends Component {
 
     }
   }
+
+  shouldComponentUpdate(){
+    //此处日期是否相同，组件减少更新
+  }
+
   render() {
     var c1=this.props.conversion_complete/this.props.conversion_target*100||0;
     var c_1=c1>100?100:c1;
