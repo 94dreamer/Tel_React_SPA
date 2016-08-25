@@ -47,9 +47,9 @@ class FootPage extends Component {
     return (
       this.props.total ?
         <ul className="turn-page clearfix">
-          {this.props.active>1?<li className="prev"><a href="###" onClick={this.prevPage}>上一页</a></li>:null}
+          {this.props.active>1?<li className="prev"><a style={{cursor:"pointer"}} onClick={this.prevPage}>上一页</a></li>:null}
           {liArr}
-          {this.props.active<totalPage?<li className="next"><a href="###" onClick={this.nextPage}>下一页</a></li>:null}
+          {this.props.active<totalPage?<li className="next"><a style={{cursor:"pointer"}} onClick={this.nextPage}>下一页</a></li>:null}
           <li className="pl5 total">共<span>{totalPage}</span>页</li>
         </ul>
         : null
@@ -71,7 +71,7 @@ class PageLi extends Component {
   render() {
     return (
       <li className="page">
-        <a href="###" onClick={this.clickHandle} className={this.props.index===this.props.active?"active":null}>{this.props.index}</a>
+        <a style={{cursor:"pointer"}} onClick={this.clickHandle} className={this.props.index===this.props.active?"active":null}>{this.props.index}</a>
       </li>)
   }
 }

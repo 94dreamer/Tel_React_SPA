@@ -3,28 +3,40 @@
  */
 import React,{Component} from 'react';
 import FootPage from '../component/FootPage';
-var jquery=require('jquery');
+var jquery = require('jquery');
 console.log(React);
 
 class Page1Bottom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1,
-      data:{}
+      data: {}
     }
     this.turnPage = this.turnPage.bind(this);
-    this.callout=this.callout.bind(this);
+    this.callout = this.callout.bind(this);
+    this.ajaxTable = this.ajaxTable.bind(this);
   }
 
   turnPage(index) {
-    this.setState({
-      page: index
-    });
+    this.ajaxTable(index);
   }
 
-  callout(tel,uid,uptime){
+  callout(tel, uid, uptime) {
 
+  }
+
+  ajaxTable(page) {
+    this.state.ajaxRequest=jquery.ajax({
+      url: './table.json',
+      data: {page: page},
+      success: function (res) {
+        if (res.result.code == 0) {
+          this.setState(res.result)
+        } else {
+          alert(res.result.message);
+        }
+      }.bind(this)
+    })
   }
 
   componentDidMount() {
@@ -48,21 +60,16 @@ class Page1Bottom extends Component {
     // 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。
     //或者是bind(this)。
     // 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
-    jquery.ajax({
-      url: './table.json',
-      success: function (res) {
-        if (res.result.code == 0) {
-          this.setState(res.result)
-        } else {
-          alert(res.result.message);
-        }
-      }.bind(this)
-    })
+    this.ajaxTable()
+  }
+
+  componentWillUnmount(){//组件移除前停止异步操作。
+    this.state.ajaxRequest.abort();
   }
 
   render() {
     const trArr = [];
-    if(this.state.data && this.state.data.list && this.state.data.list.length){
+    if (this.state.data && this.state.data.list && this.state.data.list.length) {
       for (let i = 0; i < this.state.data.list.length; i++) {
         trArr.push(<TableTr callout={this.callout} key={i} level={this.props.level} {...this.state.data.list[i]} />);
       }
@@ -93,20 +100,20 @@ class Page1Bottom extends Component {
             <option value="6">C不考虑</option>
             <option value="0">未填写</option>
           </select>
-            <div className="a_search"><a href="###">搜索</a></div>
+            <div className="a_search"><a style={{cursor:"pointer"}}>搜索</a></div>
             <figure className="opt-a pa">
-              <a href="###" id="firstHandle">优先处理
+              <a style={{cursor:"pointer"}} id="firstHandle">优先处理
                 <span className="firstH_box">
                 <span data-type="1">已选项</span>
                 <span data-type="3">当前页</span>
                 <span data-type="2">搜索结果</span>
               </span>
               </a>
-              <a href="###" id="setTarget">设置目标</a>
+              <a style={{cursor:"pointer"}} id="setTarget">设置目标</a>
             </figure>
             <input id="keyword" type="text" placeholder="请输入公司名、门店名、经纪人姓名、经纪人手机号"/></div>
           <div className="log-table log-table-sales">
-            {(!this.state.data || !this.state.data.list || !this.state.data.list.length)?
+            {(!this.state.data || !this.state.data.list || !this.state.data.list.length) ?
               <div className="side-null"></div>
               : (!this.props.level ?
               <div>
@@ -171,16 +178,20 @@ class Page1Bottom extends Component {
 class TableTr extends Component {
   constructor(props) {
     super(props)
-    this.state={
-      check:false
+    this.state = {
+      check: false
     }
-    this.checkHandle=this.checkHandle.bind(this);
+    this.checkHandle = this.checkHandle.bind(this);
   }
 
-  checkHandle(){
+  checkHandle() {
     this.setState({
-      check:!this.state.check
+      check: !this.state.check
     })
+  }
+
+  callout() {
+    this.props.callout(this.props.basicinfo.mobile, this.props.basicinfo.uid, this.props.queueinfo.visit_time)
   }
 
   render() {
@@ -195,14 +206,15 @@ class TableTr extends Component {
       this.props.telvisitinfo.remark && tel_content.push('备注说明：' + this.props.telvisitinfo.remark);
     } else {
       this.props.telvisitinfo.tag && tel_content.push(this.props.telvisitinfo.tag);
-      this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig,"$&"+"\n"))
+      this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig, "$&" + "\n"))
     }
     var tel_content_join = tel_content.join('');
     return (
       !this.props.level ?
         <tr>
           {this.props.xkTel.jobid === this.props.xkTel.login_jobid ?
-            <td>(this.props.queueinfo.is_call==="1"?<i onClick={this.checkHandle} data-uid={this.props.basicinfo.uid} className={this.state.check?"btn-checked":"btn-check"}></i>:null)
+            <td>
+              (this.props.queueinfo.is_call==="1"?<i onClick={this.checkHandle} data-uid={this.props.basicinfo.uid} className={this.state.check?"btn-checked":"btn-check"}></i>:null)
             </td>
             : null}
           <td>{this.props.prekey}</td>
@@ -242,7 +254,7 @@ class TableTr extends Component {
           <td>{this.props.telvisitinfo.calltype_view}</td>
           <td>{(this.props.telvisitinfo.visitway === 3 && this.props.telsaleinfo) ? this.props.telsaleinfo.group_name + "-" + this.props.telsaleinfo.name : null}</td>
           <td>
-            <a onClick={this.props.callout} data-uid={this.props.basicinfo.uid} data-mobile={this.props.basicinfo.mobile} data-time={this.props.queueinfo.visit_time} style={{cursor:"pointer"}}>呼叫</a>
+            <a onClick={this.callout} style={{cursor:"pointer"}}>呼叫</a>
           </td>
         </tr>)
   }
