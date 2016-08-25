@@ -12,12 +12,17 @@ class Page1Bottom extends Component {
       page: 1
     }
     this.turnPage = this.turnPage.bind(this);
+    this.callout=this.callout.bind(this);
   }
 
   turnPage(index) {
     this.setState({
       page: index
     });
+  }
+
+  callout(tel,uid,uptime){
+
   }
 
   componentDidMount() {
@@ -42,12 +47,22 @@ class Page1Bottom extends Component {
     //或者是bind(this)。
     // 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
     $.ajax({
-      url: './table.json', success: function () {
-      }
+      url: './table.json',
+      success: function (res) {
+        if (res.result.code == 0) {
+          this.setState(res.result)
+        } else {
+          alert(res.result.message);
+        }
+      }.bind(this)
     })
   }
 
   render() {
+    const trArr = [];
+    for (let i = 0; i < this.state.data.list.length; i++) {
+      trArr.push(<TableTr callout={this.callout} key={i} level={this.props.level} {...this.state.data.list[i]} />);
+    }
     return (
       <div id="page1_bottom">
         <div className="log-con-bd">
@@ -94,7 +109,7 @@ class Page1Bottom extends Component {
                 <table cellpadding="0" cellspacing="0" style={{width:100+"%"}} data-total="<%=data.total%>">
                   <tr>
                     (this.props.xkTel.jobid===this.props.xkTel.login_jobid?
-                    <th width="3%"><i class="btn-check"></i></th>
+                    <th width="3%"><i className="btn-check"></i></th>
                     :null)
                     <th width="3%">序号</th>
                     <th width="6%">客户</th>
@@ -109,14 +124,36 @@ class Page1Bottom extends Component {
                     <th width="6%">呼叫类型</th>
                     <th width="10%">电销姓名</th>
                   </tr>
-                  {}
+                  {trArr}
                 </table>
-                <p class="callnum">共找到经纪人<span></span>位</p>
-              </div> : null)
+                <p className="callnum">共找到经纪人<span>{this.state.data.total}</span>位</p>
+              </div> :
+              <div>
+                <table cellpadding="0" cellspacing="0" style={{width:100+"%"}}>
+                  <tr>
+                    <th width="3%">序号</th>
+                    <th width="6%">客户</th>
+                    <th width="10%">归属</th>
+                    <th width="6%">责任销售</th>
+                    <th width="6%">拜访时间</th>
+                    <th width="6%">通话时长</th>
+                    <th width="6%">客户意向</th>
+                    <th>沟通详情</th>
+                    <th width="6%">跟进结果</th>
+                    <th width="6%">呼叫状态</th>
+                    <th width="6%">呼叫类型</th>
+                    <th width="10%">电销姓名</th>
+                    <th width="4%">操作</th>
+                  </tr>
+                  {trArr}
+                </table>
+                <p className="callnum">
+                  已呼叫经纪人<span>{this.state.data.total}</span>位，呼叫次数<span>{this.state.data.callnum}</span>次</p>
+              </div>)
             }
           </div>
           <div className="main-foot">
-            <FootPage total={110} num={10} active={this.state.page} turnPage={this.turnPage}/>
+            <FootPage total={this.state.data.total} num={this.state.data.pagesize} active={this.state.data.currpage} turnPage={this.turnPage}/>
           </div>
         </div>
       </div>
@@ -125,6 +162,17 @@ class Page1Bottom extends Component {
 }
 class TableTr extends Component {
   constructor(props) {
+    super(props)
+    this.state={
+      check:false
+    }
+    this.checkHandle=this.checkHandle.bind(this);
+  }
+
+  checkHandle(){
+    this.setState({
+      check:!this.state.check
+    })
   }
 
   render() {
@@ -136,36 +184,59 @@ class TableTr extends Component {
       this.props.telvisitinfo.howlongtostore_view && tel_content.push('销售多久去一次门店：' + this.props.telvisitinfo.howlongtostore_view);
       this.props.telvisitinfo.howlongcommunicate_view && tel_content.push('沟通了多久：' + this.props.telvisitinfo.howlongcommunicate_view);
       this.props.telvisitinfo.satisfiedservice_view && tel_content.push('是否满意销售服务：' + this.props.telvisitinfo.satisfiedservice_view);
-      this.props.telvisitinfo.remark && tel_content.push('备注说明：' + this.props.telvisitinfo.remark)
+      this.props.telvisitinfo.remark && tel_content.push('备注说明：' + this.props.telvisitinfo.remark);
     } else {
       this.props.telvisitinfo.tag && tel_content.push(this.props.telvisitinfo.tag);
       this.props.telvisitinfo.remark && tel_content.push(this.props.telvisitinfo.remark.replace(/.{30}/ig, "$&" + "\n"))
     }
     var tel_content_join = tel_content.join('');
     return (
-      <tr>
-        {this.props.xkTel.jobid === this.props.xkTel.login_jobid ?
-          <td>(this.props.queueinfo.is_call==="1"?<i data-uid={this.props..basicinfo.uid} className="btn-check"></i>:null)
+      !this.props.level ?
+        <tr>
+          {this.props.xkTel.jobid === this.props.xkTel.login_jobid ?
+            <td>(this.props.queueinfo.is_call==="1"?<i onClick={this.checkHandle} data-uid={this.props.basicinfo.uid} className={this.state.check?"btn-checked":"btn-check"}></i>:null)
+            </td>
+            : null}
+          <td>{this.props.prekey}</td>
+          <td>
+            <a target='_blank' href={"/saletel/record?citycode="+window.xkTel.citycode+"&uid="+this.props.basicinfo.uid+(window.$_GET['groupid']?"&groupid="+window.$_GET["groupid"]:"&jobid="+window.$_GET["jobid"])}>{this.props.basicinfo.name}</a>
           </td>
-          : null}
-        <td>{this.props.prekey}</td>
-        <td>
-          <a target='_blank' href={"/saletel/record?citycode="+window.xkTel.citycode+"&uid="+this.props.basicinfo.uid+(window.$_GET['groupid']?"&groupid="+window.$_GET["groupid"]:"&jobid="+window.$_GET["jobid"])}>{this.props.basicinfo.name}</a>
-        </td>
-        <td>{this.props.basicinfo.companyshortname} {this.props.basicinfo.storename}</td>
-        <td>{this.props.saleinfo.major ? this.props.saleinfo.major.name : (this.props.saleinfo.server_line ? this.props.saleinfo.server_line.name : null)}</td>
+          <td>{this.props.basicinfo.companyshortname} {this.props.basicinfo.storename}</td>
+          <td>{this.props.saleinfo.major ? this.props.saleinfo.major.name : (this.props.saleinfo.server_line ? this.props.saleinfo.server_line.name : null)}</td>
 
-        <td>{this.props.telvisitinfo.visit_time_view ? this.props.telvisitinfo.visit_time_view : null}</td>
-        <td>{this.props.telvisitinfo.holdingtime}</td>
-        <td>{this.props.telvisitinfo.buylevel_view}</td>
-        <td title={tel_content.join('\r')} style={{cursor: "help"}}>
-          {tel_content_join.length > 10 ? tel_content_join.substring(0, 10) + "..." : tel_content_join}
-        </td>
-        <td>{this.props.queueinfo.follow_status_view}</td>
-        <td>{this.props.queueinfo.call_status_view}</td>
-        <td>{this.props.telvisitinfo.calltype_view}</td>
-        <td>{(this.props.telvisitinfo.visitway === 3 && this.props.telsaleinfo) ? this.props.telsaleinfo.group_name + "-" + this.props.telsaleinfo.name : null}</td>
-      </tr>)
+          <td>{this.props.telvisitinfo.visit_time_view ? this.props.telvisitinfo.visit_time_view : null}</td>
+          <td>{this.props.telvisitinfo.holdingtime}</td>
+          <td>{this.props.telvisitinfo.buylevel_view}</td>
+          <td title={tel_content.join('\r')} style={{cursor: "help"}}>
+            {tel_content_join.length > 10 ? tel_content_join.substring(0, 10) + "..." : tel_content_join}
+          </td>
+          <td>{this.props.queueinfo.follow_status_view}</td>
+          <td>{this.props.queueinfo.call_status_view}</td>
+          <td>{this.props.telvisitinfo.calltype_view}</td>
+          <td>{(this.props.telvisitinfo.visitway === 3 && this.props.telsaleinfo) ? this.props.telsaleinfo.group_name + "-" + this.props.telsaleinfo.name : null}</td>
+        </tr> :
+        <tr>
+          <td>{this.props.prekey}</td>
+          <td>
+            <a target='_blank' href={"/saletel/record?citycode="+window.xkTel.citycode+"&uid="+this.props.basicinfo.uid+(window.$_GET['groupid']?"&groupid="+window.$_GET["groupid"]:"&jobid="+window.$_GET["jobid"])}>{this.props.basicinfo.name}</a>
+          </td>
+          <td>{this.props.basicinfo.companyshortname} {this.props.basicinfo.storename}</td>
+          <td>{this.props.saleinfo.major ? this.props.saleinfo.major.name : (this.props.saleinfo.server_line ? this.props.saleinfo.server_line.name : null)}</td>
+
+          <td>{this.props.telvisitinfo.visit_time_view ? this.props.telvisitinfo.visit_time_view : null}</td>
+          <td>{this.props.telvisitinfo.holdingtime}</td>
+          <td>{this.props.telvisitinfo.buylevel_view}</td>
+          <td title={tel_content.join('\r')} style={{cursor: "help"}}>
+            {tel_content_join.length > 10 ? tel_content_join.substring(0, 10) + "..." : tel_content_join}
+          </td>
+          <td>{this.props.queueinfo.follow_status_view}</td>
+          <td>{this.props.queueinfo.call_status_view}</td>
+          <td>{this.props.telvisitinfo.calltype_view}</td>
+          <td>{(this.props.telvisitinfo.visitway === 3 && this.props.telsaleinfo) ? this.props.telsaleinfo.group_name + "-" + this.props.telsaleinfo.name : null}</td>
+          <td>
+            <a onClick={this.props.callout} opt-type="call" data-uid={this.props.basicinfo.uid} data-mobile={this.props.basicinfo.mobile} data-time={this.props.queueinfo.visit_time} style={{cursor:"pointer"}}>呼叫</a>
+          </td>
+        </tr>)
   }
 }
 export default Page1Bottom;
