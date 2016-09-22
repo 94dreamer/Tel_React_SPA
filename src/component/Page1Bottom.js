@@ -26,7 +26,7 @@ class Page1Bottom extends Component {
   }
 
   ajaxTable(page) {
-    this.state.ajaxRequest=jquery.ajax({
+    this.ajaxRequest=jquery.ajax({
       url: './table.json',
       data: {page: page},
       success: function (res) {
@@ -64,7 +64,7 @@ class Page1Bottom extends Component {
   }
 
   componentWillUnmount(){//组件移除前停止异步操作。
-    this.state.ajaxRequest.abort();
+    this.ajaxRequest.abort();
   }
 
   render() {
