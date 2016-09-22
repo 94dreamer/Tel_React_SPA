@@ -1,6 +1,6 @@
 We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
 
-
+`
 /build/		# 构建输出的文件会在这里
 
 /node_modules/	# 第三方类库和工具
@@ -28,7 +28,7 @@ proxy.config.js	# 配置 dora-plugin-proxy,用于 mock 和在线调试
 webpack.config.js	# 扩展 webpack 配置
 
 package.json	# 配置入口文件、依赖和 scripts
-
+`
 
 
 
