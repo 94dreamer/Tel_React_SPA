@@ -2,19 +2,33 @@ We are always open to [your feedback](https://github.com/facebookincubator/creat
 
 
 /build/		# 构建输出的文件会在这里
+
 /node_modules/	# 第三方类库和工具
+
 /src/		# 应用源码
+
      /components/	# React component
+     
      /constants/	# 常量（比如 action types等）
+     
      /containers/	# React containers
+     
      /entries/ 	# 应用入口
+     
      /reducers/ 	# reducers
+     
      /routes/	# 路由信息
+     
      /sagas/	# redux-sagas
+     
      /services/	# 处理和服务器的交互
+     
 proxy.config.js	# 配置 dora-plugin-proxy,用于 mock 和在线调试
+
 webpack.config.js	# 扩展 webpack 配置
+
 package.json	# 配置入口文件、依赖和 scripts
+
 
 
 
