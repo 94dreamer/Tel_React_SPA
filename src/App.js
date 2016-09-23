@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
-import Page1Top from './component/Page1Top';
-import Page1Bottom from './component/Page1Bottom';
-import './App.css';
+import React from 'react';
+import { Link, IndexLink } from 'react-router';
+//import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      level: window.xkTel.level,//1代表销售，0代表经理
-      isCallCenter: window.xkTelInfo.isCallCenter,//是否是呼叫中心
-      jobid: window.xkTel.jobid,
-      login_jobid: window.xkTel.login_jobid
-    }
-  }
+const App=(props)=>(
+  <div>
+    <h1>React Router</h1>
+    <ul style={{overflow:"hidden"}}>
+      <li style={{float:"left",marginRight:10}}><IndexLink to="/">Home</IndexLink></li>
+      <li style={{float:"left",marginRight:10}}><Link to="/work">Work</Link></li>
+      <li style={{float:"left",marginRight:10}}><Link to="/user">User</Link></li>
+    </ul>
+    {props.children}
+  </div>
+);
 
-  render() {
-    return (
-      this.props.page === 1 ?
-        <div className="main-layout g-line">
-          <aside className="l-s">
-          </aside>
-          <section className="r-c g-lastu">
-            <header id="tel-bar" className="telemarket-hd clearfix" style={{position: "relative"}}>
-              <a className="bkl dn"><em className="ico-n"></em>保存并退出</a>
-            </header>
-            <Page1Top {...this.state} />
-            <Page1Bottom {...this.state} />
-          </section>
-        </div> :
-        null
-    )
-  }
-}
+App.propTypes={
+  children:React.PropTypes.object
+};
 
 export default App;
