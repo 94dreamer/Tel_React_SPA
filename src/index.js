@@ -8,7 +8,7 @@ import User from './component/User';
 //import './index.css';
 
 ReactDOM.render(
-  <App page={1} />,
+  <App />,
   document.getElementById("APP")
 )
 

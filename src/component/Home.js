@@ -16,16 +16,9 @@ class Home extends Component {
 
   render() {
     return (
-        <div className="main-layout g-line">
-          <aside className="l-s">
-          </aside>
-          <section className="r-c g-lastu">
-            <header id="tel-bar" className="telemarket-hd clearfix" style={{position: "relative"}}>
-              <a className="bkl dn"><em className="ico-n"></em>保存并退出</a>
-            </header>
-            <Page1Top {...this.state} />
-            <Page1Bottom {...this.state} />
-          </section>
+        <div>
+          <Page1Top {...this.state} />
+          <Page1Bottom {...this.state} />
         </div>
     )
   }
