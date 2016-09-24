@@ -4,7 +4,6 @@
 import React,{Component} from 'react';
 import FootPage from '../component/FootPage';
 var jquery = require('jquery');
-console.log(React);
 
 class Page1Bottom extends Component {
   constructor(props) {
@@ -26,10 +25,16 @@ class Page1Bottom extends Component {
   }
 
   ajaxTable(page) {
-    this.ajaxRequest=jquery.ajax({
-      url: './table.json',
-      data: {page: page},
+    this.ajaxRequest = jquery.ajax({
+      url: '/saleajax/tellist/',
+      data: {
+        citycode: window.xkTel.citycode,//城市编号
+        group_id: window.xkTel.group_id,//部组id
+        jobid: window.xkTel.jobid,//销售工号
+        parent_id: window.xkTel.parent_id
+      },
       success: function (res) {
+        var res = (typeof res=='string')?JSON.parse(res):res;
         if (res.result.code == 0) {
           this.setState(res.result)
         } else {
@@ -63,7 +68,7 @@ class Page1Bottom extends Component {
     this.ajaxTable()
   }
 
-  componentWillUnmount(){//组件移除前停止异步操作。
+  componentWillUnmount() {//组件移除前停止异步操作。
     this.ajaxRequest.abort();
   }
 
