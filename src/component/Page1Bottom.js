@@ -3,7 +3,6 @@
  */
 import React,{Component} from 'react';
 import FootPage from '../component/FootPage';
-var jquery = require('jquery');
 
 class Page1Bottom extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class Page1Bottom extends Component {
   }
 
   ajaxTable(page) {
-    this.ajaxRequest = jquery.ajax({
+    this.ajaxRequest = $.ajax({
       url: '/saleajax/tellist/',
       data: {
         citycode: window.xkTel.citycode,//城市编号

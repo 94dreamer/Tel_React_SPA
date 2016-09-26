@@ -2,8 +2,6 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
-var $=jquery= require('jquery');
-var jquery = require('jquery');
 class StatItem extends Component {
   /*static defaultProps = {
    conversion_complete: 11,

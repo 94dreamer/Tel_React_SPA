@@ -7,12 +7,12 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    index:'./src/index.js'//入口文件
+    index: './src/index.js'//入口文件
   },
   output: {
     path: `${__dirname}/dist`,
     filename: '[name].js',
-    chunkFilename: 'chunk[id].js?ver'+new Date().getTime(),
+    chunkFilename: 'chunk[id].js?ver' + new Date().getTime(),
     publicPath: 'http://res2.esf.leju.com/Tel_React_SPA/dist/'
   },
   resolve: {
@@ -36,22 +36,28 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react','stage-0']
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
         test: /\.css$/,
         loaders: ['style', 'css']
-      }
+      },// expose-loader将需要的变量从依赖包中暴露出来
+      {test: require.resolve("jquery"), loader: "expose?$! expose?jQuery"}
     ]
   },
   // plugins 放置所使用的外掛
   plugins: [
-    /*new webpack.optimize.UglifyJsPlugin({
+    /*new webpack.optimize.UglifyJsPlugin({//压缩
      compressor:{
      warnings:false
      }
      }),*/
+    /*new webpack.DefinePlugin({//生产环境
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),*/
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",

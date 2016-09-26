@@ -4,6 +4,7 @@
   "description": "tel-reacr-spa",
   "main": "index.js",
   "dependencies": {
+    "expose-loader": "^0.7.1",
     "jquery": "^3.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -32,7 +33,7 @@
     "webpack-dev-server": "^1.16.1"
   },
   "scripts": {
-    "watch":"webpack --watch",
+    "watch": "webpack --watch",
     "build": "webpack -p",
     "dev": "webpack"
   },
