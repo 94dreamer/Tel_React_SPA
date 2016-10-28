@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Page1Top from './Page1Top';
-import Page1Bottom from './Page1Bottom';
+import Page1Middle from './Page1Middle';
+//import Page1Bottom from './Page1Bottom';
 //import './App.css';
 
 class Home extends Component {
@@ -18,7 +19,8 @@ class Home extends Component {
     return (
         <div>
           <Page1Top {...this.state} />
-          <Page1Bottom {...this.state} />
+          <Page1Middle {...this.state} />
+          /*<Page1Bottom {...this.state} />*/
         </div>
     )
   }

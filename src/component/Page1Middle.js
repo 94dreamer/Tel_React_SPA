@@ -3,6 +3,8 @@
  */
 import React,{Component} from 'react';
 import Uncall_btn from './Uncall_btn'
+import UncallChoose from './UncallChoose';
+import CalledChoose from './CalledChoose';
 import FootPage from './FootPage';
 
 export default class Page1Middle extends Component {
@@ -93,7 +95,7 @@ export default class Page1Middle extends Component {
             <div id="uncall-tag" className="tag_tab">
               <div className="tag_callCon">
                 <Uncall_btn />
-                <!--未呼叫筛选条件{:=baidu.template("uncall_choose_temp",{data:data})}-->
+                <UncallChoose />
                 <div className="h15"></div>
               </div>
               <div className="table_callCon">
@@ -102,7 +104,7 @@ export default class Page1Middle extends Component {
                 </div>
                 <!-- 分页 -->
                 <div className="main-foot">
-                  {baidu.template("tel_page_foot", data)}
+                  <FootPage />
                 </div>
               </div>
             </div>
@@ -112,8 +114,7 @@ export default class Page1Middle extends Component {
                 <div className="hd_btn">
                   <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
                 </div>
-                <!--已呼叫筛选条件-->
-                <!--("called_choose_temp",{data:data})}-->
+                <CalledChoose />
                 <div className="h15"></div>
               </div>
               <div className="table_callCon">
@@ -122,7 +123,7 @@ export default class Page1Middle extends Component {
                 </div>
                 <!-- 分页 -->
                 <div className="main-foot">
-                  <!--("tel_page_foot",data)-->
+                  <FootPage />
                 </div>
               </div>
             </div>

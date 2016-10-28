@@ -1,108 +1,108 @@
 <!--电话销售上半统计部分-->
 <script id="tel_top_temp" type="text/template">
-  <div class="log-stat-hd">
-    <div class="g-line">
-      <div class="date-box clearfix g-u">
+  <div className="log-stat-hd">
+    <div className="g-line">
+      <div className="date-box clearfix g-u">
         <%var nT=new Date();var
         t=nT.getFullYear()+"/"+(nT.getMonth()+1<10?'0'+(nT.getMonth()+1):nT.getMonth()+1)+"/"+(nT.getDate()<10?'0'+nT.getDate():nT.getDate());%>
-        <input id="result_date" class="time_l fl" value="<%=t%>到<%=t%>"/>
-        <label for="result_date" class="time_r fl"><em class="icon-date"></em></label>
+        <input id="result_date" className="time_l fl" value="<%=t%>到<%=t%>"/>
+        <label for="result_date" className="time_r fl"><em className="icon-date"></em></label>
       </div>
-      <p class="g-lastu">按时间查看统计结果</p>
+      <p className="g-lastu">按时间查看统计结果</p>
     </div>
-    <div class="stat-item clearfix">
+    <div className="stat-item clearfix">
       <%:=baidu.template("tel_top_content",data);%>
     </div>
   </div>
 </script>
 <script id="tel_top_content" type="text/template">
-  <div class="stat_l">
-    <div class="content">
-      <div class="item-1">
-        <div class=" circle1">
+  <div className="stat_l">
+    <div className="content">
+      <div className="item-1">
+        <div className=" circle1">
           <%var c1=conversion_complete/conversion_target*100||0;%>
           <%var c_1=c1>100?100:c1;%>
-          <div class="pie_left">
-            <div class="left" style="<%if(c_1>50){%>transform:rotate(<%=c_1*3.6-180%>deg)<%}%>"></div>
+          <div className="pie_left">
+            <div className="left" style="<%if(c_1>50){%>transform:rotate(<%=c_1*3.6-180%>deg)<%}%>"></div>
           </div>
-          <div class="pie_right">
-            <div class="right" style="transform:rotate(<%if(c_1<=50){%><%=c_1*3.6%><%}else{%>180<%}%>deg);"></div>
+          <div className="pie_right">
+            <div className="right" style="transform:rotate(<%if(c_1<=50){%><%=c_1*3.6%><%}else{%>180<%}%>deg);"></div>
           </div>
-          <div class="mask"><span><%=Math.round(c1==Number.POSITIVE_INFINITY?100:c1)%></span>%</div>
+          <div className="mask"><span><%=Math.round(c1==Number.POSITIVE_INFINITY?100:c1)%></span>%</div>
         </div>
         <ul>
-          <li class="g-line">
-            <span class="g-u">转化目标 </span>
-            <q class="g-lastu"><em><%=conversion_target%></em>人</q>
+          <li className="g-line">
+            <span className="g-u">转化目标 </span>
+            <q className="g-lastu"><em><%=conversion_target%></em>人</q>
           </li>
-          <li class="g-line">
-            <span class="g-u">已 完 成  </span>
-            <q class="g-lastu"><em class="c1"><%=conversion_complete%></em>人</q>
+          <li className="g-line">
+            <span className="g-u">已 完 成  </span>
+            <q className="g-lastu"><em className="c1"><%=conversion_complete%></em>人</q>
           </li>
         </ul>
       </div>
-      <div class="item-2">
-        <div class="circle2">
+      <div className="item-2">
+        <div className="circle2">
           <%var c2=connect_complete/connect_target*100||0;%>
           <%var c_2=c2>100?100:c2;%>
-          <div class="pie_left">
-            <div class="left" style="<%if(c_2>50){%>transform:rotate(<%=c_2*3.6-180%>deg)<%}%>"></div>
+          <div className="pie_left">
+            <div className="left" style="<%if(c_2>50){%>transform:rotate(<%=c_2*3.6-180%>deg)<%}%>"></div>
           </div>
-          <div class="pie_right">
-            <div class="right" style="transform:rotate(<%if(c_2<=50){%><%=c_2*3.6%><%}else{%>180<%}%>deg);"></div>
+          <div className="pie_right">
+            <div className="right" style="transform:rotate(<%if(c_2<=50){%><%=c_2*3.6%><%}else{%>180<%}%>deg);"></div>
           </div>
-          <div class="mask"><span><%=Math.round(c2==Number.POSITIVE_INFINITY?100:c2)%></span>%</div>
+          <div className="mask"><span><%=Math.round(c2==Number.POSITIVE_INFINITY?100:c2)%></span>%</div>
         </div>
         <ul>
-          <li class="g-line">
-            <span class="g-u">接通目标 </span>
-            <q class="g-lastu"><em><%=connect_target%></em>人</q>
+          <li className="g-line">
+            <span className="g-u">接通目标 </span>
+            <q className="g-lastu"><em><%=connect_target%></em>人</q>
           </li>
-          <li class="g-line">
-            <span class="g-u">已 完 成  </span>
-            <q class="g-lastu"><em class="c1"><%=connect_complete%></em>人</q>
+          <li className="g-line">
+            <span className="g-u">已 完 成  </span>
+            <q className="g-lastu"><em className="c1"><%=connect_complete%></em>人</q>
           </li>
         </ul>
       </div>
-      <div class="item-3">
+      <div className="item-3">
         <ul>
-          <li class="g-line">
-            <span class="tit g-u"><i class="c1"></i>最短通话时长 </span>
-            <q class="result"><%=talktime_min%></q>
+          <li className="g-line">
+            <span className="tit g-u"><i className="c1"></i>最短通话时长 </span>
+            <q className="result"><%=talktime_min%></q>
           </li>
-          <li class="g-line">
-            <span class="tit g-u"><i class="c2"></i>最长通话时长 </span>
-            <q class="result"><%=talktime_max%></q>
+          <li className="g-line">
+            <span className="tit g-u"><i className="c2"></i>最长通话时长 </span>
+            <q className="result"><%=talktime_max%></q>
           </li>
-          <li class="g-line">
-            <span class="tit g-u"><i class="c3"></i>平均通话时长 </span>
-            <q class="result"><%=talktime_avg%></q>
+          <li className="g-line">
+            <span className="tit g-u"><i className="c3"></i>平均通话时长 </span>
+            <q className="result"><%=talktime_avg%></q>
           </li>
         </ul>
       </div>
-      <div class="item-4">
+      <div className="item-4">
         <ul>
           <%var arr=[talksection_1,talksection_2,talksection_3,talksection_4];arr.sort(function(a,b){return b-a;});var
           max=arr[0];%>
-          <li class="g-line g-line-1">
-            <span class="tit g-u"><i></i>通话1分钟以下</span>
-            <span class="schedule g-u"><em style="width:<%=100*talksection_1/arr[0]%>%"></em></span>
-            <q class="result g-lastu"><%=talksection_1%>个</q>
+          <li className="g-line g-line-1">
+            <span className="tit g-u"><i></i>通话1分钟以下</span>
+            <span className="schedule g-u"><em style="width:<%=100*talksection_1/arr[0]%>%"></em></span>
+            <q className="result g-lastu"><%=talksection_1%>个</q>
           </li>
-          <li class="g-line g-line-2">
-            <span class="tit g-u"><i></i>通话1-3分钟</span>
-            <span class="schedule g-u"><em style="width:<%=100*talksection_2/arr[0]%>%"></em></span>
-            <q class="result g-lastu"><%=talksection_2%>个</q>
+          <li className="g-line g-line-2">
+            <span className="tit g-u"><i></i>通话1-3分钟</span>
+            <span className="schedule g-u"><em style="width:<%=100*talksection_2/arr[0]%>%"></em></span>
+            <q className="result g-lastu"><%=talksection_2%>个</q>
           </li>
-          <li class="g-line g-line-3">
-            <span class="tit g-u"><i></i>通话3-5分钟 </span>
-            <span class="schedule g-u"><em style="width:<%=100*talksection_3/arr[0]%>%"></em></span>
-            <q class="result g-lastu"><%=talksection_3%>个</q>
+          <li className="g-line g-line-3">
+            <span className="tit g-u"><i></i>通话3-5分钟 </span>
+            <span className="schedule g-u"><em style="width:<%=100*talksection_3/arr[0]%>%"></em></span>
+            <q className="result g-lastu"><%=talksection_3%>个</q>
           </li>
-          <li class="g-line g-line-4">
-            <span class="tit g-u"><i></i>通话5分钟以上</span>
-            <span class="schedule g-u"><em style="width:<%=100*talksection_4/arr[0]%>%"></em></span>
-            <q class="result g-lastu"><%=talksection_4%>个</q>
+          <li className="g-line g-line-4">
+            <span className="tit g-u"><i></i>通话5分钟以上</span>
+            <span className="schedule g-u"><em style="width:<%=100*talksection_4/arr[0]%>%"></em></span>
+            <q className="result g-lastu"><%=talksection_4%>个</q>
           </li>
         </ul>
       </div>
@@ -112,60 +112,60 @@
 
 <!--待呼叫和已呼叫外层容器-->
 <script id="tab_main_temp" type="text/template">
-  <div class="Telemarketing_main">
-    <ul class="main-title">
-      <li class="current" data-type="uncall"><a href="javascript:void(0);"> 待呼叫（<span><%=data.queuenum%></span>）</a></li>
+  <div className="Telemarketing_main">
+    <ul className="main-title">
+      <li className="current" data-type="uncall"><a href="javascript:void(0);"> 待呼叫（<span><%=data.queuenum%></span>）</a></li>
       <li data-type="called" data-time="0"><a href="javascript:void(0);">已呼叫（<span><%=data.callnum%></span>）</a></li>
     </ul>
-    <div class="tagBox">
+    <div className="tagBox">
       <!--待呼叫-->
-      <div id="uncall-tag" class="tag_tab">
-        <div class="tag_callCon">
-          <div class="hd_btn">
+      <div id="uncall-tag" className="tag_tab">
+        <div className="tag_callCon">
+          <div className="hd_btn">
             <%if(window.xkTel.level){%>
-            <a href="javascript:void(0);" id="startWork" class="btn_blue"><%if(window.xkTelInfo.isCallCenter){%>正在登录<%}else{%>开始工作<%}%></a>
+            <a href="javascript:void(0);" id="startWork" className="btn_blue"><%if(window.xkTelInfo.isCallCenter){%>正在登录<%}else{%>开始工作<%}%></a>
             <%if(window.xkTelInfo.isCallCenter){%>
-            <a href="javascript:void(0);" id="quitWork" class="btn_red">置忙</a>
+            <a href="javascript:void(0);" id="quitWork" className="btn_red">置忙</a>
             <%}%>
             <%}else{%>
             <%}%>
 
             <%if(!gArr['saleinfo'] || !gArr['saleinfo'].position || gArr['saleinfo'].position != 6){%>
-            <a href="javascript:void(0);" id="setTarget" class="btn_blue">设置目标</a>
-            <%if(2==window.xkTelInfo.telGroupRelationType){%><a href="javascript:void(0);" id="groupAllocat" class="btn_blue">部组分配</a><%}%>
+            <a href="javascript:void(0);" id="setTarget" className="btn_blue">设置目标</a>
+            <%if(2==window.xkTelInfo.telGroupRelationType){%><a href="javascript:void(0);" id="groupAllocat" className="btn_blue">部组分配</a><%}%>
             <%}%>
 
-            <a href="javascript:void(0);" id="exportUncall" class="btn_gray">导出数据</a>
+            <a href="javascript:void(0);" id="exportUncall" className="btn_gray">导出数据</a>
           </div>
           <!--未呼叫筛选条件<%:=baidu.template("uncall_choose_temp",{data:data})%>-->
-          <div class="h15"></div>
+          <div className="h15"></div>
         </div>
-        <div class="table_callCon">
-          <div class="log-table log-table-sales">
+        <div className="table_callCon">
+          <div className="log-table log-table-sales">
             <%:=baidu.template("uncall_tab_temp",{data:data})%>
           </div>
           <!-- 分页 -->
-          <div class="main-foot">
+          <div className="main-foot">
             <%:=baidu.template("tel_page_foot",data);%>
           </div>
         </div>
       </div>
       <!--已呼叫-->
-      <div id="called-tag" class="tag_tab dn">
-        <div class="tag_callCon">
-          <div class="hd_btn">
-            <a href="javascript:void(0);" id="exportCalled" class="btn_gray">导出数据</a>
+      <div id="called-tag" className="tag_tab dn">
+        <div className="tag_callCon">
+          <div className="hd_btn">
+            <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
           </div>
           <!--已呼叫筛选条件-->
           <!--("called_choose_temp",{data:data})%>-->
-          <div class="h15"></div>
+          <div className="h15"></div>
         </div>
-        <div class="table_callCon">
-          <div class="log-table log-table-sales">
+        <div className="table_callCon">
+          <div className="log-table log-table-sales">
             <!--("called_tab_temp",{data:data})-->
           </div>
           <!-- 分页 -->
-          <div class="main-foot">
+          <div className="main-foot">
             <!--("tel_page_foot",data)-->
           </div>
         </div>
@@ -176,9 +176,9 @@
 <!--待呼叫的筛选条件-->
 <script id="uncall_choose_temp" type="text/template">
   <%:=baidu.template("choose_position_temp",data)%>
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >呼叫列队：</h2>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >呼叫列队：</h2>
       <%var callqueue={
       "1":"首次邀约",
       "2":"临时指派",
@@ -188,12 +188,12 @@
       "6":"7天开通"
       };%>
       <%for(var i in callqueue){%>
-      <a href="javascript:void(0);" <%if(window.telSales.uncallData.callqueue==i){%>class="onend"<%}%> data-type="callqueue" data-id="<%=i%>" ><%=callqueue[i]%></a>
+      <a href="javascript:void(0);" <%if(window.telSales.uncallData.callqueue==i){%>className="onend"<%}%> data-type="callqueue" data-id="<%=i%>" ><%=callqueue[i]%></a>
       <%}%>
-      <h2 class="fl dataCon" >队列日期：</h2>
-      <div class="visit_time date-box clearfix fl">
-        <input class="time_l fl" id="queueDate" placeholder="选择日期">
-        <label for="queueDate" class="time_r fl"><em class="icon-date"></em></label>
+      <h2 className="fl dataCon" >队列日期：</h2>
+      <div className="visit_time date-box clearfix fl">
+        <input className="time_l fl" id="queueDate" placeholder="选择日期">
+        <label for="queueDate" className="time_r fl"><em className="icon-date"></em></label>
       </div>
     </div>
   </div>
@@ -204,10 +204,10 @@
 <script id="called_choose_temp" type="text/template">
   <%:=baidu.template("choose_position_temp",data)%>
   <%:=baidu.template("choose_group_temp",data)%>
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >电销标签：</h2>
-      <a href="javascript:void(0);" data-type="visitlabel" class="onend">全部</a>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >电销标签：</h2>
+      <a href="javascript:void(0);" data-type="visitlabel" className="onend">全部</a>
       <a href="javascript:void(0);" data-type="visitlabel" data-id="1">已邀约</a>
       <a href="javascript:void(0);" data-type="visitlabel" data-id="5">邀约回访</a>
       <a href="javascript:void(0);" data-type="visitlabel" data-id="6">陌拜回访</a>
@@ -217,18 +217,18 @@
       <a href="javascript:void(0);" data-type="visitlabel" data-id="4">7天下线提醒</a>
     </div>
   </div>
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >呼叫状态：</h2>
-      <a href="javascript:void(0);" data-type="call_status" class="onend" >全部</a>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >呼叫状态：</h2>
+      <a href="javascript:void(0);" data-type="call_status" className="onend" >全部</a>
       <a href="javascript:void(0);" data-type="call_status" data-id="1">呼叫成功</a>
       <a href="javascript:void(0);" data-type="call_status" data-id="2">呼叫失败</a>
     </div>
   </div>
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >客户意向：</h2>
-      <a href="javascript:void(0);" data-type="buylevel" class="onend" >全部</a>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >客户意向：</h2>
+      <a href="javascript:void(0);" data-type="buylevel" className="onend" >全部</a>
       <a href="javascript:void(0);" data-type="buylevel" data-id="2">A+有意向</a>
       <a href="javascript:void(0);" data-type="buylevel" data-id="3">A可以考虑</a>
       <a href="javascript:void(0);" data-type="buylevel" data-id="5">B暂无意向</a>
@@ -236,12 +236,12 @@
       <a href="javascript:void(0);" data-type="buylevel" data-id="0">未填写</a>
     </div>
   </div>
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >呼叫时间：</h2>
-      <div class="visit_time date-box clearfix fl">
-        <input class="time_l fl" id="callDate" placeholder="选择日期" />
-        <label for="callDate" class="time_r fl"><em class="icon-date"></em></label>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >呼叫时间：</h2>
+      <div className="visit_time date-box clearfix fl">
+        <input className="time_l fl" id="callDate" placeholder="选择日期" />
+        <label for="callDate" className="time_r fl"><em className="icon-date"></em></label>
       </div>
     </div>
   </div>
@@ -249,18 +249,18 @@
 </script>
 <!--筛选条件的城区板块-->
 <script id="choose_position_temp" type="text/template">
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >城区板块：</h2>
-      <a href="javascript:void(0);" data-type="district" class="onend" >全部</a>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >城区板块：</h2>
+      <a href="javascript:void(0);" data-type="district" className="onend" >全部</a>
       <%for(var i in block){%>
       <a href="javascript:void(0);" data-type="district"  data-json="<%=JSON.stringify(block[i].block)%>" data-id="<%=block[i].id%>"><%=block[i].name%><i></i></a>
       <%}%>
     </div>
     <!--悬浮标签-->
-    <div class="line-list dn" style="display: block;">
-      <div class="choose">
-        <!--choose_position_hover_temp-->
+    <div className="line-list dn" style="display: block;">
+      <div className="choose">
+        <!--choose_block_hover_temp-->
       </div>
     </div>
   </div>
@@ -278,17 +278,17 @@
 </script>
 <!--筛选条件的所属部组-->
 <script id="choose_group_temp" type="text/template">
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl" >所属部组：</h2>
-      <a href="javascript:void(0);" data-type="parent" class="onend" >全部</a>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl" >所属部组：</h2>
+      <a href="javascript:void(0);" data-type="parent" className="onend" >全部</a>
       <%for(var i in group){%>
       <a href="javascript:void(0);" data-type="parent"  data-json="<%=JSON.stringify(group[i].group)%>" data-id="<%=group[i].id%>"><i></i><%=group[i].name%></a>
       <%}%>
     </div>
     <!--悬浮标签-->
-    <div class="line-list dn" style="display: block;">
-      <div class="choose group_div">
+    <div className="line-list dn" style="display: block;">
+      <div className="choose group_div">
         <!--choose_group_hover_temp-->
       </div>
     </div>
@@ -297,7 +297,7 @@
 <!--所属部组的悬浮标签-->
 <script id="choose_group_hover_temp" type="text/template">
   <%if(!!data){%>
-  <a href="javascript:void(0);" data-type="group" class="onend" >全部</a>
+  <a href="javascript:void(0);" data-type="group" className="onend" >全部</a>
   <%for(var i=0;i< data.length;i++){%>
   <a href="javascript:void(0);"  data-type="group" data-id="<%=data[i].id%>"><%=data[i].name%></a>
   <%}%>
@@ -305,13 +305,13 @@
 </script>
 <!--筛选条件的关键字-->
 <script id="choose_keyword_temp" type="text/template">
-  <div class="item">
-    <div class="position clearfix" style="display: block;">
-      <h2 class="fl keyword" >关键字：</h2>
-      <div class="call_search fl">
-        <input type="text" class="keyword-input" autocomplete="off" placeholder="输入公司名、门店名、客户姓名、客户手机号" />
-        <i class="icon-look" class="keyword_btn"></i>
-        <div class="keyword_pop_box"></div>
+  <div className="item">
+    <div className="position clearfix" style="display: block;">
+      <h2 className="fl keyword" >关键字：</h2>
+      <div className="call_search fl">
+        <input type="text" className="keyword-input" autocomplete="off" placeholder="输入公司名、门店名、客户姓名、客户手机号" />
+        <i className="icon-look" className="keyword_btn"></i>
+        <div className="keyword_pop_box"></div>
       </div>
     </div>
   </div>
@@ -319,7 +319,7 @@
 <!--待呼叫页签-->
 <script id="uncall_tab_temp" type="text/template">
   <%if(!data.list.length){%>
-  <div class="side-null"></div>
+  <div className="side-null"></div>
   <%}else{%>
   <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -331,7 +331,7 @@
       <th width="8%">上次呼叫时间</th>
       <th width="25%">上次沟通详情</th>
       <th width="20%">待呼叫标识</th>
-      <th width="10" class="bor_r0">加入列队的时间</th>
+      <th width="10" className="bor_r0">加入列队的时间</th>
     </tr>
     <%for(var i=0;i< data.list.length;i++){%>
     <%var list = data.list[i];%>
@@ -381,20 +381,20 @@
       </td><!--沟通详情-->
 
       <td>
-        <div class="tag_s clearfix">
-          <%if(list.queueinfo.is_firstcall>0){%><span class="c_blue">首次</span><%}%>
-          <%if(list.queueinfo.is_tempassign>0){%><span class="c_purple">指派</span><%}%>
-          <%if(list.queueinfo.is_telsalevisit>0){%><span class="c_orange">回访</span><%}%>
-          <%if(list.queueinfo.is_notstandard>0){%><span class="c_red">未达标</span><%}%>
-          <%if(list.queueinfo.is_7expire>0){%><span class="c_orange">7天到期</span><%}%>
-          <%if(list.queueinfo.is_7open>0){%><span class="c_green">7天开通</span><%}%>
+        <div className="tag_s clearfix">
+          <%if(list.queueinfo.is_firstcall>0){%><span className="c_blue">首次</span><%}%>
+          <%if(list.queueinfo.is_tempassign>0){%><span className="c_purple">指派</span><%}%>
+          <%if(list.queueinfo.is_telsalevisit>0){%><span className="c_orange">回访</span><%}%>
+          <%if(list.queueinfo.is_notstandard>0){%><span className="c_red">未达标</span><%}%>
+          <%if(list.queueinfo.is_7expire>0){%><span className="c_orange">7天到期</span><%}%>
+          <%if(list.queueinfo.is_7open>0){%><span className="c_green">7天开通</span><%}%>
         </div>
       </td>
-      <td class="bor_r0"><%=list.queueinfo.queuetime_view%></td>
+      <td className="bor_r0"><%=list.queueinfo.queuetime_view%></td>
     </tr>
     <%}%>
   </table>
-  <p class="callnum">
+  <p className="callnum">
     共找到待呼叫记录 <span><%=data.total%></span> 条，经纪人 <span><%=data.brokernum%></span> 个。
   </p>
   <%}%>
@@ -402,7 +402,7 @@
 <!--已呼叫页签-->
 <script id="called_tab_temp" type="text/template">
   <%if(!data.list.length){%>
-  <div class="side-null"></div>
+  <div className="side-null"></div>
   <%}else{%>
   <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -420,7 +420,7 @@
       <th width="8%">电销姓名</th>
 
       <%if(gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6){%>
-      <th width="10%" class="bor_r0">操作</th>
+      <th width="10%" className="bor_r0">操作</th>
       <%}%>
     </tr>
     <%for(var i=0;i< data.list.length;i++){%>
@@ -476,14 +476,14 @@
       <td><%if(list.telsaleinfo){%><%=list.telsaleinfo.group_name || ''%>-<%=list.telsaleinfo.name || ''%><%}%></td>
 
       <%if(gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6){%>
-      <td class="bor_r0">
-        <a href="javascript:void(0);" class="callBtn" data-uid="<%=list.basicinfo.uid%>" data-id="<%=list.visitinfo.id%>" data-mobile="<%=list.basicinfo.mobile%>" data-time="<%=list.visitinfo.call_time%>">呼叫</a>
+      <td className="bor_r0">
+        <a href="javascript:void(0);" className="callBtn" data-uid="<%=list.basicinfo.uid%>" data-id="<%=list.visitinfo.id%>" data-mobile="<%=list.basicinfo.mobile%>" data-time="<%=list.visitinfo.call_time%>">呼叫</a>
       </td>
       <%}%>
     </tr>
     <%}%>
   </table>
-  <p class="callnum">
+  <p className="callnum">
     共找到已呼叫记录 <span><%=data.total%></span> 条，经纪人 <span><%=data.brokernum%></span> 个。
   </p>
   <%}%>
@@ -491,8 +491,8 @@
 <!--部组分配-->
 <script id="group_allocat_temp" type="text/template">
   <div id="group_Allocat_box">
-    <h4 class="h4_title">“注”：双击即可实现选中/取消选中</h4>
-    <div class="clearfix">
+    <h4 className="h4_title">“注”：双击即可实现选中/取消选中</h4>
+    <div className="clearfix">
       <dl id="unchooseGroup">
         <dt>待选部组</dt>
         <%var unGroupArr = [];
@@ -529,17 +529,17 @@
 <!--分页-->
 <script id="tel_page_foot" type="text/template">
   <%if(typeof(total)!="undefined" && total!=0){%>
-  <ul class="turn-page clearfix">
+  <ul className="turn-page clearfix">
     <%var pageN= Math.ceil(total/num)>5?5:Math.ceil(total/num);%>
-    <li class="prev dn"><a href="javascript:void(0);">上一页</a></li>
+    <li className="prev dn"><a href="javascript:void(0);">上一页</a></li>
     <%for(var i=1;i<=pageN;i++){%>
     <%if(i==1){%>
-    <li class="page"><a href="javascript:void(0);" class="active">1</a></li>
+    <li className="page"><a href="javascript:void(0);" className="active">1</a></li>
     <%}else{%>
-    <li class="page"><a href="javascript:void(0);"><%=i%></a></li>
+    <li className="page"><a href="javascript:void(0);"><%=i%></a></li>
     <%}}%>
-    <li class="next <%if(pageN<=1){%>dn<%}%>"><a href="javascript:void(0);">下一页</a></li>
-    <li class="pl5 total">共<span><%=Math.ceil(total/num)%></span>页</li>
+    <li className="next <%if(pageN<=1){%>dn<%}%>"><a href="javascript:void(0);">下一页</a></li>
+    <li className="pl5 total">共<span><%=Math.ceil(total/num)%></span>页</li>
   </ul>
   <%}%>
 </script>
@@ -549,11 +549,11 @@
   <ul>
     <%for(var i=0;i< data.length;i++){%>
     <%if(data[i].role==1){%>
-    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_company">公司</span><span class="content_name"><%=data[i].name%></span></li>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span className="k_company">公司</span><span className="content_name"><%=data[i].name%></span></li>
     <%}else if(data[i].role==7){%>
-    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_store">门店</span><span class="content_name"><%=data[i].name%></span></li>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span className="k_store">门店</span><span className="content_name"><%=data[i].name%></span></li>
     <%}else if(data[i].role==8){%>
-    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_agent">经纪人</span><span class="content_name"><%=data[i].name%></span></li>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span className="k_agent">经纪人</span><span className="content_name"><%=data[i].name%></span></li>
     <%}%>
     <%}%>
   </ul>
@@ -561,13 +561,13 @@
 </script>
 <!-- 成功失败弹层 -->
 <script id="tipPop" type="text/template">
-  <div class="up-part <%=exClass%>">
+  <div className="up-part <%=exClass%>">
     <%if(satusClass){%>
-    <i class="prompt-img <%=satusClass%>"></i>
+    <i className="prompt-img <%=satusClass%>"></i>
     <%}%>
-    <div class="text-describe">
-      <h5 class="p-title"><%:=title%></h5>
-      <span class="p-text"><%:=desc%></span>
+    <div className="text-describe">
+      <h5 className="p-title"><%:=title%></h5>
+      <span className="p-text"><%:=desc%></span>
     </div>
   </div>
 </script>

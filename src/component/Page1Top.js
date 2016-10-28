@@ -45,7 +45,6 @@ export default class Page1Top extends Component {
           </div>
           <div className="stat-item clearfix">
             <StatItem {...date} />
-            /*<%:=baidu.template("tel_top_content",data);%>*/
           </div>
         </div>
       </div>
