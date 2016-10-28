@@ -12,6 +12,6 @@ function telstatResult(state={},action){
 
 
 const telApp=combineReducers({//合并reducers函数
-  telstatResult,
+  telstatResult
 });
 export default telApp;
