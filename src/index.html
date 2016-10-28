@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <link rel="shortcut icon" href="http://www.sina.com.cn/favicon.ico" />
+  <!--[if lte IE 8]>
+  <script type="text/javascript">
+    (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(',');for(var i=0;i<e.length;i++){document.createElement(e[i])}})();
+  </script>
+  <![endif]-->
+  <title>
+    乐居二手房-销控中心
+  </title>
+  <!--全部加载的css-->
+  <link href="/res/kong/css/public.css" rel="stylesheet" type="text/css" />
+  <link href="/res/kong/css/base.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="http://res2.esf.leju.com/xk_www/statics/dist/css/lib/base.css">
+  <link rel="stylesheet" href="http://res2.esf.leju.com/xk_www/statics/dist/css/lib/moudle.css">
+  <!-- telsale -->
+  <link rel="stylesheet" href="http://res2.esf.leju.com/xk_www/statics/dist/css/login-layer/v1.0.0.css">
+</head>
+<body>
+<div id="wrapper">
+  <!--header begin--->
+  <div id="header">
+    <div class="w1184 pr">
+      <div class="logo fl">
+        <h1 title="乐居二手房-销控中心">
+          <img src="/res/kong/images/logo.jpg" />
+        </h1>
+      </div>
+      <div class="fr">
+        <!--一级菜单-->
+        <div class="logo_people c_w6">
+          您好，欢迎 <span class="c_cc" style="color: #2C70C0;">电销二</span>
+          | <a href="/saletel/list"
+               class="c_w6" >销售管理</a>
+          | <a href="/user/profile"
+               class="c_w6" >设置</a> |
+          <a href="/login/out" class="c_w6">退出</a>
+        </div>
+        <!--二级菜单-->
+        <div class="nav fr yahei f16">
+          <ul>
+          </ul>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!--header end-->
+  <!--login begin-->
+  <div class="content w1184 mt20">
+    <div class="main-layout g-line">
+      <aside class="l-s">
+        <!-- 左边栏 -->
+        <ul class="left-side">
+          <li class="l-city">
+            <p class="active"><span class="open">+</span><span class="stop">-</span><a href="?city=bj">北京</a></p>
+            <ul class="u-part ">
+              <li>
+                <p class="active"><span class="open">+</span><span class="stop">-</span>
+                  <a href="javascript:void(0);">测试一部</a>
+                </p>
+                <ul class="u-group ">
+                  <li class="on">
+                    <p class="active"><span class="open">+</span><span class="stop">-</span><a href="javascript:void(0);">测试电销组</a></p>
+                    <ul class="u-people">
+                      <li class="active"><a href="javascript:void(0);">电销二 </a></li>
+                      <li ><a href="javascript:void(0);">电销员工 </a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+      <section class="r-c g-lastu">
+        <header id="tel-bar" class="telemarket-hd clearfix" style="position: relative;">
+        </header>
+        <div id="APP"></div>
+      </section>
+    </div>
+    <script language="javascript" type="text/javascript">
+
+      window.xkTel = {}; //列表参数
+      xkTel = {"citycode":"bj","login_jobid":"52523","jobid":"52523","level":1,"parent_id":"326","group_id":"336","groupid":"336"};
+      console.log(xkTel);
+
+      window.xkTelInfo = {};
+
+      //工具条参数
+      xkTelInfo.callInfo = {"hotline":"89192154","jobid":"52523","password":"","bindtel":"","bindtype":1};
+
+      //登陆销售信息
+      xkTelInfo.loginSaleInfo = {"id":"2308","citycode":"bj","name":"\u7535\u9500\u4e8c","jobnumber":"52523","jobnumber_real":"0","position":"6","position_yd":"6","rank_id":"0","rank_id_yd":"0","group_id":"336","bossid":"2306","mobile":"13666666666","mail":"52523@leju.com","joindate":"20160701","regulardate":"20161230","changedate":"0","bargain_start":"2016","bargain_end":"2019","status":"1","sort":"211","citysort":"1","tiaoji":"0","citymanager":"0","jobid":"52523","rank_code":null,"rank_name":null,"is_tel":"1","is_callcenter":"0","is_dbgroup":"0","group_name":"\u6d4b\u8bd5\u7535\u9500\u7ec4","parent_id":"326","parent_name":"\u6d4b\u8bd5\u4e00\u90e8","customer":"0","tel_groups":"","tel_groups_list":[]};
+
+      //是否启用呼叫中心 1启用 0不用
+      xkTelInfo.isCallCenter = 0;
+
+      //目标
+      xkTelInfo.targetInfo = {"connect_num":"15","conversion_num":"30","group_id":"336"};
+
+      console.log(xkTelInfo);
+
+      window.$_GET = (function(){
+        var url = window.document.location.href.toString();
+        var u = url.split("?");
+        if(typeof(u[1]) == "string"){
+          u = u[1].split("&");
+          var get = {};
+          for(var i in u){
+            var j = u[i].split("=");
+            get[j[0]] = j[1];
+          }
+          return get;
+        } else {
+          return {};
+        }
+      })();
+    </script>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="footer">
+  <p>Copyright © All Rights Reserved 乐居二手房 版权所有</p>
+  <p>京ICP证080057号</p>
+</div>
+</div>
+
+<!-- 返回顶部 -->
+<div class="fixed-box animated fadeOut">
+  <a class="fixed-attend" href="javascript:void (0);"></a>
+  <a class="fixed-schedule" href="javascript:void (0);"></a>
+  <a class="fixed-jointel" href="javascript:void(0);"></a>
+  <a class="fixed-backtop" href="javascript:void (0);"></a>
+</div>
+<!-- ajax loading -->
+<div class="loader_w dn">
+  <div class="loader"><p class="in"></p></div>
+  <div class="loader-lyt"></div>
+</div>
+
+<script type="text/javascript" language="javascript">
+  var gArr = window.gArr || {};
+  gArr['citycode'] = 'bj';
+  gArr['citycn'] = '北京';
+  gArr['saleinfo'] = {};
+  gArr['saleinfo'] = {"id":"2308","citycode":"bj","name":"\u7535\u9500\u4e8c","jobnumber":"52523","jobnumber_real":"0","position":"6","position_yd":"6","rank_id":"0","rank_id_yd":"0","group_id":"336","bossid":"2306","mobile":"13666666666","mail":"52523@leju.com","joindate":"20160701","regulardate":"20161230","changedate":"0","bargain_start":"2016","bargain_end":"2019","status":"1","sort":"211","citysort":"1","tiaoji":"0","citymanager":"0","jobid":"52523","rank_code":null,"rank_name":null,"is_tel":"1","is_callcenter":"0","is_dbgroup":"0","group_name":"\u6d4b\u8bd5\u7535\u9500\u7ec4","parent_id":"326","parent_name":"\u6d4b\u8bd5\u4e00\u90e8","customer":"0","tel_groups":"","tel_groups_list":[],"partname":"\u6d4b\u8bd5\u4e00\u90e8","groupname":"\u6d4b\u8bd5\u7535\u9500\u7ec4"};
+  gArr['currIsDbgroup'] = 0;
+  gArr['currIsFHD'] = 0;
+  gArr['commdescription'] = ["\u552e\u540e\u7ef4\u62a4","\u5ba2\u6237\u57f9\u8bad","\u4ea7\u54c1\u5ba3\u8bb2","\u53d1\u653e\u793c\u54c1","\u4e34\u65f6\u62dc\u8bbf"];
+
+  gArr['currType']     = 'group';
+  gArr['currParentId'] = 326;
+  gArr['currGroupId']  = 336;
+</script>
+<script src="http://res2.esf.leju.com/xk_www/statics/dist/js/common.js"></script>
+<!-- telsale -->
+<script src="http://res2.esf.leju.com/Tel_React_SPA/dist/index.js"></script>
+</body>

@@ -2,9 +2,10 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
-import FootPage from '../component/FootPage';
+import Uncall_btn from './Uncall_btn'
+import FootPage from './FootPage';
 
-export default class Page1Bottom extends Component {
+export default class Page1Middle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +34,7 @@ export default class Page1Bottom extends Component {
         parent_id: window.xkTel.parent_id
       },
       success: function (res) {
-        var res = (typeof res=='string')?JSON.parse(res):res;
+        var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
           this.setState(res.result)
         } else {
@@ -79,7 +80,56 @@ export default class Page1Bottom extends Component {
       }
     }
     return (
-      <div id="page1_bottom">
+      <div id="page1_middle">
+
+        <div className="Telemarketing_main">
+          <ul className="main-title">
+            <li className="current" data-type="uncall"><a href="javascript:void(0);"> 待呼叫（<span>{data.queuenum}></span>）</a>
+            </li>
+            <li data-type="called" data-time="0"><a href="javascript:void(0);">已呼叫（<span>{data.callnum}</span>）</a></li>
+          </ul>
+          <div className="tagBox">
+            <!--待呼叫-->
+            <div id="uncall-tag" className="tag_tab">
+              <div className="tag_callCon">
+                <Uncall_btn />
+                <!--未呼叫筛选条件{:=baidu.template("uncall_choose_temp",{data:data})}-->
+                <div className="h15"></div>
+              </div>
+              <div className="table_callCon">
+                <div className="log-table log-table-sales">
+                  {baidu.template("uncall_tab_temp", {data: data})}
+                </div>
+                <!-- 分页 -->
+                <div className="main-foot">
+                  {baidu.template("tel_page_foot", data)}
+                </div>
+              </div>
+            </div>
+            <!--已呼叫-->
+            <div id="called-tag" className="tag_tab dn">
+              <div className="tag_callCon">
+                <div className="hd_btn">
+                  <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
+                </div>
+                <!--已呼叫筛选条件-->
+                <!--("called_choose_temp",{data:data})}-->
+                <div className="h15"></div>
+              </div>
+              <div className="table_callCon">
+                <div className="log-table log-table-sales">
+                  <!--("called_tab_temp",{data:data})-->
+                </div>
+                <!-- 分页 -->
+                <div className="main-foot">
+                  <!--("tel_page_foot",data)-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className="log-con-bd">
           <div className="tit">
             <div className="visit_time date-box clearfix">
@@ -121,7 +171,7 @@ export default class Page1Bottom extends Component {
               <div className="side-null"></div>
               : (!this.props.level ?
               <div>
-                <table cellPadding="0" cellSpacing="0" style={{width:100+"%"}} data-total="<%=data.total%>">
+                <table cellPadding="0" cellSpacing="0" style={{width:100+"%"}} data-total="{=data.total}">
                   <tbody>
                   <tr>
                     (this.props.xkTel.jobid===this.props.xkTel.login_jobid?
@@ -175,6 +225,8 @@ export default class Page1Bottom extends Component {
             <FootPage total={this.state.data.total*1} num={this.state.data.pagesize*1} active={this.state.data.currpage*1} turnPage={this.turnPage}/>
           </div>
         </div>
+
+
       </div>
     )
   }

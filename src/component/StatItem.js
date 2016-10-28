@@ -2,7 +2,7 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
-class StatItem extends Component {
+export default class StatItem extends Component {
   /*static defaultProps = {
    conversion_complete: 11,
    conversion_target: 100,
@@ -159,4 +159,3 @@ class StatItem extends Component {
     )
   }
 }
-export default StatItem;

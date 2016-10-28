@@ -13,7 +13,7 @@ let store = createStore(telApp);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home}/>
         <Route path="/work" component={Work}/>

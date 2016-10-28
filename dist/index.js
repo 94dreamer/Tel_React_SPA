@@ -89,7 +89,7 @@
 	  { store: store },
 	  _react2.default.createElement(
 	    _reactRouter.Router,
-	    { history: browserHistory },
+	    { history: _reactRouter.hashHistory },
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: _App2.default },

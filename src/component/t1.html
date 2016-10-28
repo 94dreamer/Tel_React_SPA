@@ -1,0 +1,573 @@
+<!--电话销售上半统计部分-->
+<script id="tel_top_temp" type="text/template">
+  <div class="log-stat-hd">
+    <div class="g-line">
+      <div class="date-box clearfix g-u">
+        <%var nT=new Date();var
+        t=nT.getFullYear()+"/"+(nT.getMonth()+1<10?'0'+(nT.getMonth()+1):nT.getMonth()+1)+"/"+(nT.getDate()<10?'0'+nT.getDate():nT.getDate());%>
+        <input id="result_date" class="time_l fl" value="<%=t%>到<%=t%>"/>
+        <label for="result_date" class="time_r fl"><em class="icon-date"></em></label>
+      </div>
+      <p class="g-lastu">按时间查看统计结果</p>
+    </div>
+    <div class="stat-item clearfix">
+      <%:=baidu.template("tel_top_content",data);%>
+    </div>
+  </div>
+</script>
+<script id="tel_top_content" type="text/template">
+  <div class="stat_l">
+    <div class="content">
+      <div class="item-1">
+        <div class=" circle1">
+          <%var c1=conversion_complete/conversion_target*100||0;%>
+          <%var c_1=c1>100?100:c1;%>
+          <div class="pie_left">
+            <div class="left" style="<%if(c_1>50){%>transform:rotate(<%=c_1*3.6-180%>deg)<%}%>"></div>
+          </div>
+          <div class="pie_right">
+            <div class="right" style="transform:rotate(<%if(c_1<=50){%><%=c_1*3.6%><%}else{%>180<%}%>deg);"></div>
+          </div>
+          <div class="mask"><span><%=Math.round(c1==Number.POSITIVE_INFINITY?100:c1)%></span>%</div>
+        </div>
+        <ul>
+          <li class="g-line">
+            <span class="g-u">转化目标 </span>
+            <q class="g-lastu"><em><%=conversion_target%></em>人</q>
+          </li>
+          <li class="g-line">
+            <span class="g-u">已 完 成  </span>
+            <q class="g-lastu"><em class="c1"><%=conversion_complete%></em>人</q>
+          </li>
+        </ul>
+      </div>
+      <div class="item-2">
+        <div class="circle2">
+          <%var c2=connect_complete/connect_target*100||0;%>
+          <%var c_2=c2>100?100:c2;%>
+          <div class="pie_left">
+            <div class="left" style="<%if(c_2>50){%>transform:rotate(<%=c_2*3.6-180%>deg)<%}%>"></div>
+          </div>
+          <div class="pie_right">
+            <div class="right" style="transform:rotate(<%if(c_2<=50){%><%=c_2*3.6%><%}else{%>180<%}%>deg);"></div>
+          </div>
+          <div class="mask"><span><%=Math.round(c2==Number.POSITIVE_INFINITY?100:c2)%></span>%</div>
+        </div>
+        <ul>
+          <li class="g-line">
+            <span class="g-u">接通目标 </span>
+            <q class="g-lastu"><em><%=connect_target%></em>人</q>
+          </li>
+          <li class="g-line">
+            <span class="g-u">已 完 成  </span>
+            <q class="g-lastu"><em class="c1"><%=connect_complete%></em>人</q>
+          </li>
+        </ul>
+      </div>
+      <div class="item-3">
+        <ul>
+          <li class="g-line">
+            <span class="tit g-u"><i class="c1"></i>最短通话时长 </span>
+            <q class="result"><%=talktime_min%></q>
+          </li>
+          <li class="g-line">
+            <span class="tit g-u"><i class="c2"></i>最长通话时长 </span>
+            <q class="result"><%=talktime_max%></q>
+          </li>
+          <li class="g-line">
+            <span class="tit g-u"><i class="c3"></i>平均通话时长 </span>
+            <q class="result"><%=talktime_avg%></q>
+          </li>
+        </ul>
+      </div>
+      <div class="item-4">
+        <ul>
+          <%var arr=[talksection_1,talksection_2,talksection_3,talksection_4];arr.sort(function(a,b){return b-a;});var
+          max=arr[0];%>
+          <li class="g-line g-line-1">
+            <span class="tit g-u"><i></i>通话1分钟以下</span>
+            <span class="schedule g-u"><em style="width:<%=100*talksection_1/arr[0]%>%"></em></span>
+            <q class="result g-lastu"><%=talksection_1%>个</q>
+          </li>
+          <li class="g-line g-line-2">
+            <span class="tit g-u"><i></i>通话1-3分钟</span>
+            <span class="schedule g-u"><em style="width:<%=100*talksection_2/arr[0]%>%"></em></span>
+            <q class="result g-lastu"><%=talksection_2%>个</q>
+          </li>
+          <li class="g-line g-line-3">
+            <span class="tit g-u"><i></i>通话3-5分钟 </span>
+            <span class="schedule g-u"><em style="width:<%=100*talksection_3/arr[0]%>%"></em></span>
+            <q class="result g-lastu"><%=talksection_3%>个</q>
+          </li>
+          <li class="g-line g-line-4">
+            <span class="tit g-u"><i></i>通话5分钟以上</span>
+            <span class="schedule g-u"><em style="width:<%=100*talksection_4/arr[0]%>%"></em></span>
+            <q class="result g-lastu"><%=talksection_4%>个</q>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!--待呼叫和已呼叫外层容器-->
+<script id="tab_main_temp" type="text/template">
+  <div class="Telemarketing_main">
+    <ul class="main-title">
+      <li class="current" data-type="uncall"><a href="javascript:void(0);"> 待呼叫（<span><%=data.queuenum%></span>）</a></li>
+      <li data-type="called" data-time="0"><a href="javascript:void(0);">已呼叫（<span><%=data.callnum%></span>）</a></li>
+    </ul>
+    <div class="tagBox">
+      <!--待呼叫-->
+      <div id="uncall-tag" class="tag_tab">
+        <div class="tag_callCon">
+          <div class="hd_btn">
+            <%if(window.xkTel.level){%>
+            <a href="javascript:void(0);" id="startWork" class="btn_blue"><%if(window.xkTelInfo.isCallCenter){%>正在登录<%}else{%>开始工作<%}%></a>
+            <%if(window.xkTelInfo.isCallCenter){%>
+            <a href="javascript:void(0);" id="quitWork" class="btn_red">置忙</a>
+            <%}%>
+            <%}else{%>
+            <%}%>
+
+            <%if(!gArr['saleinfo'] || !gArr['saleinfo'].position || gArr['saleinfo'].position != 6){%>
+            <a href="javascript:void(0);" id="setTarget" class="btn_blue">设置目标</a>
+            <%if(2==window.xkTelInfo.telGroupRelationType){%><a href="javascript:void(0);" id="groupAllocat" class="btn_blue">部组分配</a><%}%>
+            <%}%>
+
+            <a href="javascript:void(0);" id="exportUncall" class="btn_gray">导出数据</a>
+          </div>
+          <!--未呼叫筛选条件<%:=baidu.template("uncall_choose_temp",{data:data})%>-->
+          <div class="h15"></div>
+        </div>
+        <div class="table_callCon">
+          <div class="log-table log-table-sales">
+            <%:=baidu.template("uncall_tab_temp",{data:data})%>
+          </div>
+          <!-- 分页 -->
+          <div class="main-foot">
+            <%:=baidu.template("tel_page_foot",data);%>
+          </div>
+        </div>
+      </div>
+      <!--已呼叫-->
+      <div id="called-tag" class="tag_tab dn">
+        <div class="tag_callCon">
+          <div class="hd_btn">
+            <a href="javascript:void(0);" id="exportCalled" class="btn_gray">导出数据</a>
+          </div>
+          <!--已呼叫筛选条件-->
+          <!--("called_choose_temp",{data:data})%>-->
+          <div class="h15"></div>
+        </div>
+        <div class="table_callCon">
+          <div class="log-table log-table-sales">
+            <!--("called_tab_temp",{data:data})-->
+          </div>
+          <!-- 分页 -->
+          <div class="main-foot">
+            <!--("tel_page_foot",data)-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<!--待呼叫的筛选条件-->
+<script id="uncall_choose_temp" type="text/template">
+  <%:=baidu.template("choose_position_temp",data)%>
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >呼叫列队：</h2>
+      <%var callqueue={
+      "1":"首次邀约",
+      "2":"临时指派",
+      "3":"回访核实",
+      "4":"未达标",
+      "5":"7天到期",
+      "6":"7天开通"
+      };%>
+      <%for(var i in callqueue){%>
+      <a href="javascript:void(0);" <%if(window.telSales.uncallData.callqueue==i){%>class="onend"<%}%> data-type="callqueue" data-id="<%=i%>" ><%=callqueue[i]%></a>
+      <%}%>
+      <h2 class="fl dataCon" >队列日期：</h2>
+      <div class="visit_time date-box clearfix fl">
+        <input class="time_l fl" id="queueDate" placeholder="选择日期">
+        <label for="queueDate" class="time_r fl"><em class="icon-date"></em></label>
+      </div>
+    </div>
+  </div>
+  <%:=baidu.template("choose_group_temp",data)%>
+  <%:=baidu.template("choose_keyword_temp",{})%>
+</script>
+<!--已呼叫的筛选条件-->
+<script id="called_choose_temp" type="text/template">
+  <%:=baidu.template("choose_position_temp",data)%>
+  <%:=baidu.template("choose_group_temp",data)%>
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >电销标签：</h2>
+      <a href="javascript:void(0);" data-type="visitlabel" class="onend">全部</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="1">已邀约</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="5">邀约回访</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="6">陌拜回访</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="7">自我安排回访</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="2">未达标提醒</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="3">7天开通关怀</a>
+      <a href="javascript:void(0);" data-type="visitlabel" data-id="4">7天下线提醒</a>
+    </div>
+  </div>
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >呼叫状态：</h2>
+      <a href="javascript:void(0);" data-type="call_status" class="onend" >全部</a>
+      <a href="javascript:void(0);" data-type="call_status" data-id="1">呼叫成功</a>
+      <a href="javascript:void(0);" data-type="call_status" data-id="2">呼叫失败</a>
+    </div>
+  </div>
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >客户意向：</h2>
+      <a href="javascript:void(0);" data-type="buylevel" class="onend" >全部</a>
+      <a href="javascript:void(0);" data-type="buylevel" data-id="2">A+有意向</a>
+      <a href="javascript:void(0);" data-type="buylevel" data-id="3">A可以考虑</a>
+      <a href="javascript:void(0);" data-type="buylevel" data-id="5">B暂无意向</a>
+      <a href="javascript:void(0);" data-type="buylevel" data-id="6">C不考虑</a>
+      <a href="javascript:void(0);" data-type="buylevel" data-id="0">未填写</a>
+    </div>
+  </div>
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >呼叫时间：</h2>
+      <div class="visit_time date-box clearfix fl">
+        <input class="time_l fl" id="callDate" placeholder="选择日期" />
+        <label for="callDate" class="time_r fl"><em class="icon-date"></em></label>
+      </div>
+    </div>
+  </div>
+  <%:=baidu.template("choose_keyword_temp",{})%>
+</script>
+<!--筛选条件的城区板块-->
+<script id="choose_position_temp" type="text/template">
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >城区板块：</h2>
+      <a href="javascript:void(0);" data-type="district" class="onend" >全部</a>
+      <%for(var i in block){%>
+      <a href="javascript:void(0);" data-type="district"  data-json="<%=JSON.stringify(block[i].block)%>" data-id="<%=block[i].id%>"><%=block[i].name%><i></i></a>
+      <%}%>
+    </div>
+    <!--悬浮标签-->
+    <div class="line-list dn" style="display: block;">
+      <div class="choose">
+        <!--choose_position_hover_temp-->
+      </div>
+    </div>
+  </div>
+</script>
+<!--城区板块的悬浮标签-->
+<script id="choose_block_hover_temp" type="text/template">
+  <%if(!!data){%>
+  <%for(var i in data){%>
+  <span><%=i%></span>
+  <%for(var n=0;n< data[i].length;n++){%>
+  <a href="javascript:void(0);" data-type="block" data-id="<%=data[i][n].id%>"><%=data[i][n].name%></a>
+  <%}%>
+  <%}%>
+  <%}%>
+</script>
+<!--筛选条件的所属部组-->
+<script id="choose_group_temp" type="text/template">
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl" >所属部组：</h2>
+      <a href="javascript:void(0);" data-type="parent" class="onend" >全部</a>
+      <%for(var i in group){%>
+      <a href="javascript:void(0);" data-type="parent"  data-json="<%=JSON.stringify(group[i].group)%>" data-id="<%=group[i].id%>"><i></i><%=group[i].name%></a>
+      <%}%>
+    </div>
+    <!--悬浮标签-->
+    <div class="line-list dn" style="display: block;">
+      <div class="choose group_div">
+        <!--choose_group_hover_temp-->
+      </div>
+    </div>
+  </div>
+</script>
+<!--所属部组的悬浮标签-->
+<script id="choose_group_hover_temp" type="text/template">
+  <%if(!!data){%>
+  <a href="javascript:void(0);" data-type="group" class="onend" >全部</a>
+  <%for(var i=0;i< data.length;i++){%>
+  <a href="javascript:void(0);"  data-type="group" data-id="<%=data[i].id%>"><%=data[i].name%></a>
+  <%}%>
+  <%}%>
+</script>
+<!--筛选条件的关键字-->
+<script id="choose_keyword_temp" type="text/template">
+  <div class="item">
+    <div class="position clearfix" style="display: block;">
+      <h2 class="fl keyword" >关键字：</h2>
+      <div class="call_search fl">
+        <input type="text" class="keyword-input" autocomplete="off" placeholder="输入公司名、门店名、客户姓名、客户手机号" />
+        <i class="icon-look" class="keyword_btn"></i>
+        <div class="keyword_pop_box"></div>
+      </div>
+    </div>
+  </div>
+</script>
+<!--待呼叫页签-->
+<script id="uncall_tab_temp" type="text/template">
+  <%if(!data.list.length){%>
+  <div class="side-null"></div>
+  <%}else{%>
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <th width="5%">序号</th>
+      <th width="6%">客户姓名</th>
+      <th width="8%">所属门店</th>
+      <th width="8%">责任销售</th>
+      <th width="10%">所属部组</th>
+      <th width="8%">上次呼叫时间</th>
+      <th width="25%">上次沟通详情</th>
+      <th width="20%">待呼叫标识</th>
+      <th width="10" class="bor_r0">加入列队的时间</th>
+    </tr>
+    <%for(var i=0;i< data.list.length;i++){%>
+    <%var list = data.list[i];%>
+    <tr>
+      <td><%=list.number%></td>
+      <%if(window.$_GET['groupid']){%>
+      <td><a target='_blank'
+             href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&groupid=<%=window.$_GET['groupid']%>"><%=list.basicinfo.name%></a>
+      </td><!--客户-->
+      <%}else{%>
+      <td><a target='_blank'
+             href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&jobid=<%=window.$_GET['jobid']%>"><%=list.basicinfo.name%></a>
+      </td><!--客户-->
+      <%}%>
+      <td><%=list.basicinfo.companyshortname%> <%=list.basicinfo.storename%></td>
+      <td><%=list.saleinfo.name || ''%></td>
+      <td><%=list.saleinfo.parent_name || ''%>-<%=list.saleinfo.group_name || ''%></td>
+      <td><%=list.visitinfo.ctime_view%></td>
+
+      <%var tel_content=[];%>
+      <%if(list.visitinfo.visitway==3){%>
+      <%if(list.visitinfo.customerintention==7){
+      list.visitinfo.customerintention_view && tel_content.push('预约情况：'+list.visitinfo.customerintention_view+'
+      '+list.visitinfo.notconn_item_view);
+      }else{
+      list.visitinfo.customerintention_view && tel_content.push('预约情况：'+list.visitinfo.customerintention_view);
+      }
+      list.visitinfo.tomeet_view && tel_content.push('销售是否面见：'+list.visitinfo.tomeet_view);
+
+      if(list.visitinfo.tomeet==1){
+      list.visitinfo.isremembersale_view && tel_content.push('是否记得销售姓名：'+list.visitinfo.isremembersale_view);
+      list.visitinfo.isknowtopshow_view && tel_content.push('是否知道认证房置顶展示：'+list.visitinfo.isknowtopshow_view);
+      list.visitinfo.howlongtostore_view && tel_content.push('销售多久去一次门店：'+list.visitinfo.howlongtostore_view);
+      list.visitinfo.howlongcommunicate_view && tel_content.push('沟通了多久：'+list.visitinfo.howlongcommunicate_view);
+      list.visitinfo.satisfiedservice_view && tel_content.push('是否满意销售服务：'+list.visitinfo.satisfiedservice_view);
+      }
+      list.visitinfo.remark && tel_content.push('备注说明：'+list.visitinfo.remark.replace(/.{20}/ig,"$&"+"\n"));%>
+      <%}else{list.visitinfo.tag && tel_content.push(list.visitinfo.tag);
+      list.visitinfo.remark &&tel_content.push(list.visitinfo.remark.replace(/.{20}/ig,"$&"+"\n"));}%>
+      <td title="<%=tel_content.join('\r')%>" style="cursor: help;">
+        <%var tel_content_join=tel_content.join('；');%>
+        <%if(tel_content_join.length>30){%>
+        <%=tel_content_join.substring(0,30)+"..."%>
+        <%}else{%>
+        <%=tel_content_join%>
+        <%}%>
+      </td><!--沟通详情-->
+
+      <td>
+        <div class="tag_s clearfix">
+          <%if(list.queueinfo.is_firstcall>0){%><span class="c_blue">首次</span><%}%>
+          <%if(list.queueinfo.is_tempassign>0){%><span class="c_purple">指派</span><%}%>
+          <%if(list.queueinfo.is_telsalevisit>0){%><span class="c_orange">回访</span><%}%>
+          <%if(list.queueinfo.is_notstandard>0){%><span class="c_red">未达标</span><%}%>
+          <%if(list.queueinfo.is_7expire>0){%><span class="c_orange">7天到期</span><%}%>
+          <%if(list.queueinfo.is_7open>0){%><span class="c_green">7天开通</span><%}%>
+        </div>
+      </td>
+      <td class="bor_r0"><%=list.queueinfo.queuetime_view%></td>
+    </tr>
+    <%}%>
+  </table>
+  <p class="callnum">
+    共找到待呼叫记录 <span><%=data.total%></span> 条，经纪人 <span><%=data.brokernum%></span> 个。
+  </p>
+  <%}%>
+</script>
+<!--已呼叫页签-->
+<script id="called_tab_temp" type="text/template">
+  <%if(!data.list.length){%>
+  <div class="side-null"></div>
+  <%}else{%>
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <th width="5%">序号</th>
+      <th width="6%">客户姓名</th>
+      <th width="8%">所属门店</th>
+      <th width="8%">销售名称</th>
+      <th width="10%">所属部组</th>
+      <th width="8%">呼叫时间</th>
+      <th width="8%">通话时长</th>
+      <th width="10%">沟通详情</th>
+      <th width="8%">意向程度</th>
+      <th width="8%">呼叫状态</th>
+      <th width="8%">电销标签</th>
+      <th width="8%">电销姓名</th>
+
+      <%if(gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6){%>
+      <th width="10%" class="bor_r0">操作</th>
+      <%}%>
+    </tr>
+    <%for(var i=0;i< data.list.length;i++){%>
+    <%var list = data.list[i];%>
+    <tr>
+      <td><%=list.number%></td>
+      <%if(window.$_GET['groupid']){%>
+      <td><a target='_blank'
+             href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&groupid=<%=window.$_GET['groupid']%>"><%=list.basicinfo.name%></a>
+      </td><!--客户-->
+      <%}else{%>
+      <td><a target='_blank'
+             href="/saletel/record?citycode=<%=window.xkTel.citycode%>&uid=<%=list.basicinfo.uid%>&jobid=<%=window.$_GET['jobid']%>"><%=list.basicinfo.name%></a>
+      </td><!--客户-->
+      <%}%>
+      <td><%=list.basicinfo.companyshortname%> <%=list.basicinfo.storename%></td>
+      <td><%=list.saleinfo.name || ''%></td>
+      <td><%=list.saleinfo.parent_name || ''%>-<%=list.saleinfo.group_name || ''%></td>
+      <td><%=list.visitinfo.ctime_view%></td>
+      <td><%if(list.visitinfo.customerintention==7){%>--<%}else{%><%=list.visitinfo.talk_time%><%}%></td>
+
+      <%var tel_content=[];%>
+      <%if(list.visitinfo.visitway==3){%>
+      <%if(list.visitinfo.customerintention==7){
+      list.visitinfo.customerintention_view && tel_content.push('预约情况：'+list.visitinfo.customerintention_view+'
+      '+list.visitinfo.notconn_item_view);
+      }else{
+      list.visitinfo.customerintention_view && tel_content.push('预约情况：'+list.visitinfo.customerintention_view);
+      }
+      list.visitinfo.tomeet_view && tel_content.push('销售是否面见：'+list.visitinfo.tomeet_view);
+      if(list.visitinfo.tomeet==1){
+      list.visitinfo.isremembersale_view && tel_content.push('是否记得销售姓名：'+list.visitinfo.isremembersale_view);
+      list.visitinfo.isknowtopshow_view && tel_content.push('是否知道认证房置顶展示：'+list.visitinfo.isknowtopshow_view);
+      list.visitinfo.howlongtostore_view && tel_content.push('销售多久去一次门店：'+list.visitinfo.howlongtostore_view);
+      list.visitinfo.howlongcommunicate_view && tel_content.push('沟通了多久：'+list.visitinfo.howlongcommunicate_view);
+      list.visitinfo.satisfiedservice_view && tel_content.push('是否满意销售服务：'+list.visitinfo.satisfiedservice_view);
+      }
+      list.visitinfo.remark && tel_content.push('备注说明：'+list.visitinfo.remark.replace(/.{20}/ig,"$&"+"\n"));%>
+      <%}else{list.visitinfo.tag && tel_content.push(list.visitinfo.tag);
+      list.visitinfo.remark && tel_content.push(list.visitinfo.remark.replace(/.{20}/ig,"$&"+"\n"));}%>
+      <td title="<%=tel_content.join('\r')%>" style="cursor: help;">
+        <%var tel_content_join=tel_content.join('；');%>
+        <%if(tel_content_join.length>30){%>
+        <%=tel_content_join.substring(0,30)+"..."%>
+        <%}else{%>
+        <%=tel_content_join%>
+        <%}%>
+      </td><!--沟通详情-->
+
+      <td><%=list.visitinfo.buylevel_view || ''%></td>
+      <td><%if(list.visitinfo.customerintention==7){%>呼叫失败<%}else{%>呼叫成功<%}%></td>
+      <td><%=list.visitinfo.visitlabel_view%></td>
+      <td><%if(list.telsaleinfo){%><%=list.telsaleinfo.group_name || ''%>-<%=list.telsaleinfo.name || ''%><%}%></td>
+
+      <%if(gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6){%>
+      <td class="bor_r0">
+        <a href="javascript:void(0);" class="callBtn" data-uid="<%=list.basicinfo.uid%>" data-id="<%=list.visitinfo.id%>" data-mobile="<%=list.basicinfo.mobile%>" data-time="<%=list.visitinfo.call_time%>">呼叫</a>
+      </td>
+      <%}%>
+    </tr>
+    <%}%>
+  </table>
+  <p class="callnum">
+    共找到已呼叫记录 <span><%=data.total%></span> 条，经纪人 <span><%=data.brokernum%></span> 个。
+  </p>
+  <%}%>
+</script>
+<!--部组分配-->
+<script id="group_allocat_temp" type="text/template">
+  <div id="group_Allocat_box">
+    <h4 class="h4_title">“注”：双击即可实现选中/取消选中</h4>
+    <div class="clearfix">
+      <dl id="unchooseGroup">
+        <dt>待选部组</dt>
+        <%var unGroupArr = [];
+        for (var n = 0; n < group.length; n++) {
+        unGroupArr.push(group[n]);
+        for (var m = 0; m < tel[0].group.length; m++) {
+        group[n].id == tel[0].group[m].id && unGroupArr.pop()
+        }
+        }%>
+        <%for(var i=0;i< unGroupArr.length;i++){%>
+        <dd data-id="<%=unGroupArr[i].id%>"><%=unGroupArr[i].name%></dd>
+        <%}%>
+      </dl>
+      <i></i>
+      <dl id="chooseedGroup">
+        <dt>已选部组</dt>
+        <%if(tel[0] && tel[0].group && tel[0].group.length){
+        for(var t=0;t< tel[0].group.length;t++){%>
+        <dd data-id="<%=tel[0].group[t].id%>"><%=tel[0].group[t].name%></dd>
+        <%}
+        }%>
+      </dl>
+    </div>
+    <p>
+      <span>电销人员：</span>
+      <select name="tel_basic" id="tel_basic" style="clear: both;">
+        <%for(var i=0;i< tel.length;i++){%>
+        <option value="<%=tel[i].jobid%>" <%if(i==0){%>selected<%}%> ><%=tel[i].name%></option>
+        <%}%>
+      </select>
+    </p>
+  </div>
+</script>
+<!--分页-->
+<script id="tel_page_foot" type="text/template">
+  <%if(typeof(total)!="undefined" && total!=0){%>
+  <ul class="turn-page clearfix">
+    <%var pageN= Math.ceil(total/num)>5?5:Math.ceil(total/num);%>
+    <li class="prev dn"><a href="javascript:void(0);">上一页</a></li>
+    <%for(var i=1;i<=pageN;i++){%>
+    <%if(i==1){%>
+    <li class="page"><a href="javascript:void(0);" class="active">1</a></li>
+    <%}else{%>
+    <li class="page"><a href="javascript:void(0);"><%=i%></a></li>
+    <%}}%>
+    <li class="next <%if(pageN<=1){%>dn<%}%>"><a href="javascript:void(0);">下一页</a></li>
+    <li class="pl5 total">共<span><%=Math.ceil(total/num)%></span>页</li>
+  </ul>
+  <%}%>
+</script>
+<!--关键字下拉框-->
+<script id="keyword_pop_temp" type="text/template">
+  <%if(data.length){%>
+  <ul>
+    <%for(var i=0;i< data.length;i++){%>
+    <%if(data[i].role==1){%>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_company">公司</span><span class="content_name"><%=data[i].name%></span></li>
+    <%}else if(data[i].role==7){%>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_store">门店</span><span class="content_name"><%=data[i].name%></span></li>
+    <%}else if(data[i].role==8){%>
+    <li data-uid="<%=data[i].uid%>" data-role="<%=data[i].role%>"><span class="k_agent">经纪人</span><span class="content_name"><%=data[i].name%></span></li>
+    <%}%>
+    <%}%>
+  </ul>
+  <%}%>
+</script>
+<!-- 成功失败弹层 -->
+<script id="tipPop" type="text/template">
+  <div class="up-part <%=exClass%>">
+    <%if(satusClass){%>
+    <i class="prompt-img <%=satusClass%>"></i>
+    <%}%>
+    <div class="text-describe">
+      <h5 class="p-title"><%:=title%></h5>
+      <span class="p-text"><%:=desc%></span>
+    </div>
+  </div>
+</script>
