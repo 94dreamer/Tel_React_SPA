@@ -5,10 +5,10 @@ import React,{Component} from 'react';
 export default class UncallTab extends Component {
 
   render() {
-    return
-    !data.list.length?<div className="side-null"></div> :
+    return {
+    !data.list.length ? <div className="side-null"></div> :
       <div>
-        <table cellpadding="0" cellspacing="0" width="100%">
+        <table cellPadding="0" cellSpacing="0" width="100%">
           <tbody>
           <tr>
             <th width="5%">序号</th>
@@ -58,5 +58,6 @@ export default class UncallTab extends Component {
           共找到待呼叫记录 <span>{data.total}</span> 条，经纪人 <span>{data.brokernum}</span> 个。
         </p>
       </div>
+  }
   }
 }

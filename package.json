@@ -29,6 +29,9 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.25.0",
+    "eslint": "^3.9.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
     "html-webpack-plugin": "^2.22.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
@@ -37,7 +40,8 @@
   "scripts": {
     "watch": "webpack --watch",
     "build": "webpack -p",
-    "dev": "webpack"
+    "dev": "webpack",
+    "eslint": "eslint src"
   },
   "repository": {
     "type": "git",
