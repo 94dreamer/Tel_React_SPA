@@ -2,9 +2,10 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
-import ChoosePosition from './ChoosePosition';
-import ChooseGroup from './ChooseGroup';
-import ChooseKeyword from './ChooseKeyword';
+import {ChoosePosition} from './ChoosePosition';
+import {ChooseGroup} from './ChooseGroup';
+import {ChooseKeyword} from './ChooseKeyword';
+
 export default class CalledChoose extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ export default class CalledChoose extends Component {
         <ChoosePosition />
         <ChooseGroup />
         <div className="item">
-          <div className="position clearfix" style="display: block;">
+          <div className="position clearfix" style={{display: "block"}}>
             <h2 className="fl">电销标签：</h2>
             <a href="javascript:void(0);" data-type="visitlabel" className="onend">全部</a>
             <a href="javascript:void(0);" data-type="visitlabel" data-id="1">已邀约</a>
@@ -30,7 +31,7 @@ export default class CalledChoose extends Component {
           </div>
         </div>
         <div className="item">
-          <div className="position clearfix" style="display: block;">
+          <div className="position clearfix" style={{display: "block"}}>
             <h2 className="fl">呼叫状态：</h2>
             <a href="javascript:void(0);" data-type="call_status" className="onend">全部</a>
             <a href="javascript:void(0);" data-type="call_status" data-id="1">呼叫成功</a>
@@ -38,7 +39,7 @@ export default class CalledChoose extends Component {
           </div>
         </div>
         <div className="item">
-          <div className="position clearfix" style="display: block;">
+          <div className="position clearfix" style={{display: "block"}}>
             <h2 className="fl">客户意向：</h2>
             <a href="javascript:void(0);" data-type="buylevel" className="onend">全部</a>
             <a href="javascript:void(0);" data-type="buylevel" data-id="2">A+有意向</a>
@@ -49,11 +50,11 @@ export default class CalledChoose extends Component {
           </div>
         </div>
         <div className="item">
-          <div className="position clearfix" style="display: block;">
+          <div className="position clearfix" style={{display: "block"}}>
             <h2 className="fl">呼叫时间：</h2>
             <div className="visit_time date-box clearfix fl">
               <input className="time_l fl" id="callDate" placeholder="选择日期"/>
-              <label for="callDate" className="time_r fl"><em className="icon-date"></em></label>
+              <label htmlFor="callDate" className="time_r fl"><em className="icon-date" /></label>
             </div>
           </div>
         </div>

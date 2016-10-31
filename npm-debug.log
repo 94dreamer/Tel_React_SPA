@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run-script',
+1 verbose cli   'eslint' ]
+2 info using npm@3.8.6
+3 info using node@v6.1.0
+4 verbose run-script [ 'preeslint', 'eslint', 'posteslint' ]
+5 info lifecycle tel@1.0.0~preeslint: tel@1.0.0
+6 silly lifecycle tel@1.0.0~preeslint: no script for preeslint, continuing
+7 info lifecycle tel@1.0.0~eslint: tel@1.0.0
+8 verbose lifecycle tel@1.0.0~eslint: unsafe-perm in lifecycle true
+9 verbose lifecycle tel@1.0.0~eslint: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;D:\static_resource\Tel_React_SPA\node_modules\.bin;C:\Program Files\nodejs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\nodejs\;C:\Users\zz\AppData\Roaming\npm
+10 verbose lifecycle tel@1.0.0~eslint: CWD: D:\static_resource\Tel_React_SPA
+11 silly lifecycle tel@1.0.0~eslint: Args: [ '/d /s /c', 'eslint src' ]
+12 silly lifecycle tel@1.0.0~eslint: Returned: code: 1  signal: null
+13 info lifecycle tel@1.0.0~eslint: Failed to exec eslint script
+14 verbose stack Error: tel@1.0.0 eslint: `eslint src`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:239:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:850:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+15 verbose pkgid tel@1.0.0
+16 verbose cwd D:\static_resource\Tel_React_SPA
+17 error Windows_NT 6.1.7601
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run-script" "eslint"
+19 error node v6.1.0
+20 error npm  v3.8.6
+21 error code ELIFECYCLE
+22 error tel@1.0.0 eslint: `eslint src`
+22 error Exit status 1
+23 error Failed at the tel@1.0.0 eslint script 'eslint src'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the tel package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     eslint src
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs tel
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls tel
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

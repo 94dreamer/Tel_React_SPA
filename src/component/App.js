@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 import { Link, IndexLink } from 'react-router';
-//import './App.css';
+/* import './App.css';*/
 
-const App=(props)=>(
+const App = props=>(
   <div>
     <h1>React Router</h1>
     <ul style={{overflow:"hidden"}}>
@@ -14,8 +14,8 @@ const App=(props)=>(
   </div>
 );
 
-App.propTypes={
-  children:React.PropTypes.object
+App.propTypes = {
+  children: PropTypes.isRequired
 };
 
 export default App;

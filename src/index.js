@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore}from 'redux';
-import {Provider}from 'react-redux';
+import {Provider} from 'react-redux';
 import {Router,Route,hashHistory,browserHistory,IndexRoute}from 'react-router'
 import App from './component/App';
 import Home from './component/Home';

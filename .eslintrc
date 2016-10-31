@@ -1,9 +1,27 @@
 {
     "extends": "airbnb",
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "linebreak-style": [0, "windows"],//换行风格,
+      "object-curly-spacing": [0, "never"],//大括号内是否允许不必要的空格
+      //"keyword-spacing":[0,{"before": true,"after": true}],//要求在关键字前后至少有一个空格
+      "arrow-spacing":[0,{ "before": true, "after": true }],
+      "quotes":[0, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
+      "key-spacing":0,//对象的key
+      "comma-spacing":0,// 强制在逗号前后使用一致的空格"
+      "comma-dangle":0,//行尾丢失逗号
+      "semi":0,//分号
+      "no-script-url":0,//使用javascript:
+      "react/jsx-space-before-closing":0,//关闭标签前需要一个空格
+      "max-len":0,//一行的最大长度
     },
+    "plugins": [
+      "babel",
+      "react",
+      "promise"
+    ],
     "env" :{
-        "browser": true
+      "browser": true
     }
 }
+
