@@ -2,9 +2,9 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
-import ChoosePosition from './ChoosePosition';
-import ChooseGroup from './ChooseGroup';
-import ChooseKeyword from './ChooseKeyword';
+import {ChoosePosition} from './ChoosePosition';
+import {ChooseGroup} from './ChooseGroup';
+import {ChooseKeyword} from './ChooseKeyword';
 
 export default class UncallChoose extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class UncallChoose extends Component {
   }
 
   render() {
-    var callqueue = {
+    const callqueue = {
       "1": "首次邀约",
       "2": "临时指派",
       "3": "回访核实",
@@ -24,11 +24,11 @@ export default class UncallChoose extends Component {
     var callArr = [];
     for (let i in  callArr) {
       callArr.push(
-        <a href="javascript:void(0);" className={window.telSales.uncallData.callqueue==i?onend:null} data-type="callqueue" data-id="<%=i%>">{callqueue[i]}</a>)
+        <a href="javascript:void(0);" className={window.telSales.uncallData.callqueue==i?onend:null} data-type="callqueue" data-id={i}>{callqueue[i]}</a>)
     }
     return (
       <div>
-        <ChoosePosition/>
+        <ChoosePosition />
         <div className="item">
           <div className="position clearfix" style="display: block;">
             <h2 className="fl">呼叫列队：</h2>
@@ -40,8 +40,8 @@ export default class UncallChoose extends Component {
             </div>
           </div>
         </div>
-        <ChooseGroup/>
-        <ChooseKeyword/>
+        <ChooseGroup />
+        <ChooseKeyword />
       </div>
     )
   }

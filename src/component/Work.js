@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-//import './App.css';
+// import './App.css';
 
-class Work extends Component {
+export default class Work extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -16,5 +15,3 @@ class Work extends Component {
     )
   }
 }
-
-export default Work;

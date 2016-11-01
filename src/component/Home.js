@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Page1Top from './Page1Top';
 import Page1Middle from './Page1Middle';
-//import Page1Bottom from './Page1Bottom';
 //import './App.css';
 
 class Home extends Component {
@@ -16,14 +17,25 @@ class Home extends Component {
   }
 
   render() {
+    // 通过调用 connect() 注入:
+    const { dispatch ,TEL_AGENT , WORK_PARAM } = this.props;
+    /*let home={<Page1Middle {...this.state} />}*/
     return (
-        <div>
-          <Page1Top {...this.state} />
-          <Page1Middle {...this.state} />
-          /*<Page1Bottom {...this.state} />*/
-        </div>
+      <div>
+        home
+        <p>{this.props.TEL_AGENT.name}</p>
+        <Page1Top {...this.state}/>
+      </div>
     )
   }
 }
 
-export default Home;
+// 基于全局 state ，哪些是我们想注入的 props ?
+// 注意：使用 https://github.com/reactjs/reselect 效果更佳。
+function select(state) {
+  return {
+    TEL_AGENT: state.TEL_AGENT,
+    WORK_PARAM: state.WORK_PARAM
+  };
+}
+export default connect(select)(Home);

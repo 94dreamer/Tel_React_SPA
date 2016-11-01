@@ -2,6 +2,7 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
+
 export default class ChooseGroupHover extends Component {
   constructor(props) {
     super(props);

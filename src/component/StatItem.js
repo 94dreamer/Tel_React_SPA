@@ -25,10 +25,10 @@ export default class StatItem extends Component {
     this.ajaxRequest = $.ajax({
       url: '/saleajax/telstatresult/',
       data: {
-        citycode: xkTel.citycode,//城市编号
-        level: xkTel.level,
-        group_id: xkTel.group_id,//部组id
-        jobid: xkTel.jobid,//销售工号
+        citycode: window.xkTel.citycode,//城市编号
+        level: window.xkTel.level,
+        group_id: window.xkTel.group_id,//部组id
+        jobid: window.xkTel.jobid,//销售工号
         start_date: this.props.minDate,
         end_date: this.props.maxDate
       },

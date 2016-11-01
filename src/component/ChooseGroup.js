@@ -2,7 +2,8 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
-import ChooseGroupHover from 'ChooseGroupHover';
+import ChooseGroupHover from './ChooseGroupHover';
+
 export default class ChooseGroup extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,6 @@ export default class ChooseGroup extends Component {
           <a href="javascript:void(0);" data-type="parent" className="onend" >全部</a>
           {arr}
         </div>
-        <!--悬浮标签-->
         <div className="line-list dn" style="display: block;">
           <ChooseGroupHover />
         </div>
