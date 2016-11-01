@@ -3,8 +3,9 @@
  */
 import React,{Component} from 'react';
 import StatItem from '../component/StatItem';
+import {connect} from 'react-redux'
 
-export default class Page1Top extends Component {
+class Page1Top extends Component {
   constructor(props) {
     super(props);
     this.dateForm = this.dateForm.bind(this);
@@ -18,14 +19,15 @@ export default class Page1Top extends Component {
 
   dateChange(e) {
     this.props.dispatch({
-      type:"CHANGE_resultDate",
-      min:e.target.value.split("到")[0],
+      type: "CHANGE_resultDate",
+      min: e.target.value.split("到")[0],
       max: e.target.value.split("到")[1]
     })
   }
 
   render() {
-    console.log(this.props);
+    // 通过调用 connect() 注入:
+    const {dispatch, resultDate} = this.props;
     const date = {
       min: this.props.resultDate.min || this.dateForm(new Date()),
       max: this.props.resultDate.max || this.dateForm(new Date())
@@ -48,3 +50,10 @@ export default class Page1Top extends Component {
     )
   }
 }
+
+function select(state) {
+  return {
+    resultDate: state.resultDate
+  };
+}
+export default connect(select)(Page1Top);
