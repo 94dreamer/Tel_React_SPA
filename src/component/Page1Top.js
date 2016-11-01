@@ -9,10 +9,6 @@ export default class Page1Top extends Component {
     super(props);
     this.dateForm = this.dateForm.bind(this);
     this.dateChange = this.dateChange.bind(this);
-    this.state = {
-      mindate: this.dateForm(new Date()),
-      maxdate: this.dateForm(new Date())
-    }
   }
 
   dateForm(nT) {
@@ -21,29 +17,31 @@ export default class Page1Top extends Component {
   }
 
   dateChange(e) {
-    this.setState({
-      mindate: e.target.value.split("到")[0],
-      maxdate: e.target.value.split("到")[1]
+    this.props.dispatch({
+      type:"CHANGE_resultDate",
+      min:e.target.value.split("到")[0],
+      max: e.target.value.split("到")[1]
     })
   }
 
   render() {
+    console.log(this.props);
     const date = {
-      minDate: this.state.mindate,
-      maxDate: this.state.maxdate
+      min: this.props.resultDate.min || this.dateForm(new Date()),
+      max: this.props.resultDate.max || this.dateForm(new Date())
     }
     return (
       <div id="page1_top">
         <div className="log-stat-hd">
           <div className="g-line">
             <div className="date-box clearfix g-u">
-              <input id="result_date" className="time_l fl" defaultValue={this.state.mindate+"到"+this.state.maxdate} onChange={this.dateChange}/>
+              <input id="result_date" className="time_l fl" defaultValue={date.min+"到"+date.max} onChange={this.dateChange}/>
               <label htmlFor="result_date" className="time_r fl"><em className="icon-date"></em></label>
             </div>
             <p className="g-lastu">按时间查看统计结果</p>
           </div>
           <div className="stat-item clearfix">
-            <StatItem {...date} />
+            <StatItem {...this.props.resultDate} />
           </div>
         </div>
       </div>

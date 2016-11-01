@@ -1,34 +1,30 @@
 import {combineReducers} from 'redux';
 
-function telstatResult(state = {}, action) {
+function resultDate(state = {}, action) {
   switch (action.type) {
-    case "telstatResult":
-      return {...state, start_date: action.start_date, end_date: action.end_date}
+    case "CHANGE_resultDate":
+      return {...state, min: action.min, max: action.max}
     default:
       return state
   }
 }
 
-function uncallDetail(state = {}, action) {
+function telAgent(state = {}, action) {
   switch (action.type) {
-    case "uncallDetailGet":
-      return {...state, param: action.param}
+    case "NEXT_telAgent":
+      return {...state, ...action.param}
+    case "CLEAN_telAgent":
+      return {}
     default:
       return state
   }
 }
-function TEL_AGENT(state = {}, action) {
+function workParam(state = {}, action) {
   switch (action.type) {
-    case "uncallDetailGet":
-      return {...state, param: action.param}
-    default:
-      return state
-  }
-}
-function WORK_PARAM(state = {}, action) {
-  switch (action.type) {
-    case "uncallDetailGet":
-      return {...state, param: action.param}
+    case "CHANGE_workParam":
+      return {...state, ...action.param}
+    case "CLEAN_workParam":
+      return {}
     default:
       return state
   }
@@ -36,9 +32,8 @@ function WORK_PARAM(state = {}, action) {
 
 
 const telApp = combineReducers({//合并reducers函数
-  telstatResult,
-  uncallDetail,
-  TEL_AGENT,
-  WORK_PARAM
+  resultDate,
+  telAgent,
+  workParam
 });
 export default telApp;

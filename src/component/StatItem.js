@@ -3,46 +3,22 @@
  */
 import React,{Component} from 'react';
 export default class StatItem extends Component {
-  /*static defaultProps = {
-   conversion_complete: 11,
-   conversion_target: 100,
-   connect_complete: 11,
-   connect_target: 20,
-   talksection_1: 20,
-   talksection_2: 35,
-   talksection_3: 30,
-   talksection_4: 25
-   }*/
-
   constructor(props) {
     super(props);
+    this.ajax=this.ajax.bind(this);
     this.state={
       first:true//标识为ajax
     }
   }
 
   componentDidMount() {
-    this.ajaxRequest = $.ajax({
-      url: '/saleajax/telstatresult/',
-      data: {
-        citycode: window.xkTel.citycode,//城市编号
-        level: window.xkTel.level,
-        group_id: window.xkTel.group_id,//部组id
-        jobid: window.xkTel.jobid,//销售工号
-        start_date: this.props.minDate,
-        end_date: this.props.maxDate
-      },
-      success: function (res) {
-        var res = (typeof res == 'string') ? JSON.parse(res) : res;
-        if (res.result.code == 0) {
-          this.state.first=false;
-          this.setState(res.result.data)
-          console.log(this.state);
-        } else {
-          alert(res.result.message);
-        }
-      }.bind(this)
-    })
+    console.log('componentDidMount')
+    this.ajax(this.props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('componentWillReceiveProps');
+    this.ajax(nextProps);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -55,9 +31,33 @@ export default class StatItem extends Component {
     this.ajaxRequest.abort();
   }
 
+  ajax(props){//注意ajax内部this的指向
+    let min=props.min,
+      max=props.max
+    this.ajaxRequest = $.ajax({
+      url: '/saleajax/telstatresult/',
+      data: {
+        citycode: window.xkTel.citycode,//城市编号
+        level: window.xkTel.level,
+        group_id: window.xkTel.group_id,//部组id
+        jobid: window.xkTel.jobid,//销售工号
+        start_date: min,
+        end_date: max
+      },
+      success: function (res) {
+        var res = (typeof res == 'string') ? JSON.parse(res) : res;
+        if (res.result.code == 0) {
+          this.state.first=false;
+          this.setState(res.result.data)
+        } else {
+          alert(res.result.message);
+        }
+      }.bind(this)
+    })
+  }
   render() {
-    console.log(this.state.first)
     if(this.state.first){
+      console.log("Item first!");
       return null
     }
     var c1 = this.state.conversion_complete / this.state.conversion_target * 100 || 0;

@@ -9,7 +9,19 @@ import Work from './component/Work';
 import User from './component/User';
 import telApp from './reducers/reducres';
 
-const store = createStore(telApp, {TEL_AGENT: {name:"周振",total:10}, WORK_PARAM: {work_type:"uncall"}});
+const initState = {
+  resultDate: {
+    min: null,
+    max: null
+  },
+  telAgent: {
+    name: "周振"
+  },
+  workParam: {
+
+  }
+}
+const store = createStore(telApp, initState);
 
 ReactDOM.render(
   <Provider store={store}>

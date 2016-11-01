@@ -82,7 +82,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var store = (0, _redux.createStore)(_reducres2.default, { TEL_AGENT: { name: "周振", total: 10 }, WORK_PARAM: { work_type: "uncall" } });
+	var initState = {
+	  resultDate: {
+	    min: null,
+	    max: null
+	  },
+	  telAgent: {
+	    name: "周振"
+	  },
+	  workParam: {}
+	};
+	var store = (0, _redux.createStore)(_reducres2.default, initState);
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -26037,10 +26047,10 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
 	    _this.state = {
-	      level: window.xkTel.level, //1代表销售，0代表经理
-	      isCallCenter: window.xkTelInfo.isCallCenter, //是否是呼叫中心
-	      jobid: window.xkTel.jobid,
-	      login_jobid: window.xkTel.login_jobid
+	      /*level: window.xkTel.level,//1代表销售，0代表经理
+	       isCallCenter: window.xkTelInfo.isCallCenter,//是否是呼叫中心
+	       jobid: window.xkTel.jobid,
+	       login_jobid: window.xkTel.login_jobid*/
 	    };
 	    return _this;
 	  }
@@ -26051,9 +26061,10 @@
 	      // 通过调用 connect() 注入:
 	      var _props = this.props;
 	      var dispatch = _props.dispatch;
-	      var TEL_AGENT = _props.TEL_AGENT;
-	      var WORK_PARAM = _props.WORK_PARAM;
-	      /*let home={}*/
+	      var resultDate = _props.resultDate;
+	      var telAgent = _props.telAgent;
+	      var workParam = _props.workParam;
+	      /*let home={<Page1Middle {...this.state} />}*/
 
 	      return _react2.default.createElement(
 	        'div',
@@ -26062,10 +26073,9 @@
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          this.props.TEL_AGENT.name
+	          this.props.telAgent.name
 	        ),
-	        _react2.default.createElement(_Page1Top2.default, this.state),
-	        _react2.default.createElement(_Page1Middle2.default, this.state)
+	        _react2.default.createElement(_Page1Top2.default, { dispatch: this.props.dispatch, resultDate: this.props.resultDate })
 	      );
 	    }
 	  }]);
@@ -26079,8 +26089,9 @@
 
 	function select(state) {
 	  return {
-	    TEL_AGENT: state.TEL_AGENT,
-	    WORK_PARAM: state.WORK_PARAM
+	    resultDate: state.resultDate,
+	    telAgent: state.telAgent,
+	    workParam: state.workParam
 	  };
 	}
 	exports.default = (0, _reactRedux.connect)(select)(Home);
@@ -26379,10 +26390,6 @@
 
 	    _this.dateForm = _this.dateForm.bind(_this);
 	    _this.dateChange = _this.dateChange.bind(_this);
-	    _this.state = {
-	      mindate: _this.dateForm(new Date()),
-	      maxdate: _this.dateForm(new Date())
-	    };
 	    return _this;
 	  }
 
@@ -26395,17 +26402,19 @@
 	  }, {
 	    key: 'dateChange',
 	    value: function dateChange(e) {
-	      this.setState({
-	        mindate: e.target.value.split("到")[0],
-	        maxdate: e.target.value.split("到")[1]
+	      this.props.dispatch({
+	        type: "CHANGE_resultDate",
+	        min: e.target.value.split("到")[0],
+	        max: e.target.value.split("到")[1]
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props);
 	      var date = {
-	        minDate: this.state.mindate,
-	        maxDate: this.state.maxdate
+	        min: this.props.resultDate.min || this.dateForm(new Date()),
+	        max: this.props.resultDate.max || this.dateForm(new Date())
 	      };
 	      return _react2.default.createElement(
 	        'div',
@@ -26419,7 +26428,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'date-box clearfix g-u' },
-	              _react2.default.createElement('input', { id: 'result_date', className: 'time_l fl', defaultValue: this.state.mindate + "到" + this.state.maxdate, onChange: this.dateChange }),
+	              _react2.default.createElement('input', { id: 'result_date', className: 'time_l fl', defaultValue: date.min + "到" + date.max, onChange: this.dateChange }),
 	              _react2.default.createElement(
 	                'label',
 	                { htmlFor: 'result_date', className: 'time_r fl' },
@@ -26435,7 +26444,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'stat-item clearfix' },
-	            _react2.default.createElement(_StatItem2.default, date)
+	            _react2.default.createElement(_StatItem2.default, this.props.resultDate)
 	          )
 	        )
 	      );
@@ -26477,22 +26486,12 @@
 	var StatItem = function (_Component) {
 	  _inherits(StatItem, _Component);
 
-	  /*static defaultProps = {
-	   conversion_complete: 11,
-	   conversion_target: 100,
-	   connect_complete: 11,
-	   connect_target: 20,
-	   talksection_1: 20,
-	   talksection_2: 35,
-	   talksection_3: 30,
-	   talksection_4: 25
-	   }*/
-
 	  function StatItem(props) {
 	    _classCallCheck(this, StatItem);
 
 	    var _this = _possibleConstructorReturn(this, (StatItem.__proto__ || Object.getPrototypeOf(StatItem)).call(this, props));
 
+	    _this.ajax = _this.ajax.bind(_this);
 	    _this.state = {
 	      first: true //标识为ajax
 	    };
@@ -26502,27 +26501,14 @@
 	  _createClass(StatItem, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.ajaxRequest = $.ajax({
-	        url: '/saleajax/telstatresult/',
-	        data: {
-	          citycode: window.xkTel.citycode, //城市编号
-	          level: window.xkTel.level,
-	          group_id: window.xkTel.group_id, //部组id
-	          jobid: window.xkTel.jobid, //销售工号
-	          start_date: this.props.minDate,
-	          end_date: this.props.maxDate
-	        },
-	        success: function (res) {
-	          var res = typeof res == 'string' ? JSON.parse(res) : res;
-	          if (res.result.code == 0) {
-	            this.state.first = false;
-	            this.setState(res.result.data);
-	            console.log(this.state);
-	          } else {
-	            alert(res.result.message);
-	          }
-	        }.bind(this)
-	      });
+	      console.log('componentDidMount');
+	      this.ajax(this.props);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      console.log('componentWillReceiveProps');
+	      this.ajax(nextProps);
 	    }
 	  }, {
 	    key: 'shouldComponentUpdate',
@@ -26538,10 +26524,38 @@
 	      this.ajaxRequest.abort();
 	    }
 	  }, {
+	    key: 'ajax',
+	    value: function ajax(props) {
+	      //注意ajax内部this的指向
+	      console.log(props);
+	      var min = props.min,
+	          max = props.max;
+	      this.ajaxRequest = $.ajax({
+	        url: '/saleajax/telstatresult/',
+	        data: {
+	          citycode: window.xkTel.citycode, //城市编号
+	          level: window.xkTel.level,
+	          group_id: window.xkTel.group_id, //部组id
+	          jobid: window.xkTel.jobid, //销售工号
+	          start_date: min,
+	          end_date: max
+	        },
+	        success: function (res) {
+	          var res = typeof res == 'string' ? JSON.parse(res) : res;
+	          if (res.result.code == 0) {
+	            this.state.first = false;
+	            this.setState(res.result.data);
+	          } else {
+	            alert(res.result.message);
+	          }
+	        }.bind(this)
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.first);
 	      if (this.state.first) {
+	        console.log("Item first!");
 	        return null;
 	      }
 	      var c1 = this.state.conversion_complete / this.state.conversion_target * 100 || 0;
@@ -27391,57 +27405,49 @@
 
 	var _redux = __webpack_require__(78);
 
-	function telstatResult() {
+	function resultDate() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case "telstatResult":
-	      return _extends({}, state, { start_date: action.start_date, end_date: action.end_date });
+	    case "CHANGE_resultDate":
+	      return _extends({}, state, { min: action.min, max: action.max });
 	    default:
 	      return state;
 	  }
 	}
 
-	function uncallDetail() {
+	function telAgent() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case "uncallDetailGet":
-	      return _extends({}, state, { param: action.param });
+	    case "NEXT_telAgent":
+	      return _extends({}, state, action.param);
+	    case "CLEAN_telAgent":
+	      return {};
 	    default:
 	      return state;
 	  }
 	}
-	function TEL_AGENT() {
+	function workParam() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case "uncallDetailGet":
-	      return _extends({}, state, { param: action.param });
-	    default:
-	      return state;
-	  }
-	}
-	function WORK_PARAM() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case "uncallDetailGet":
-	      return _extends({}, state, { param: action.param });
+	    case "CHANGE_workParam":
+	      return _extends({}, state, action.param);
+	    case "CLEAN_workParam":
+	      return {};
 	    default:
 	      return state;
 	  }
 	}
 
 	var telApp = (0, _redux.combineReducers)({ //合并reducers函数
-	  telstatResult: telstatResult,
-	  uncallDetail: uncallDetail,
-	  TEL_AGENT: TEL_AGENT,
-	  WORK_PARAM: WORK_PARAM
+	  resultDate: resultDate,
+	  telAgent: telAgent,
+	  workParam: workParam
 	});
 	exports.default = telApp;
 
