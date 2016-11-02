@@ -3,11 +3,10 @@
  */
 import React,{Component} from 'react';
 export default class UncallTab extends Component {
-
   render() {
-    var data = {};
+    const data = this.props.data;
     return (
-      !data.list.length ? <div className="side-null"></div> :
+      !(data.list && data.list.length) ? <div className="side-null"></div> :
         <div>
           <table cellPadding="0" cellSpacing="0" width="100%">
             <tbody>
@@ -28,7 +27,8 @@ export default class UncallTab extends Component {
                 (window.$_GET['groupid']?
                 <td>
                   <a target='_blank' href="/saletel/record?citycode={window.xkTel.citycode}&uid={list.basicinfo.uid}&groupid={window.$_GET['groupid']}">{list.basicinfo.name}</a>
-                </td>:
+                </td>
+                :
                 <td>
                   <a target='_blank' href="/saletel/record?citycode={window.xkTel.citycode}&uid={list.basicinfo.uid}&jobid={window.$_GET['jobid']}">{list.basicinfo.name}</a>
                 </td>
@@ -37,7 +37,7 @@ export default class UncallTab extends Component {
                 <td>{list.saleinfo.name || ''}</td>
                 <td>{list.saleinfo.parent_name || ''}-{list.saleinfo.group_name || ''}</td>
                 <td>{list.visitinfo.ctime_view}</td>
-                <td title={tel_content.join('\r')} style={{cursor: help}}></td>
+                <td title={list.visitinfo.remark} style={{cursor: help}}>{list.visitinfo.remark}</td>
                 <td>
                   <div className="tag_s clearfix">
                     (list.queueinfo.is_firstcall>0?<span className="c_blue">首次</span>:null)

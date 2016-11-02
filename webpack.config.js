@@ -53,11 +53,11 @@ module.exports = {
      warnings:false
      }
      }),*/
-    /*new webpack.DefinePlugin({//生产环境
+    new webpack.DefinePlugin({//生产环境
       "process.env": {
-        NODE_ENV: JSON.stringify("production")
+        NODE_ENV: JSON.stringify("development")
       }
-    }),*/
+    }),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",

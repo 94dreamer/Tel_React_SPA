@@ -21,27 +21,17 @@ export default class UncallChoose extends Component {
       "5": "7天到期",
       "6": "7天开通"
     };
-    var callArr = [];
-    for (let i in  callArr) {
-      callArr.push(
-        <a href="javascript:void(0);" className={window.telSales.uncallData.callqueue==i?onend:null} data-type="callqueue" data-id={i}>{callqueue[i]}</a>)
+    const callArr = [];
+    for (const i in callqueue) {
+      if ({}.hasOwnProperty.call(callqueue, i)) {
+        // callArr.push(<a href="javascript:void(0);" className={window.telSales.uncallData.callqueue==i?"onend":null} key={i} data-type="callqueue" data-id={i}>{callqueue[i]}</a>)
+        callArr.push({key: i, value: callqueue[i]})
+      }
     }
+
     return (
       <div>
-        <ChoosePosition />
-        <div className="item">
-          <div className="position clearfix" style="display: block;">
-            <h2 className="fl">呼叫列队：</h2>
-            {callArr}
-            <h2 className="fl dataCon">队列日期：</h2>
-            <div className="visit_time date-box clearfix fl">
-              <input className="time_l fl" id="queueDate" placeholder="选择日期"/>
-              <label for="queueDate" className="time_r fl"><em className="icon-date"></em></label>
-            </div>
-          </div>
-        </div>
-        <ChooseGroup />
-        <ChooseKeyword />
+        aaa
       </div>
     )
   }

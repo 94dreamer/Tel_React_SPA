@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import Page1Top from './Page1Top';
 import Page1Middle from './Page1Middle';

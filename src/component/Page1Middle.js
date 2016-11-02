@@ -9,13 +9,14 @@ import UncallTab from './UncallTab';
 import CalledTab from './CalledTab';
 import FootPage from './FootPage';
 
-import {connnect} from 'react-redux';
+import {connect} from 'react-redux';
 
 class Page1Middle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {}
+      uncall: {data: {}},
+      called: {data: {}}
     }
     this.turnPage = this.turnPage.bind(this);
     this.callout = this.callout.bind(this);
@@ -30,19 +31,16 @@ class Page1Middle extends Component {
 
   }
 
-  ajaxTable(page) {
+  ajaxTable(kind, page) {
     this.ajaxRequest = $.ajax({
-      url: '/saleajax/tellist/',
-      data: {
-        citycode: window.xkTel.citycode,//城市编号
-        group_id: window.xkTel.group_id,//部组id
-        jobid: window.xkTel.jobid,//销售工号
-        parent_id: window.xkTel.parent_id
-      },
+      url: kind === 'uncall' ? '/saleajax/tellist/' : '/saleajax/getcalllist/',
+      data: kind === 'uncall' ? this.props.uncallData : this.props.calledData,
       success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
-          this.setState(res.result)
+          this.setState({
+            [kind]: res.result
+          })
         } else {
           alert(res.result.message);
         }
@@ -51,16 +49,7 @@ class Page1Middle extends Component {
   }
 
   componentDidMount() {
-    /*装载完成阶段调用ajax渲染table明细*/
-    //一、此处为什么放弃fetch？原因有几个
-    //1.fetch的兼容性较差
-    //2.fetch暂时不支持中断，没有相关API。
-    // 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
-    //二、ajax的坑
-    // 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。
-    //或者是bind(this)。
-    // 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
-    this.ajaxTable()
+    this.ajaxTable("uncall")
   }
 
   componentWillUnmount() {//组件移除前停止异步操作。
@@ -68,20 +57,18 @@ class Page1Middle extends Component {
   }
 
   render() {
-    const trArr = [];
-    if (this.state.data && this.state.data.list && this.state.data.list.length) {
-      for (let i = 0; i < this.state.data.list.length; i++) {
-        trArr.push(<TableTr callout={this.callout} key={i} level={this.props.level} {...this.state.data.list[i]} />);
-      }
-    }
+    // 通过调用 connect() 注入:
+    const { dispatch, uncallData, calledData} = this.props;
     return (
       <div id="page1_middle">
-
         <div className="Telemarketing_main">
           <ul className="main-title">
-            <li className="current" data-type="uncall"><a href="javascript:void(0);"> 待呼叫（<span>{data.queuenum}></span>）</a>
+            <li className="current" data-type="uncall">
+              <a href="javascript:void(0);">待呼叫（<span>{this.state.uncall.data.queuenum || this.state.called.data.queuenum || 0}</span>）</a>
             </li>
-            <li data-type="called" data-time="0"><a href="javascript:void(0);">已呼叫（<span>{data.callnum}</span>）</a></li>
+            <li data-type="called" data-time="0">
+              <a href="javascript:void(0);">已呼叫（<span>{this.state.called.data.callnum || this.state.uncall.data.callnum || 0}</span>）</a>
+            </li>
           </ul>
           <div className="tagBox">
             <div id="uncall-tag" className="tag_tab">
@@ -92,7 +79,7 @@ class Page1Middle extends Component {
               </div>
               <div className="table_callCon">
                 <div className="log-table log-table-sales">
-                  <UncallTab />
+                  <UncallTab {...this.state.uncall} />
                 </div>
                 <div className="main-foot">
                   <FootPage />
@@ -109,7 +96,7 @@ class Page1Middle extends Component {
               </div>
               <div className="table_callCon">
                 <div className="log-table log-table-sales">
-                  <CalledTab />
+                  <CalledTab {...this.state.called} />
                 </div>
                 <div className="main-foot">
                   <FootPage />

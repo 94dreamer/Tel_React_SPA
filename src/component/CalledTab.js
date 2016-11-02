@@ -2,11 +2,12 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
+
 export default class CalledTab extends Component {
   render() {
-    var data = {};
+    const data = this.props.data;
     return (
-      !data.list.length ? <div className="side-null"></div> :
+      !(data.list && data.list.length) ? <div className="side-null"></div> :
         <div>
           <table cellPadding="0" cellSpacing="0" width="100%">
             <tbody>
@@ -43,7 +44,7 @@ export default class CalledTab extends Component {
                 <td>{list.saleinfo.parent_name || ''}-{list.saleinfo.group_name || ''}</td>
                 <td>{list.visitinfo.ctime_view}</td>
                 <td>{list.visitinfo.customerintention == 7 ? "--" : list.visitinfo.talk_time}</td>
-                <td title="" style={{cursor: "help"}}>{tel_content_join}</td>
+                <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark}</td>
                 <td>{list.visitinfo.buylevel_view || ''}</td>
                 <td>{list.visitinfo.customerintention == 7 ? 呼叫失败 : 呼叫成功}</td>
                 <td>{list.visitinfo.visitlabel_view}</td>
