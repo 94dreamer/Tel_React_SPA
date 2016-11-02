@@ -9,6 +9,28 @@ function resultDate(state = {}, action) {
   }
 }
 
+function uncallData(state = {}, action) {
+  switch (action.type) {
+    case "ADD_uncallData":
+      return {...state,[action.param.type]:action.param.value}
+    case "DEL_uncallData":
+      return delete {...state}[action.param.type]
+    default:
+      return state
+  }
+}
+
+function calledData(state = {}, action) {
+  switch (action.type) {
+    case "ADD_calledData":
+      return {...state,[action.param.type]:action.param.value}
+    case "DEL_calledData":
+      return delete {...state}[action.param.type]
+    default:
+      return state
+  }
+}
+
 function telAgent(state = {}, action) {
   switch (action.type) {
     case "NEXT_telAgent":
@@ -33,6 +55,8 @@ function workParam(state = {}, action) {
 
 const telApp = combineReducers({//合并reducers函数
   resultDate,
+  uncallData,
+  calledData,
   telAgent,
   workParam
 });

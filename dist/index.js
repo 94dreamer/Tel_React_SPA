@@ -26012,6 +26012,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(4);
@@ -26053,12 +26055,16 @@
 	  _createClass(Home, [{
 	    key: 'render',
 	    value: function render() {
-	      /*let home={<Page1Middle {...this.state} />}*/
+	      var a = { a: 1, b: 2 };
+	      var b = { a: 2, b: 4 };
+	      var c = _extends({}, a, b);
+	      console.log("c", c);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        'home',
-	        _react2.default.createElement(_Page1Top2.default, null)
+	        _react2.default.createElement(_Page1Top2.default, null),
+	        _react2.default.createElement(_Page1Middle2.default, null)
 	      );
 	    }
 	  }]);
@@ -26156,7 +26162,7 @@
 	    }
 	  }, {
 	    key: 'callout',
-	    value: function callout(tel, uid, uptime) {}
+	    value: function callout(tel, uid) {}
 	  }, {
 	    key: 'ajaxTable',
 	    value: function ajaxTable(page) {
@@ -26186,17 +26192,6 @@
 	      //1.fetch的兼容性较差
 	      //2.fetch暂时不支持中断，没有相关API。
 	      // 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
-	      /*fetch("./table.json", {credentials: 'include'}).then(function (response) {
-	       return response.json();
-	       }).then(function (data) {
-	       if (data.result.code === 0) {
-	       this.setState(data.result)
-	       } else {
-	       alert("data.result.message");
-	       }
-	       }).catch(function (e) {
-	       console.log("Oops, error");
-	       });*/
 	      //二、ajax的坑
 	      // 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。
 	      //或者是bind(this)。
@@ -27398,6 +27393,8 @@
 
 	var _redux = __webpack_require__(79);
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function resultDate() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
@@ -27405,6 +27402,34 @@
 	  switch (action.type) {
 	    case "CHANGE_resultDate":
 	      return _extends({}, state, { min: action.min, max: action.max });
+	    default:
+	      return state;
+	  }
+	}
+
+	function uncallData() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case "ADD_uncallData":
+	      return _extends({}, state, _defineProperty({}, action.param.type, action.param.value));
+	    case "DEL_uncallData":
+	      return delete _extends({}, state)[action.param.type];
+	    default:
+	      return state;
+	  }
+	}
+
+	function calledData() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case "ADD_calledData":
+	      return _extends({}, state, _defineProperty({}, action.param.type, action.param.value));
+	    case "DEL_calledData":
+	      return delete _extends({}, state)[action.param.type];
 	    default:
 	      return state;
 	  }
@@ -27439,6 +27464,8 @@
 
 	var telApp = (0, _redux.combineReducers)({ //合并reducers函数
 	  resultDate: resultDate,
+	  uncallData: uncallData,
+	  calledData: calledData,
 	  telAgent: telAgent,
 	  workParam: workParam
 	});

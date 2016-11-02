@@ -13,11 +13,11 @@ class Home extends Component {
   }
 
   render() {
-    /*let home={<Page1Middle {...this.state} />}*/
     return (
       <div>
         home
         <Page1Top />
+        <Page1Middle />
       </div>
     )
   }

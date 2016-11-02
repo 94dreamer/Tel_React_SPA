@@ -9,7 +9,9 @@ import UncallTab from './UncallTab';
 import CalledTab from './CalledTab';
 import FootPage from './FootPage';
 
-export default class Page1Middle extends Component {
+import {connnect} from 'react-redux';
+
+class Page1Middle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +26,7 @@ export default class Page1Middle extends Component {
     this.ajaxTable(index);
   }
 
-  callout(tel, uid, uptime) {
+  callout(tel, uid) {
 
   }
 
@@ -54,17 +56,6 @@ export default class Page1Middle extends Component {
     //1.fetch的兼容性较差
     //2.fetch暂时不支持中断，没有相关API。
     // 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
-    /*fetch("./table.json", {credentials: 'include'}).then(function (response) {
-     return response.json();
-     }).then(function (data) {
-     if (data.result.code === 0) {
-     this.setState(data.result)
-     } else {
-     alert("data.result.message");
-     }
-     }).catch(function (e) {
-     console.log("Oops, error");
-     });*/
     //二、ajax的坑
     // 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。
     //或者是bind(this)。
@@ -131,3 +122,11 @@ export default class Page1Middle extends Component {
     )
   }
 }
+
+function select(state) {
+  return {
+    uncallData: state.uncallData,
+    calledData: state.calledData
+  }
+}
+export default connect(select)(Page1Middle)
