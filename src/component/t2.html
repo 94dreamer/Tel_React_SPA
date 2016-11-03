@@ -28,7 +28,11 @@
               <a data-href="<%=basicinfo.detailurl%>"><%=basicinfo.shopshortname||basicinfo.shopname%></a>
             </figure>
             <figure className="region">
-              责任销售：<%if( saleinfo.major){%><span><%=saleinfo.major.name%>(<%=saleinfo.major.rank_code%>)</span><em>|</em><span><%=saleinfo.major.parent_name%></span><em>|</em><span><%=saleinfo.major.group_name%></span><%}else{%>无<%}%>
+              责任销售：<%if( saleinfo.major){%>
+              <span><%=saleinfo.major.name%>(<%=saleinfo.major.rank_code%>)</span><em>|</em><span><%=saleinfo.major.parent_name%></span><em>|</em><span><%=saleinfo.major.group_name%></span>
+              <%}else{%>
+              无
+              <%}%>
             </figure>
             <div className="bom-box g-line">
               <ul className="ag-Info">

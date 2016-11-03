@@ -2,8 +2,8 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
-import StatItem from '../component/StatItem';
-import {connect} from 'react-redux'
+import StatItem from './StatItem';
+import {connect} from 'react-redux';
 
 class Page1Top extends Component {
   constructor(props) {

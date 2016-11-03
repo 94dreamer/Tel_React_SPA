@@ -7,7 +7,7 @@ import UncallChoose from './UncallChoose';
 import CalledChoose from './CalledChoose';
 import UncallTab from './UncallTab';
 import CalledTab from './CalledTab';
-import FootPage from './FootPage';
+import FootPage from './../common/FootPage';
 
 import {connect} from 'react-redux';
 

@@ -140,3 +140,7 @@ This works in CSS too:
 //或者是bind(this)。
 
 // 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
+
+
+
+
