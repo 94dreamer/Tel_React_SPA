@@ -19111,7 +19111,9 @@
 
 	    var _this = _possibleConstructorReturn(this, (ChooseGroup.__proto__ || Object.getPrototypeOf(ChooseGroup)).call(this, props));
 
-	    _this.state = {};
+	    _this.state = {
+	      current: null
+	    };
 	    return _this;
 	  }
 
@@ -19119,12 +19121,12 @@
 	    key: 'render',
 	    value: function render() {
 	      var arr = [];
-	      for (var i in group) {
+	      for (var i in this.props.group) {
 	        arr.push(_react2.default.createElement(
 	          'a',
-	          { href: 'javascript:void(0);', 'data-type': 'parent', 'data-json': JSON.stringify(group[i].group), 'data-id': group[i].id },
+	          { href: 'javascript:void(0);', 'data-type': 'parent', 'data-json': JSON.stringify(this.props.group[i].group), 'data-id': this.props.group[i].id, key: this.props.group[i].id },
 	          _react2.default.createElement('i', null),
-	          group[i].name
+	          this.props.group[i].name
 	        ));
 	      }
 	      return _react2.default.createElement(
@@ -19132,7 +19134,7 @@
 	        { className: 'item' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'position clearfix', style: 'display: block;' },
+	          { className: 'position clearfix' },
 	          _react2.default.createElement(
 	            'h2',
 	            { className: 'fl' },
@@ -19145,11 +19147,11 @@
 	          ),
 	          arr
 	        ),
-	        _react2.default.createElement(
+	        this.state.current ? _react2.default.createElement(
 	          'div',
-	          { className: 'line-list dn', style: 'display: block;' },
-	          _react2.default.createElement(_ChooseGroupHover2.default, null)
-	        )
+	          { className: 'line-list' },
+	          _react2.default.createElement(_ChooseGroupHover2.default, this.props.group[this.state.current])
+	        ) : null
 	      );
 	    }
 	  }]);
@@ -19177,8 +19179,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19191,10 +19191,13 @@
 	var ChooseKeyword = function (_Component) {
 	  _inherits(ChooseKeyword, _Component);
 
-	  function ChooseKeyword() {
+	  function ChooseKeyword(props) {
 	    _classCallCheck(this, ChooseKeyword);
 
-	    return _possibleConstructorReturn(this, (ChooseKeyword.__proto__ || Object.getPrototypeOf(ChooseKeyword)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ChooseKeyword.__proto__ || Object.getPrototypeOf(ChooseKeyword)).call(this, props));
+
+	    _this.state = {};
+	    return _this;
 	  }
 
 	  _createClass(ChooseKeyword, [{
@@ -19205,7 +19208,7 @@
 	        { className: "item" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "position clearfix", style: "display: block;" },
+	          { className: "position clearfix" },
 	          _react2.default.createElement(
 	            "h2",
 	            { className: "fl keyword" },
@@ -19214,8 +19217,8 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "call_search fl" },
-	            _react2.default.createElement("input", { type: "text", className: "keyword-input", autocomplete: "off", placeholder: "输入公司名、门店名、客户姓名、客户手机号" }),
-	            _react2.default.createElement("i", _defineProperty({ className: "icon-look" }, "className", "keyword_btn")),
+	            _react2.default.createElement("input", { type: "text", className: "keyword-input", autoComplete: "off", placeholder: "输入公司名、门店名、客户姓名、客户手机号" }),
+	            _react2.default.createElement("i", { className: "icon-look" }),
 	            _react2.default.createElement("div", { className: "keyword_pop_box" })
 	          )
 	        )
@@ -19267,7 +19270,9 @@
 
 	    var _this = _possibleConstructorReturn(this, (ChoosePosition.__proto__ || Object.getPrototypeOf(ChoosePosition)).call(this, props));
 
-	    _this.state = {};
+	    _this.state = {
+	      currentBlock: null
+	    };
 	    return _this;
 	  }
 
@@ -19275,9 +19280,9 @@
 	    key: 'render',
 	    value: function render() {
 	      var blockArr = [];
-	      for (var _i in this.props.block) {
-	        if ({}.hasOwnProperty.call(this.props.block, _i)) {
-	          blockArr.push(this.props.block[_i]);
+	      for (var i in this.props.block) {
+	        if ({}.hasOwnProperty.call(this.props.block, i)) {
+	          blockArr.push(this.props.block[i]);
 	        }
 	      }
 
@@ -19286,7 +19291,7 @@
 	        { className: 'item' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'position clearfix', style: 'display: block;' },
+	          { className: 'position clearfix' },
 	          _react2.default.createElement(
 	            'h2',
 	            { className: 'fl' },
@@ -19297,20 +19302,20 @@
 	            { href: 'javascript:void(0);', 'data-type': 'district', className: 'onend' },
 	            '全部'
 	          ),
-	          blockArr.map(function (b) {
+	          blockArr.map(function (block) {
 	            return _react2.default.createElement(
 	              'a',
-	              { href: 'javascript:void(0);', 'data-type': 'district', 'data-json': JSON.stringify(block[i].block), 'data-id': block[i].id },
-	              n.name,
+	              { href: 'javascript:void(0);', 'data-type': 'district', 'data-json': JSON.stringify(block.block), 'data-id': block.id, key: block.id },
+	              block.name,
 	              _react2.default.createElement('i', null)
 	            );
 	          })
 	        ),
-	        _react2.default.createElement(
+	        this.state.currentBlock ? _react2.default.createElement(
 	          'div',
-	          { className: 'line-list dn', style: { display: "block" } },
-	          _react2.default.createElement(_ChoosePositionHover2.default, null)
-	        )
+	          { className: 'line-list' },
+	          _react2.default.createElement(_ChoosePositionHover2.default, this.props.block[this.state.currentBlock])
+	        ) : null
 	      );
 	    }
 	  }]);
@@ -25562,10 +25567,10 @@
 	          { href: "javascript:void(0);", "data-type": "group", className: "onend" },
 	          "全部"
 	        ),
-	        data.map(function (item) {
+	        this.props.group.map(function (item) {
 	          return _react2.default.createElement(
 	            "a",
-	            { href: "javascript:void(0);", "data-type": "group", "data-id": item.id },
+	            { href: "javascript:void(0);", "data-type": "group", "data-id": item.id, key: item.id },
 	            item.name
 	          );
 	        })
@@ -25621,15 +25626,15 @@
 	    key: "render",
 	    value: function render() {
 	      var arr = [];
-	      for (var i in data) {
-	        arr.push(data[i]);
+	      for (var i in this.props.block) {
+	        arr.push(this.props.block[i]);
 	      }
 
 	      var outArr = arr.map(function (outItem, outI) {
 	        var inArr = outItem.map(function (inItem) {
 	          return _react2.default.createElement(
 	            "a",
-	            { style: { cursor: "pointer" }, "data-type": "block", "data-id": inItem.id },
+	            { style: { cursor: "pointer" }, "data-type": "block", "data-id": inItem.id, key: inItem.id },
 	            inItem.name
 	          );
 	        });
@@ -25959,6 +25964,7 @@
 	    var _this = _possibleConstructorReturn(this, (Page1Middle.__proto__ || Object.getPrototypeOf(Page1Middle)).call(this, props));
 
 	    _this.state = {
+	      current: 1,
 	      uncall: { data: {} },
 	      called: { data: {} }
 	    };
@@ -26055,7 +26061,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tagBox' },
-	            _react2.default.createElement(
+	            this.state.current == 1 ? _react2.default.createElement(
 	              'div',
 	              { id: 'uncall-tag', className: 'tag_tab' },
 	              _react2.default.createElement(
@@ -26079,8 +26085,7 @@
 	                  _react2.default.createElement(_FootPage2.default, null)
 	                )
 	              )
-	            ),
-	            _react2.default.createElement(
+	            ) : _react2.default.createElement(
 	              'div',
 	              { id: 'called-tag', className: 'tag_tab dn' },
 	              _react2.default.createElement(
@@ -26294,13 +26299,13 @@
 	  _createClass(StatItem, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      console.log('componentDidMount');
+	      //console.log('StatItem componentDidMount')
 	      this.ajax(this.props);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      console.log('componentWillReceiveProps');
+	      //console.log('StatItem componentWillReceiveProps');
 	      this.ajax(nextProps);
 	    }
 	  }, {
@@ -26347,7 +26352,7 @@
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.first) {
-	        console.log("Item first!");
+	        //console.log("StatItem firstRender!");
 	        return null;
 	      }
 	      var c1 = this.state.conversion_complete / this.state.conversion_target * 100 || 0;
@@ -26679,9 +26684,15 @@
 
 	var _ChoosePosition = __webpack_require__(83);
 
+	var _ChoosePosition2 = _interopRequireDefault(_ChoosePosition);
+
 	var _ChooseGroup = __webpack_require__(81);
 
+	var _ChooseGroup2 = _interopRequireDefault(_ChooseGroup);
+
 	var _ChooseKeyword = __webpack_require__(82);
+
+	var _ChooseKeyword2 = _interopRequireDefault(_ChooseKeyword);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26725,7 +26736,6 @@
 	          }
 	        }.bind(this)
 	      });
-	      this.ajaxTable("uncall");
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -26751,16 +26761,17 @@
 	          callArr.push({ key: i, value: callqueue[i] });
 	        }
 	      }
+	      console.log("UncallChoose render");
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_ChoosePosition.ChoosePosition, this.state.block),
+	        _react2.default.createElement(_ChoosePosition2.default, { block: this.state.block }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'item' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'position clearfix', style: { display: "block" } },
+	            { className: 'position clearfix' },
 	            _react2.default.createElement(
 	              'h2',
 	              { className: 'fl' },
@@ -26790,8 +26801,8 @@
 	            )
 	          )
 	        ),
-	        _react2.default.createElement(_ChooseGroup.ChooseGroup, this.state.group),
-	        _react2.default.createElement(_ChooseKeyword.ChooseKeyword, null)
+	        _react2.default.createElement(_ChooseGroup2.default, { group: this.state.group }),
+	        _react2.default.createElement(_ChooseKeyword2.default, null)
 	      );
 	    }
 	  }]);
@@ -27096,7 +27107,7 @@
 	        ) : _react2.default.createElement(
 	          'a',
 	          { href: 'javascript:void(0);', id: 'startWork', className: 'btn_blue' },
-	          ':开始工作'
+	          '开始工作'
 	        ) : null,
 	        isSet ? _react2.default.createElement(
 	          'a',

@@ -15,6 +15,7 @@ class Page1Middle extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      current: 1,
       uncall: {data: {}},
       called: {data: {}}
     }
@@ -71,38 +72,40 @@ class Page1Middle extends Component {
             </li>
           </ul>
           <div className="tagBox">
-            <div id="uncall-tag" className="tag_tab">
-              <div className="tag_callCon">
-                <Uncall_btn />
-                <UncallChoose />
-                <div className="h15"></div>
+            {this.state.current == 1 ?
+              <div id="uncall-tag" className="tag_tab">
+                <div className="tag_callCon">
+                  <Uncall_btn />
+                  <UncallChoose />
+                  <div className="h15"></div>
+                </div>
+                <div className="table_callCon">
+                  <div className="log-table log-table-sales">
+                    <UncallTab {...this.state.uncall} />
+                  </div>
+                  <div className="main-foot">
+                    <FootPage />
+                  </div>
+                </div>
+              </div> :
+              <div id="called-tag" className="tag_tab dn">
+                <div className="tag_callCon">
+                  <div className="hd_btn">
+                    <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
+                  </div>
+                  <CalledChoose />
+                  <div className="h15"></div>
+                </div>
+                <div className="table_callCon">
+                  <div className="log-table log-table-sales">
+                    <CalledTab {...this.state.called} />
+                  </div>
+                  <div className="main-foot">
+                    <FootPage />
+                  </div>
+                </div>
               </div>
-              <div className="table_callCon">
-                <div className="log-table log-table-sales">
-                  <UncallTab {...this.state.uncall} />
-                </div>
-                <div className="main-foot">
-                  <FootPage />
-                </div>
-              </div>
-            </div>
-            <div id="called-tag" className="tag_tab dn">
-              <div className="tag_callCon">
-                <div className="hd_btn">
-                  <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
-                </div>
-                <CalledChoose />
-                <div className="h15"></div>
-              </div>
-              <div className="table_callCon">
-                <div className="log-table log-table-sales">
-                  <CalledTab {...this.state.called} />
-                </div>
-                <div className="main-foot">
-                  <FootPage />
-                </div>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>

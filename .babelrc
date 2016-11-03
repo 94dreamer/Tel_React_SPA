@@ -4,6 +4,10 @@
     "react",
     "stage-0"
   ],
+  "ignore":[
+    "jquery.js",
+    "jquery.min.js"
+  ],
   "plugins": [
     "syntax-class-properties",
     "syntax-decorators",

@@ -2,9 +2,9 @@
  * Created by zz on 2016/10/28.
  */
 import React,{Component} from 'react';
-import {ChoosePosition} from './ChoosePosition';
-import {ChooseGroup} from './ChooseGroup';
-import {ChooseKeyword} from './ChooseKeyword';
+import ChoosePosition from './ChoosePosition';
+import ChooseGroup from './ChooseGroup';
+import ChooseKeyword from './ChooseKeyword';
 
 export default class UncallChoose extends Component {
   constructor(props) {
@@ -29,7 +29,6 @@ export default class UncallChoose extends Component {
         }
       }.bind(this)
     });
-    this.ajaxTable("uncall");
   }
 
   componentWillUnmount() {//组件移除前停止异步操作。
@@ -52,11 +51,12 @@ export default class UncallChoose extends Component {
         callArr.push({key: i, value: callqueue[i]})
       }
     }
+    console.log("UncallChoose render")
     return (
       <div>
-        <ChoosePosition {...this.state.block} />
+        <ChoosePosition block={this.state.block} />
         <div className="item">
-          <div className="position clearfix" style={{display: "block"}}>
+          <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
             {callArr.map(item=>
               <a href="javascript:void(0);" className="oned" key={item.key} data-type="callqueue" data-id={item.key}>{item.value}</a>
@@ -68,7 +68,7 @@ export default class UncallChoose extends Component {
             </div>
           </div>
         </div>
-        <ChooseGroup {...this.state.group} />
+        <ChooseGroup group={this.state.group} />
         <ChooseKeyword />
       </div>
     )

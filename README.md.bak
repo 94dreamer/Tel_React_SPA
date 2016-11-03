@@ -123,7 +123,7 @@ This works in CSS too:
 
 # React开发过程中的一些坑和深刻的debugger。
 
-1.AJAX
+## 1.AJAX
 
 //一、此处为什么放弃fetch？原因有几个
 

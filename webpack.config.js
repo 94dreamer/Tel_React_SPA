@@ -46,8 +46,12 @@ module.exports = {
       {test: require.resolve("jquery"), loader: "expose?$! expose?jQuery"}
     ]
   },
-  // plugins 放置所使用的外掛
+  // plugins 放置所使用的插件
   plugins: [
+    /*new webpack.DllReferencePlugin({//  ddl打包
+      context: __dirname,
+      manifest: require('./manifest.json'),
+    }),*/
     /*new webpack.optimize.UglifyJsPlugin({//压缩
      compressor:{
      warnings:false

@@ -19,7 +19,7 @@ export default class Uncall_btn extends Component {
             <a href="javascript:void(0);" id="startWork" className="btn_blue">正在登录</a>
             <a href="javascript:void(0);" id="quitWork" className="btn_red">置忙</a>
             </span> :
-              <a href="javascript:void(0);" id="startWork" className="btn_blue">:开始工作</a>
+              <a href="javascript:void(0);" id="startWork" className="btn_blue">开始工作</a>
           )
           : null
         }

@@ -12,12 +12,12 @@ export default class StatItem extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
+    //console.log('StatItem componentDidMount')
     this.ajax(this.props);
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('componentWillReceiveProps');
+    //console.log('StatItem componentWillReceiveProps');
     this.ajax(nextProps);
   }
 
@@ -57,7 +57,7 @@ export default class StatItem extends Component {
   }
   render() {
     if(this.state.first){
-      console.log("Item first!");
+      //console.log("StatItem firstRender!");
       return null
     }
     var c1 = this.state.conversion_complete / this.state.conversion_target * 100 || 0;

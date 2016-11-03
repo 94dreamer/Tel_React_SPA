@@ -7,24 +7,30 @@ import ChooseGroupHover from './ChooseGroupHover';
 export default class ChooseGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      current: null
+    }
   }
 
   render() {
-    var arr=[];
-    for(var i in group){
-      arr.push(<a href="javascript:void(0);" data-type="parent"  data-json={JSON.stringify(group[i].group)} data-id={group[i].id}><i></i>{group[i].name}</a>)
+    var arr = [];
+    for (var i in this.props.group) {
+      arr.push(
+        <a href="javascript:void(0);" data-type="parent" data-json={JSON.stringify(this.props.group[i].group)} data-id={this.props.group[i].id} key={this.props.group[i].id}><i></i>{this.props.group[i].name}
+        </a>)
     }
     return (
       <div className="item">
-        <div className="position clearfix" style="display: block;">
-          <h2 className="fl" >所属部组：</h2>
-          <a href="javascript:void(0);" data-type="parent" className="onend" >全部</a>
+        <div className="position clearfix">
+          <h2 className="fl">所属部组：</h2>
+          <a href="javascript:void(0);" data-type="parent" className="onend">全部</a>
           {arr}
         </div>
-        <div className="line-list dn" style="display: block;">
-          <ChooseGroupHover />
-        </div>
+        {this.state.current ?
+          <div className="line-list">
+            <ChooseGroupHover {...this.props.group[this.state.current]} />
+          </div> : null
+        }
       </div>
     )
   }
