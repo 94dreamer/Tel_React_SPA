@@ -6,6 +6,7 @@ import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-rou
 import App from './component/App';
 import Home from './component/Home';
 import Work from './component/Work';
+import Users from './component/Users';
 import User from './component/User';
 import telApp from './reducers/reducres';
 
@@ -38,7 +39,9 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Home}/>
         <Route path="/work" component={Work}/>
-        <Route path="/user" component={User}/>
+        <Route path="/users" component={Users}>
+          <Route path="/user/:userId" component={User}/>
+        </Route>
       </Route>
     </Router>
   </Provider>,

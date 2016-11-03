@@ -4,10 +4,17 @@
 import React,{Component} from 'react';
 
 export default class CalledTab extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const data = this.props.data;
+    let isNull = !(data.list && data.list.length);
     return (
-      !(data.list && data.list.length) ? <div className="side-null"></div> :
+      isNull ?
+        <div className="side-null"></div> :
         <div>
           <table cellPadding="0" cellSpacing="0" width="100%">
             <tbody>
@@ -27,8 +34,8 @@ export default class CalledTab extends Component {
               {gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6 ?
                 <th width="10%" className="bor_r0">操作</th> : null}
             </tr>
-            data.map(function(list,i){
-              <tr>
+            {data.list.map(list=>
+              <tr key={list.uid}>
                 <td>{list.number}</td>
                 {window.$_GET['groupid'] ?
                   <td>
@@ -54,7 +61,7 @@ export default class CalledTab extends Component {
                     <a href="javascript:void(0);" className="callBtn" data-uid="<%=list.basicinfo.uid%>" data-id="<%=list.visitinfo.id%>" data-mobile="<%=list.basicinfo.mobile%>" data-time="<%=list.visitinfo.call_time%>">呼叫</a>
                   </td> : null}
               </tr>
-            })
+            )}
             </tbody>
           </table>
           <p className="callnum">

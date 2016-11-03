@@ -4,7 +4,7 @@
 // 這邊使用 HtmlWebpackPlugin，將 bundle 好的 <script> 插入到 body ${__dirname} 為 ES6 語法對應到 __dirname
 const webpack = require('webpack');
 const path = require('path');
-
+var env = process.env.NODE_ENV;
 module.exports = {
   entry: {
     index: './src/index.js'//入口文件
@@ -55,7 +55,7 @@ module.exports = {
      }),*/
     new webpack.DefinePlugin({//生产环境
       "process.env": {
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify(env)
       }
     }),
     new webpack.ProvidePlugin({
