@@ -11,12 +11,19 @@ export default class ChoosePosition extends Component {
   }
 
   render() {
+    const blockArr=[];
+    for(const i in this.props.block) {
+      if({}.hasOwnProperty.call(this.props.block,i)){
+        blockArr.push(this.props.block[i])
+      }
+    }
+
     return (
       <div className="item">
         <div className="position clearfix" style="display: block;">
           <h2 className="fl" >城区板块：</h2>
           <a href="javascript:void(0);" data-type="district" className="onend" >全部</a>
-          {block.map(b=><a href="javascript:void(0);" data-type="district"  data-json={JSON.stringify(block[i].block)} data-id={block[i].id}>{n.name}<i></i></a>)}
+          {blockArr.map(b=><a href="javascript:void(0);" data-type="district"  data-json={JSON.stringify(block[i].block)} data-id={block[i].id}>{n.name}<i></i></a>)}
         </div>
         <div className="line-list dn" style={{display: "block"}}>
           <ChoosePositionHover />

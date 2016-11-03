@@ -13,7 +13,7 @@ export default class UncallChoose extends Component {
   }
 
   componentDidMount() {
-    this.ajaxRequest= $.ajax({
+    this.ajaxRequest = $.ajax({
       url: '/saleajax/gettellistconfig/',
       data: {
         citycode: window.xkTel.citycode,//城市编号
@@ -23,9 +23,7 @@ export default class UncallChoose extends Component {
       success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
-          this.setState({
-            [kind]: res.result
-          })
+          this.setState(res.result.data)
         } else {
           alert(res.result.message);
         }
@@ -56,7 +54,7 @@ export default class UncallChoose extends Component {
     }
     return (
       <div>
-        <ChoosePosition />
+        <ChoosePosition {...this.state.block} />
         <div className="item">
           <div className="position clearfix" style={{display: "block"}}>
             <h2 className="fl">呼叫列队：</h2>
@@ -70,7 +68,7 @@ export default class UncallChoose extends Component {
             </div>
           </div>
         </div>
-        <ChooseGroup />
+        <ChooseGroup {...this.state.group} />
         <ChooseKeyword />
       </div>
     )
