@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
 import Page1Top from './page1/Page1Top';
 import Page1Middle from './page1/Page1Middle';
-import Page2Top from './page2/EnterMain';
-import Page2Middle from './page2/Page2Middle';
+import EnterMain from './page2/EnterMain';
 //import './App.css';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      page: 1
-    }
   }
 
   render() {
+    const { dispatch, page} = this.props;
     return (
-      this.state.page == 1 ?
+      page === 1 ?
         <div>
           <Page1Top />
           <Page1Middle />
         </div> :
-        <div>
-          <Page2Top />
-          <Page2Bottom />
-        </div>
+        <EnterMain />
     )
   }
 }
@@ -38,4 +32,9 @@ class Home extends Component {
  workParam: state.workParam
  };
  }*/
-export default Home;
+function select(state){
+  return {
+    page:state.page
+  }
+}
+export default connect(select)(Home);

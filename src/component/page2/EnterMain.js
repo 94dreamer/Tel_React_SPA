@@ -17,13 +17,14 @@ class EnterMain extends Component {
       <section id="tel_work" className="dn" data-uid={info.basicinfo.uid}>
         <WorkAgent />
         <div className="record_newCon">
-          /*baidu.template("mian_top_temp",window.TEL_AGENT)*/
+          <Record_1 telAgent={this.props.telAgent} workParam={this.props.workParam} />
+          <Record_2 telAgent={this.props.telAgent} workParam={this.props.workParam}/>
           <div className="record_3">
-            <!--预约情况-->
+            {/*预约情况*/}
             <div className="yx">
               <h2><em></em>预约情况<span>(选择“可面见”后，该经纪人自动流转给销售跟进）</span></h2>
               <figure className="radio-w">
-                <!--baidu.template("tel_buylevel",{})-->
+                {/*baidu.template("tel_buylevel",{})*/}
               </figure>
               <div className="tel_nointentionreason dn">无面见意向的原因
                 <input type="text" id="tel_nointentionreason" maxlength="20" placeholder="无面见意向的原因"/></div>
@@ -43,31 +44,31 @@ class EnterMain extends Component {
                 <span><i data-val="3" className="btn-radio-no"/>停机</span>
               </div>
             </div>
-            <!--回访详情-->
+            {/*回访详情*/}
             {(this.props.workParam.work_type == 2 && this.props.telAgent.visitinfo.pid > 0) || (this.props.workParam.work_type == 1 && his.props.telAgent.queueinfo.is_telsalevisit > 0) ?
               <div className="visitCon">
                 <h2><em></em>回访详情</h2>
-                <!--遍历多个basic_show_temp-->
+                {/*遍历多个basic_show_temp*/}
               </div>
               : null}
-            <!--竞对情况-->
+            {/*竞对情况*/}
             <div className="jdui">
               <h2><em></em>竞对情况</h2>
-              <!--baidu.template("tel_rival",res.result.data);-->
+              {/*baidu.template("tel_rival",res.result.data);*/}
             </div>
-            <!--核实意向-->
+            {/*核实意向*/}
             <div className="checkCon">
               <h2><em></em>核实意向</h2>
               <figure className="radio-w">
                 <em>意向程度</em>
-                <!---->
+                {/**/}
               </figure>
             </div>
             <div className="desc clearfix">
               <textarea cols="30" rows="10" id="remark" placeholder="详细描述" />
               <span id="msg-sms"><i className="btn-check-no" />短信通知相关销售</span>
             </div>
-            <!--btn-->
+            {/*btn*/}
             {window.xkTelInfo.isCallCenter ?
               <div className="btn-item clearfix">
                 {this.props.workParam.calltype == 1 ?
@@ -85,7 +86,7 @@ class EnterMain extends Component {
               </div>
             }
           </div>
-          <!--拜访历史-->
+          {/*拜访历史*/}
           <div className="record_4">
             <h2><em></em>拜访历史</h2>
             <div className="con">
@@ -94,7 +95,7 @@ class EnterMain extends Component {
               </ul>
               <div className="log-table log-table-tel detail-table">
                 <table id="visit-table" cellpadding="0" cellspacing="0" width="100%">
-                  <!--tel_visited_record,data-->
+                  {/*tel_visited_record,data*/}
                 </table>
                 <div className="main-foot">
                   <FootPage />

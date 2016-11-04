@@ -2,109 +2,39 @@
  * Created by zz on 2016/8/19.
  */
 import React,{Component} from 'react';
-import Uncall_btn from './Uncall_btn'
-import UncallChoose from './UncallChoose';
-import CalledChoose from './CalledChoose';
-import UncallTab from './UncallTab';
-import CalledTab from './CalledTab';
-import FootPage from './../common/FootPage';
-
+import UncallBox from './UncallBox';
+import CalledBox from './CalledBox';
 import {connect} from 'react-redux';
 
 class Page1Middle extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      current: 1,
-      uncall: {data: {}},
-      called: {data: {}}
-    }
-    this.turnPage = this.turnPage.bind(this);
-    this.callout = this.callout.bind(this);
-    this.ajaxTable = this.ajaxTable.bind(this);
+    this.changeBlock=this.changeBlock.bind(this);
   }
 
-  turnPage(index) {
-    this.ajaxTable(index);
-  }
-
-  callout(tel, uid) {
-
-  }
-
-  ajaxTable(kind, page) {
-    this.ajaxRequest = $.ajax({
-      url: kind === 'uncall' ? '/saleajax/tellist/' : '/saleajax/getcalllist/',
-      data: kind === 'uncall' ? this.props.uncallData : this.props.calledData,
-      success: function (res) {
-        var res = (typeof res == 'string') ? JSON.parse(res) : res;
-        if (res.result.code == 0) {
-          this.setState({
-            [kind]: res.result
-          })
-        } else {
-          alert(res.result.message);
-        }
-      }.bind(this)
-    })
-  }
-
-  componentDidMount() {
-    this.ajaxTable("uncall")
-  }
-
-  componentWillUnmount() {//组件移除前停止异步操作。
-    this.ajaxRequest.abort();
+  changeBlock(e){
+    this.props.dispatch({type:"CHANGE_callblock",block:e.target.dataset.block})
   }
 
   render() {
-    // 通过调用 connect() 注入:
-    const { dispatch, uncallData, calledData} = this.props;
+    const { dispatch, callblock , queuenum , callnum } = this.props;
+    console.log("Page1Middle", this.props);
     return (
       <div id="page1_middle">
         <div className="Telemarketing_main">
           <ul className="main-title">
-            <li className="current" data-type="uncall">
-              <a href="javascript:void(0);">待呼叫（<span>{this.state.uncall.data.queuenum || this.state.called.data.queuenum || 0}</span>）</a>
+            <li className={callblock === "uncall" ?"current":null} data-type="uncall">
+              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="uncall">待呼叫（<span>{queuenum || 0}</span>）</a>
             </li>
-            <li data-type="called" data-time="0">
-              <a href="javascript:void(0);">已呼叫（<span>{this.state.called.data.callnum || this.state.uncall.data.callnum || 0}</span>）</a>
+            <li className={callblock === "called" ?"current":null} data-type="called">
+              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="called">已呼叫（<span>{callnum || 0}</span>）</a>
             </li>
           </ul>
           <div className="tagBox">
-            {this.state.current == 1 ?
-              <div id="uncall-tag" className="tag_tab">
-                <div className="tag_callCon">
-                  <Uncall_btn />
-                  <UncallChoose />
-                  <div className="h15"></div>
-                </div>
-                <div className="table_callCon">
-                  <div className="log-table log-table-sales">
-                    <UncallTab {...this.state.uncall} />
-                  </div>
-                  <div className="main-foot">
-                    <FootPage />
-                  </div>
-                </div>
-              </div> :
-              <div id="called-tag" className="tag_tab dn">
-                <div className="tag_callCon">
-                  <div className="hd_btn">
-                    <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
-                  </div>
-                  <CalledChoose />
-                  <div className="h15"></div>
-                </div>
-                <div className="table_callCon">
-                  <div className="log-table log-table-sales">
-                    <CalledTab {...this.state.called} />
-                  </div>
-                  <div className="main-foot">
-                    <FootPage />
-                  </div>
-                </div>
-              </div>
+            {callblock === "uncall" ?
+              <UncallBox />
+              :
+              <CalledBox />
             }
           </div>
         </div>
@@ -115,8 +45,9 @@ class Page1Middle extends Component {
 
 function select(state) {
   return {
-    uncallData: state.uncallData,
-    calledData: state.calledData
+    queuenum: state.queuenum,
+    callnum: state.callnum,
+    callblock: state.callblock
   }
 }
 export default connect(select)(Page1Middle)

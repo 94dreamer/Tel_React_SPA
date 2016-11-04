@@ -11,7 +11,7 @@ export default class UncallTab extends Component {
 
   render() {
     const data = this.props.data || [];
-    const isNull = !(data.list && data.list.length);
+    const isNull = !(data && data.list && data.list.length);
     return (
       isNull ? <div className="side-null"/> :
         <div>

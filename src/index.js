@@ -11,6 +11,10 @@ import User from './component/User';
 import telApp from './reducers/reducres';
 
 const initState = {
+  page:1,
+  queuenum: 0,
+  callnum: 0,
+  callblock: "uncall",
   resultDate: {
     min: null,
     max: null
@@ -27,7 +31,6 @@ const initState = {
     tel_group_id: window.xkTel.group_id// 部组id
   },
   telAgent: {
-    name: "周振"
   },
   workParam: {}
 }
