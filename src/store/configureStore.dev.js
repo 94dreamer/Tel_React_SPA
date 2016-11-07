@@ -1,12 +1,14 @@
 /**
  * Created by zz on 2016/11/7.
  */
-import {createStore,compose} from 'redux';
-import {persistState} from 'redux-devtools';
-import rootReducer from '../reducers'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistState } from 'redux-devtools';
+import thunk from 'redux-thunk';
+import telApp from '../reducers/reducres';
 import DevTools from '../containers/DevTools';
 
-const enhancer=compose(
+const enhancer = compose(
+  applyMiddleware(thunk),
   DevTools.instrument(),
   persistState(
     window.location.href.match(
@@ -15,10 +17,8 @@ const enhancer=compose(
   )
 );
 
-export default function  configureStore(initialState){
-  const store=createStore(rootReducer,initialState,enhancer);
-  if(module.hot){
-    module.hot.accept('../reducers',()=>store.replaceReducer(require('../reducers').default));
-  }
+export default function configureStore(initialState) {
+  const store = createStore(telApp, initialState, enhancer);
+
   return store;
 }

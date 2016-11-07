@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
-// import DevTools from './containers/DevTools';
+import DevTools from './containers/DevTools';
+import configureStore from './store/configureStore';
 import App from './component/App';
 import Home from './component/Home';
 import Work from './component/Work';
@@ -38,6 +39,7 @@ const initState = {
   workParam: {}
 }
 const store = createStore(telApp, initState);
+//const store=configureStore(initState);
 
 ReactDOM.render(
   <Provider store={store}>

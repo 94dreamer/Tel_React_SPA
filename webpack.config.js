@@ -5,7 +5,7 @@
 const webpack = require('webpack');
 const path = require('path');
 var env = process.env.NODE_ENV;
-module.exports = {
+const config = {
   entry: {
     index: './src/index.js'//入口文件
   },
@@ -57,13 +57,8 @@ module.exports = {
   // plugins 放置所使用的插件
   plugins: [
     /*new webpack.DllReferencePlugin({//  ddl打包
-      context: __dirname,
-      manifest: require('./manifest.json'),
-    }),*/
-    /*new webpack.optimize.UglifyJsPlugin({//压缩
-     compressor:{
-     warnings:false
-     }
+     context: __dirname,
+     manifest: require('./manifest.json'),
      }),*/
     new webpack.DefinePlugin({//生产环境
       "process.env": {
@@ -78,4 +73,13 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 };
-console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV == "production") {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({//压缩
+      compressor: {
+        warnings: false
+      }
+    })
+  )
+}
+module.exports = config;
