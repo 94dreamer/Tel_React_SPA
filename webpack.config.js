@@ -16,7 +16,15 @@ module.exports = {
     publicPath: 'http://res2.esf.leju.com/Tel_React_SPA/dist/'
   },
   resolve: {
+    alias: {
+      'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
+      'redux-devtools': path.join(__dirname, '..', '..', 'src'),
+      'react': path.join(__dirname, 'node_modules', 'react')
+    },
     extensions: ['', '.js', '.css']
+  },
+  resolveLoader: {
+    'fallback': path.join(__dirname, 'node_modules')
   },
   module: {
     // loaders 則是放欲使用的 loaders，
@@ -70,3 +78,4 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 };
+console.log(process.env.NODE_ENV)

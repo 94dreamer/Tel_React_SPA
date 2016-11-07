@@ -150,3 +150,6 @@ This works in CSS too:
 ### 2.循环的map内，每个标签都需要一个key值，唯一值。
 
 ### 3.Component's children should not be mutated. 使用|| 或者 && 的时候一定要保证有输出。
+
+
+cnpm install --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor

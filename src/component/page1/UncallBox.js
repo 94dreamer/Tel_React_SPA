@@ -14,6 +14,7 @@ class UncallBox extends Component {
     this.turnPage = this.turnPage.bind(this);
     this.callout = this.callout.bind(this);
     this.ajaxTable = this.ajaxTable.bind(this);
+    this.changeData=this.changeData.bind(this);
   }
 
   turnPage(index) {
@@ -40,6 +41,24 @@ class UncallBox extends Component {
     })
   }
 
+  changeData(e){
+    const dataType=e.target.dataset.type;
+    const dataId=e.target.dataset.id;
+    switch (dataType){
+      case "callqueue":
+        this.props.dispatch({
+          type:"ADD_uncallData",
+          param:{
+            type:dataType,
+            value:dataId
+          }
+        })
+        break;
+      default :
+        console.error("未知类型改变",dataType);
+    }
+  }
+
   componentDidMount() {
     this.ajaxTable()
   }
@@ -55,7 +74,7 @@ class UncallBox extends Component {
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose uncallData={this.props.uncallData} />
+          <UncallChoose uncallData={this.props.uncallData} changeData={this.changeData} />
           <div className="h15"></div>
         </div>
         <div className="table_callCon">

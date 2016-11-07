@@ -2,13 +2,16 @@ import React,{PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router'
+import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
+// import DevTools from './containers/DevTools';
 import App from './component/App';
 import Home from './component/Home';
 import Work from './component/Work';
 import Users from './component/Users';
 import User from './component/User';
 import telApp from './reducers/reducres';
+
+console.log("环境变量",process.env.NODE_ENV);
 
 const initState = {
   page:1,

@@ -36,6 +36,7 @@ export default class UncallChoose extends Component {
   }
 
   render() {
+    const {uncallData,changeData}=this.props;
     const callqueue = {
       "1": "首次邀约",
       "2": "临时指派",
@@ -51,7 +52,7 @@ export default class UncallChoose extends Component {
         callArr.push({key: i, value: callqueue[i]})
       }
     }
-    console.log("UncallChoose render")
+    console.log("UncallChoose render");
     return (
       <div>
         <ChoosePosition block={this.state.block} />
@@ -59,12 +60,12 @@ export default class UncallChoose extends Component {
           <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
             {callArr.map(item=>
-              <a href="javascript:void(0);" className="oned" key={item.key} data-type="callqueue" data-id={item.key}>{item.value}</a>
+              <a style={{cursor:"pointer"}} className={item.key==uncallData.callqueue?"oned":null} onClick={changeData} key={item.key} data-type="callqueue" data-id={item.key}>{item.value}</a>
             )}
             <h2 className="fl dataCon">队列日期：</h2>
             <div className="visit_time date-box clearfix fl">
               <input className="time_l fl" id="queueDate" placeholder="选择日期"/>
-              <label htmlFor="queueDate" className="time_r fl"><em className="icon-date"/></label>
+              <label htmlFor="queueDate" className="time_r fl"><em className="icon-date" /></label>
             </div>
           </div>
         </div>
