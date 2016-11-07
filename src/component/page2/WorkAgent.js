@@ -11,7 +11,7 @@ class WorkAgent extends Component {
   }
 
   render() {
-    const agent = this.props.telAgent
+    const agent = this.props.telAgent;
     return (
       <div className="log-con-bd">
         <table className="agent-table" cellpadding="0" cellspacing="0">

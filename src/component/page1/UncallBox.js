@@ -50,17 +50,16 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
+    const {dispatch} =this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose />
+          <UncallChoose uncallData={this.props.uncallData} />
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
-          <div className="log-table log-table-sales">
-            <UncallTab {...this.state} />
-          </div>
+          <UncallTab {...this.state} />
           <div className="main-foot">
             <FootPage />
           </div>

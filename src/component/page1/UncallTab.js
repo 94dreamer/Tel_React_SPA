@@ -13,8 +13,10 @@ export default class UncallTab extends Component {
     const data = this.props.data || [];
     const isNull = !(data && data.list && data.list.length);
     return (
-      isNull ? <div className="side-null"/> :
-        <div>
+      isNull ? <div className="log-table log-table-sales">
+        <div className="side-null"/>
+      </div> :
+        <div className="log-table log-table-sales">
           <table cellPadding="0" cellSpacing="0" width="100%">
             <tbody>
             <tr>
@@ -41,18 +43,18 @@ export default class UncallTab extends Component {
                   </td>
                 }
                 <td>{list.basicinfo.companyshortname} {list.basicinfo.storename}</td>
-                <td>{list.saleinfo.name || ''}</td>
-                <td>{list.saleinfo.parent_name || ''}-{list.saleinfo.group_name || ''}</td>
+                <td>{list.saleinfo.name}</td>
+                <td>{list.saleinfo.parent_name}-{list.saleinfo.group_name}</td>
                 <td>{list.visitinfo.ctime_view}</td>
                 <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark}</td>
                 <td>
                   <div className="tag_s clearfix">
-                    {list.queueinfo.is_firstcall>0?<span className="c_blue">首次</span>:null}
-                    {list.queueinfo.is_tempassign>0?<span className="c_purple">指派</span>:null}
-                    {list.queueinfo.is_telsalevisit>0?<span className="c_orange">回访</span>:null}
-                    {list.queueinfo.is_notstandard>0?<span className="c_red">未达标</span>:null}
-                    {list.queueinfo.is_7expire>0?<span className="c_orange">7天到期</span>:null}
-                    {list.queueinfo.is_7open>0?<span className="c_green">7天开通</span>:null}
+                    {list.queueinfo.is_firstcall > 0 ? <span className="c_blue">首次</span> : null}
+                    {list.queueinfo.is_tempassign > 0 ? <span className="c_purple">指派</span> : null}
+                    {list.queueinfo.is_telsalevisit > 0 ? <span className="c_orange">回访</span> : null}
+                    {list.queueinfo.is_notstandard > 0 ? <span className="c_red">未达标</span> : null}
+                    {list.queueinfo.is_7expire > 0 ? <span className="c_orange">7天到期</span> : null}
+                    {list.queueinfo.is_7open > 0 ? <span className="c_green">7天开通</span> : null}
                   </div>
                 </td>
                 <td className="bor_r0">{list.queueinfo.queuetime_view}</td>

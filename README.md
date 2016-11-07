@@ -148,3 +148,5 @@ This works in CSS too:
 ### 1.onClick时注意大小写 onClick={this.handleClick} ，千万不要加括号，就自动执行了。
 
 ### 2.循环的map内，每个标签都需要一个key值，唯一值。
+
+### 3.Component's children should not be mutated. 使用|| 或者 && 的时候一定要保证有输出。

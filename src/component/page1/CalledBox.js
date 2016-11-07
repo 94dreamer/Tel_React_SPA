@@ -49,7 +49,7 @@ class CalledBox extends Component {
 
   render() {
     return (
-      <div id="called-tag" className="tag_tab dn">
+      <div id="called-tag" className="tag_tab">
         <div className="tag_callCon">
           <div className="hd_btn">
             <a href="javascript:void(0);" id="exportCalled" className="btn_gray">导出数据</a>
@@ -58,9 +58,7 @@ class CalledBox extends Component {
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
-          <div className="log-table log-table-sales">
-            <CalledTab {...this.state} />
-          </div>
+          <CalledTab {...this.state} />
           <div className="main-foot">
             <FootPage />
           </div>

@@ -11,11 +11,12 @@ export default class CalledTab extends Component {
 
   render() {
     const data = this.props.data;
+    console.log(data)
     let isNull = !(data && data.list && data.list.length);
     return (
       isNull ?
-        <div className="side-null"></div> :
-        <div>
+        <div className="log-table log-table-sales"><div className="side-null" /></div> :
+        <div className="log-table log-table-sales">
           <table cellPadding="0" cellSpacing="0" width="100%">
             <tbody>
             <tr>
@@ -32,12 +33,12 @@ export default class CalledTab extends Component {
               <th width="8%">电销标签</th>
               <th width="8%">电销姓名</th>
               {gArr['saleinfo'] && gArr['saleinfo'].position && gArr['saleinfo'].position == 6 ?
-                <th width="10%" className="bor_r0">操作</th> : null}
+                <th className="bor_r0">操作</th> : null}
             </tr>
             {data.list.map(list=>
               <tr key={list.number+list.uid}>
                 <td>{list.number}</td>
-                {window.$_GET['groupid']?
+                {window.$_GET.groupid ?
                   <td>
                     <a target='_blank' href="">{list.basicinfo.name}</a>
                   </td>
@@ -47,17 +48,17 @@ export default class CalledTab extends Component {
                   </td>
                 }
                 <td>{list.basicinfo.companyshortname} {list.basicinfo.storename}</td>
-                <td>{list.saleinfo.name || ''}</td>
-                <td>{list.saleinfo.parent_name || ''}-{list.saleinfo.group_name || ''}</td>
+                <td>{list.saleinfo.name}</td>
+                <td>{list.saleinfo.parent_name}-{list.saleinfo.group_name}</td>
                 <td>{list.visitinfo.ctime_view}</td>
                 <td>{list.visitinfo.customerintention == 7 ? "--" : list.visitinfo.talk_time}</td>
-                <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark}</td>
-                <td>{list.visitinfo.buylevel_view || ''}</td>
+                <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark.slice(0,30)}</td>
+                <td>{list.visitinfo.buylevel_view}</td>
                 <td>{list.visitinfo.customerintention == 7 ? "呼叫失败" : "呼叫成功"}</td>
                 <td>{list.visitinfo.visitlabel_view}</td>
-                <td>{list.telsaleinfo ? ((list.telsaleinfo.group_name || '') - (list.telsaleinfo.name || '')) : null}</td>
+                <td>{list.telsaleinfo ? (list.telsaleinfo.group_name+ '-' +list.telsaleinfo.name) : null}</td>
                 {window.gArr['saleinfo'] && window.gArr['saleinfo'].position && window.gArr['saleinfo'].position == 6 ?
-                  <td className="bor_r0">
+                  <td width="10%" className="bor_r0">
                     <a href="javascript:void(0);" className="callBtn" data-uid={list.basicinfo.uid} data-id={list.visitinfo.id} data-mobile={list.basicinfo.mobile} data-time={list.visitinfo.call_time}>呼叫</a>
                   </td> : null
                 }
