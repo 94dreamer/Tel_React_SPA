@@ -40,8 +40,6 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-react": "^6.4.1",
     "html-webpack-plugin": "^2.22.0",
-    "parse-key": "^0.2.1",
-    "react-dock": "^0.2.3",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-instrument": "^1.0.1",
