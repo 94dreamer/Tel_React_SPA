@@ -27,7 +27,7 @@ const initState = {
     citycode: window.xkTel.citycode,// 城市编号
     jobid: window.xkTel.jobid,// 销售工号
     tel_group_id: window.xkTel.group_id,// 部组id
-    callqueue: 1,//呼叫队列
+    callqueue: 1//呼叫队列
   },
   calledData: {
     citycode: window.xkTel.citycode,// 城市编号
@@ -37,9 +37,8 @@ const initState = {
   telAgent: {
   },
   workParam: {}
-}
+};
 const store = createStore(telApp, initState);
-//const store=configureStore(initState);
 
 ReactDOM.render(
   <Provider store={store}>
