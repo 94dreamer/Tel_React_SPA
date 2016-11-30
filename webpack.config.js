@@ -73,7 +73,8 @@ const config = {
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 };
-if (process.env.NODE_ENV == "production") {
+
+if (process.env.NODE_ENV) {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({//压缩
       compressor: {
