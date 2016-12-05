@@ -5,17 +5,17 @@ import {Provider} from 'react-redux';
 import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
 //import DevTools from './containers/DevTools';
 //import configureStore from './store/configureStore';
-import App from './component/App';
+import Top from './component/Top';
 import Home from './component/Home';
 import Work from './component/Work';
 import Users from './component/Users';
 import User from './component/User';
 import telApp from './reducers/reducres';
 
-console.log("环境变量",process.env.NODE_ENV);
+console.log("环境变量", process.env.NODE_ENV);
 
 const initState = {
-  page:1,
+  page: 1,
   queuenum: 0,
   callnum: 0,
   callblock: "uncall",
@@ -34,8 +34,7 @@ const initState = {
     jobid: window.xkTel.jobid,// 销售工号
     tel_group_id: window.xkTel.group_id// 部组id
   },
-  telAgent: {
-  },
+  telAgent: {},
   workParam: {}
 };
 const store = createStore(telApp, initState);
@@ -43,7 +42,7 @@ const store = createStore(telApp, initState);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={Top}>
         <IndexRoute component={Home}/>
         <Route path="/work" component={Work}/>
         <Route path="/users" component={Users}>

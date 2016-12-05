@@ -13,7 +13,7 @@
       "semi":0,//分号
       "no-script-url":0,//使用javascript:
       "react/jsx-space-before-closing":0,//关闭标签前需要一个空格
-      "max-len":0,//一行的最大长度
+      "max-len":0//一行的最大长度
     },
     "plugins": [
       "babel",
