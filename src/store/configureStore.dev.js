@@ -3,12 +3,12 @@
  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
-import rootReducer from '../reducers';
+import rootReducer from '../reducers/reducres';
 import DevTools from '../containers/DevTools';
 
 const enhancer = compose(
   // 你想在开发环境使用的Middleware:
-  applyMiddleware(d1, d2, d3),
+  applyMiddleware(),
   // 这是必需的! 使用你选择的附带monitors的Redux DevTools
   DevTools.instrument(),
   //参数，让你输入?debug_session=<key> 在地址栏中持续地debug会话

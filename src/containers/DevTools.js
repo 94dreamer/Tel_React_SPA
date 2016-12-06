@@ -11,7 +11,7 @@ import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
 // createDevTools 通过一个监视器和产生器来创建一个DevTools component
-const DevTools = createDevTools(
+export default createDevTools(
   // Monitors 是一个个单独的props.
   // 查找这些包的github地址来学习了解他们的props.
   // 这里,我们把LogMonitor放在DockMonitor里.
@@ -22,5 +22,3 @@ const DevTools = createDevTools(
     <LogMonitor theme='tomorrow' />
   </DockMonitor>
 );
-
-export default DevTools;

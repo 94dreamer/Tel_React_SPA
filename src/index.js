@@ -3,18 +3,14 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
-//import DevTools from './containers/DevTools';
-//import configureStore from './store/configureStore';
-import Top from './component/Top';
-import Home from './component/Home';
-import Work from './component/Work';
-import Users from './component/Users';
-import User from './component/User';
+
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
 import telApp from './reducers/reducres';
 
 console.log("环境变量", process.env.NODE_ENV);
 
-const initState = {
+const initialState = {
   page: 1,
   queuenum: 0,
   callnum: 0,
@@ -37,19 +33,10 @@ const initState = {
   telAgent: {},
   workParam: {}
 };
-const store = createStore(telApp, initState);
+
+const store = configureStore(initialState);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/" component={Top}>
-        <IndexRoute component={Home}/>
-        <Route path="/work" component={Work}/>
-        <Route path="/users" component={Users}>
-          <Route path="/user/:userId" component={User}/>
-        </Route>
-      </Route>
-    </Router>
-  </Provider>,
+  <Root store={store}/>,
   document.getElementById("APP")
 );

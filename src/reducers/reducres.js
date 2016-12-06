@@ -96,7 +96,7 @@ function workParam(state = {}, action) {
 }
 
 
-const telApp = combineReducers({  // 合并reducers函数
+const rootReducer = combineReducers({  // 合并reducers函数
   page,
   queuenum,
   callnum,
@@ -107,4 +107,4 @@ const telApp = combineReducers({  // 合并reducers函数
   telAgent,
   workParam
 });
-export default telApp;
+export default rootReducer;
