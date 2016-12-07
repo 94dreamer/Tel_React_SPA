@@ -3,12 +3,13 @@
  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
+import thunk from 'redux-thunk';
 import rootReducer from '../reducers/reducres';
 import DevTools from '../containers/DevTools';
 
 const enhancer = compose(
   // 你想在开发环境使用的Middleware:
-  applyMiddleware(),
+  applyMiddleware(thunk),
   // 这是必需的! 使用你选择的附带monitors的Redux DevTools
   DevTools.instrument(),
   //参数，让你输入?debug_session=<key> 在地址栏中持续地debug会话
@@ -28,11 +29,11 @@ export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   // 热重载reducers (requires Webpack or Browserify HMR to be enabled)
-  if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+/*  if (module.hot) {
+    module.hot.accept('../reducers/reducres', () =>
+      store.replaceReducer(require('../reducers/reducres')/!*.default if you use Babel 6+ *!/)
     );
-  }
+  }*/
 
   return store;
 }

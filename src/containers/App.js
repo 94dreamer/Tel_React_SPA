@@ -13,7 +13,7 @@ import telApp from '../reducers/reducres';
 export  default class App extends Component {
   render() {
     return (
-      <Router history={hashHistory}>
+      /*<Router history={hashHistory}>
         <Route path="/" component={Top}>
           <IndexRoute component={Home}/>
           <Route path="/work" component={Work}/>
@@ -21,7 +21,10 @@ export  default class App extends Component {
             <Route path="/user/:userId" component={User}/>
           </Route>
         </Route>
-      </Router>
+      </Router>*/
+      <div>
+        <Home />
+      </div>
     )
   }
 }

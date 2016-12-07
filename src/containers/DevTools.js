@@ -16,8 +16,8 @@ export default createDevTools(
   // 查找这些包的github地址来学习了解他们的props.
   // 这里,我们把LogMonitor放在DockMonitor里.
   // 注意: DockMonitor默认是可见的.
-  <DockMonitor toggleVisibilityKey='ctrl-h'
-               changePositionKey='ctrl-q'
+  <DockMonitor toggleVisibilityKey='ctrl-H'
+               changePositionKey='ctrl-Q'
                defaultIsVisible={true}>
     <LogMonitor theme='tomorrow' />
   </DockMonitor>

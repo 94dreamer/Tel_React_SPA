@@ -16,9 +16,9 @@ const config = {
     publicPath: 'http://res2.esf.leju.com/Tel_React_SPA/dist/'
   },
   resolve: {
-    alias: {
-      'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
-      'redux-devtools': path.join(__dirname, '..', '..', 'src'),
+    alias: {//它的作用是把用户的一个请求重定向到另一个路径
+      //'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),//这些但是demo自定义的
+      //'redux-devtools': path.join(__dirname, '..', '..', 'src'),
       'react': path.join(__dirname, 'node_modules', 'react')
     },
     extensions: ['', '.js', '.css']
