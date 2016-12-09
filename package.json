@@ -53,7 +53,7 @@
   "scripts": {
     "watch": "webpack --watch",
     "build": "set NODE_ENV=production && webpack --colors --profile",
-    "dev": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js --display-modules",
     "eslint": "eslint src"
   },
   "repository": {
