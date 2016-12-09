@@ -24,10 +24,10 @@ class Page1Middle extends Component {
         <div className="Telemarketing_main">
           <ul className="main-title">
             <li className={callblock === "uncall" ?"current":null} data-type="uncall">
-              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="uncall">待呼叫（<span>{queuenum || 0}</span>）</a>
+              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="uncall">待呼叫<span>{queuenum || 0}</span></a>
             </li>
             <li className={callblock === "called" ?"current":null} data-type="called">
-              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="called">已呼叫（<span>{callnum || 0}</span>）</a>
+              <a style={{cursor:"pointer"}} onClick={this.changeBlock} data-block="called">已呼叫<span>{callnum || 0}</span></a>
             </li>
           </ul>
           <div className="tagBox">

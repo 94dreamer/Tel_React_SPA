@@ -19,7 +19,8 @@ const config = {
     alias: {//它的作用是把用户的一个请求重定向到另一个路径
       //'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),//这些但是demo自定义的
       //'redux-devtools': path.join(__dirname, '..', '..', 'src'),
-      'react': path.join(__dirname, 'node_modules', 'react')
+      'react': path.join(__dirname, 'node_modules', 'react'),
+      'moment': "moment/min/moment-with-locales.min.js"
     },
     extensions: ['', '.js', '.css']
   },
@@ -51,7 +52,10 @@ const config = {
         test: /\.css$/,
         loaders: ['style', 'css']
       },// expose-loader将需要的变量从依赖包中暴露出来
-      {test: require.resolve("jquery"), loader: "expose?$! expose?jQuery"}
+      {
+        test: require.resolve("jquery"),
+        loader: "expose?$! expose?jQuery"
+      }
     ]
   },
   // plugins 放置所使用的插件
@@ -70,7 +74,9 @@ const config = {
       jQuery: "jquery",
       "window.jQuery": "jquery"
     }),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(), //删除类似的重复代码
+    new webpack.optimize.AggressiveMergingPlugin()//合并块  貌似这两个都没有什么卵用
   ]
 };
 
