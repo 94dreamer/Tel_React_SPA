@@ -10,6 +10,7 @@ class Page1Top extends Component {
     super(props);
     this.dateForm = this.dateForm.bind(this);
     this.dateChange = this.dateChange.bind(this);
+    this.alertClick=this.alertClick.bind(this);
   }
 
   dateForm(nT) {
@@ -24,6 +25,29 @@ class Page1Top extends Component {
       max: e.target.value.split("到")[1]
     })
   }
+
+  /*alertClick(e){
+    //e.nativeEvent.stopImmediatePropagation();
+    //alert("click");
+    //e.preventDefault();
+    //e.stopPropagation();
+  }*/
+
+  /*componentDidMount(){
+    document.body.addEventListener('click',e=>{
+      alert("body");
+    })
+    document.getElementById("page1_top").addEventListener('click',e=>{
+      alert("page1_top")
+      e.preventDefault();
+      e.stopPropagation();
+    })
+  }*/
+
+  /*componentWillUnmount(){
+    document.body.removeEventListener('click');
+  }
+*/
 
   render() {
     // 通过调用 connect() 注入:
