@@ -155,7 +155,9 @@ This works in CSS too:
 
 ### 5.慎用setState和大量state存储，尽可能使用props。
 
+## 四、npm
 
+### 1."build": "set NODE_ENV=production && webpack --colors --profile"时，设置环境变量，window系统下使用set，而mac下需要使用export。
 
 
 cnpm install --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor

@@ -10,7 +10,6 @@ class Page1Top extends Component {
     super(props);
     this.dateForm = this.dateForm.bind(this);
     this.dateChange = this.dateChange.bind(this);
-    this.alertClick=this.alertClick.bind(this);
   }
 
   dateForm(nT) {

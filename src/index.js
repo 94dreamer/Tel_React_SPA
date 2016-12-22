@@ -1,12 +1,8 @@
 import React,{PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
 
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
-import telApp from './reducers/reducres';
 
 console.log("环境变量", process.env.NODE_ENV);
 

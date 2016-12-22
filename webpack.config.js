@@ -54,7 +54,7 @@ const config = {
       },// expose-loader将需要的变量从依赖包中暴露出来
       {
         test: require.resolve("jquery"),
-        loader: "expose?$! expose?jQuery"
+        loader: "expose-loader?$!expose-loader?jQuery"
       }
     ]
   },
@@ -79,7 +79,7 @@ const config = {
     new webpack.optimize.AggressiveMergingPlugin()//合并块  貌似这两个都没有什么卵用
   ]
 };
-
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV) {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({//压缩
