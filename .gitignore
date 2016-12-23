@@ -1,2 +1,3 @@
+/node_modules
 /.idea
-over.js
+.DS_Store

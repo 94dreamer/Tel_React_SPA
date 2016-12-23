@@ -102,7 +102,7 @@
 	    citycode: window.xkTel.citycode, // 城市编号
 	    jobid: window.xkTel.jobid, // 销售工号
 	    tel_group_id: window.xkTel.group_id, // 部组id
-	    callqueue: 1 //呼叫队列
+	    callqueue: 1 // 呼叫队列
 	  },
 	  calledData: {
 	    citycode: window.xkTel.citycode, // 城市编号
@@ -153,12 +153,18 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 
-	function invariant(condition, format, a, b, c, d, e, f) {
-	  if ((undefined) !== 'production') {
+	var validateFormat = function validateFormat(format) {};
+
+	if ((undefined) !== 'production') {
+	  validateFormat = function validateFormat(format) {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
 	    }
-	  }
+	  };
+	}
+
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
 
 	  if (!condition) {
 	    var error;
