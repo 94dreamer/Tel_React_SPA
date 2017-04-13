@@ -1,7 +1,7 @@
 {
-  "name": "tel",
+  "name": "tel-react-spa",
   "version": "1.0.0",
-  "description": "tel-reacr-spa",
+  "description": "tel-react-spa",
   "main": "index.js",
   "dependencies": {
     "expose-loader": "^0.7.1",

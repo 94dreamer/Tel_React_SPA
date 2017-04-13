@@ -121,43 +121,43 @@ This works in CSS too:
 }
 ```
 
-# React开发过程中的一些坑和深刻的debugger。
+## React开发过程中的一些坑和深刻的debugger。
 
-## 一、AJAX
+### 一、AJAX
 
-### 1.此处为什么放弃fetch？原因有几个
+#### 1.此处为什么放弃fetch？原因有几个
 
-#### 1.fetch的兼容性较差
+1. fetch的兼容性较差
 
-#### 2.fetch暂时不支持中断，没有相关API。
+2. fetch暂时不支持中断，没有相关API。
 
-#### 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
+因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
 
-### 2.$.ajax的坑
+#### 2.$.ajax的坑
 
-#### 1.ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。或者是bind(this)。
+1. ajax的success函数内使用this.setState()，调用的是XHR对象，所以需要在ajax外层that=this，保存一下this的指向于组件。或者是bind(this)。
 
-#### 2.ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
+2. ajax如果是异步的 后面的如果调用到ajax内的数据取不到，解决方案是要么改成ajaxType改成同步，要么注意数据为空问题。
 
-## 二、使用Redux
+### 二、使用Redux
 
-### 1.使用connect连接组件时，注入依赖的select选择的store中的指定细节数据，此时就无法获取父级传递的props。
+#### 1.使用connect连接组件时，注入依赖的select选择的store中的指定细节数据，此时就无法获取父级传递的props。
 
-## 三、组件
+### 三、组件
 
-### 1.onClick时注意大小写 onClick={this.handleClick} ，千万不要加括号，就自动执行了。
+#### 1.onClick时注意大小写 onClick={this.handleClick} ，千万不要加括号，就自动执行了。
 
-### 2.循环的map内，每个标签都需要一个key值，唯一值。
+#### 2.循环的map内，每个标签都需要一个key值，唯一值。
 
-### 3.Component's children should not be mutated. 使用|| 或者 && 的时候一定要保证有输出。
+#### 3.Component's children should not be mutated. 使用|| 或者 && 的时候一定要保证有输出。
 
-### 4.组件的render优化全靠生命周期的shouldComponentUpdate内的判断，来优化不相干子节点的更新渲染。
+#### 4.组件的render优化全靠生命周期的shouldComponentUpdate内的判断，来优化不相干子节点的更新渲染。
 
-### 5.慎用setState和大量state存储，尽可能使用props。
+#### 5.慎用setState和大量state存储，尽可能使用props。
 
-## 四、npm
+### 四、npm
 
-### 1."build": "set NODE_ENV=production && webpack --colors --profile"时，设置环境变量，window系统下使用set，而mac下需要使用export。
+1."build": "set NODE_ENV=production && webpack --colors --profile"时，设置环境变量，window系统下使用set，而mac下需要使用export。
 
 
 cnpm install --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
