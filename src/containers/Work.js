@@ -3,10 +3,10 @@
  */
 import React,{ Component } from 'react';
 import {connect} from 'react-redux';
-import WorkAgent from './WorkAgent';
-import FootPage from '../common/FootPage';
+import WorkAgent from '../component/work/WorkAgent';
+import FootPage from '../component/common/FootPage';
 
-class EnterMain extends Component {
+class Work extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -114,4 +114,4 @@ function select(state) {
     telAgent: state.telAgent
   }
 }
-export default connect(select)(EnterMain);
+export default connect(select)(Work);

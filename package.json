@@ -10,7 +10,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
-    "react-router": "^2.8.1",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-thunk": "^1.0.3"
   },
@@ -53,7 +53,7 @@
   },
   "scripts": {
     "watch": "webpack --watch",
-    "build": "export NODE_ENV=production && webpack",
+    "build": "export NODE_ENV=production && webpack --colors --profile --display-modules",
     "dev": "webpack --config webpack.config.js --display-modules --colors --profile",
     "eslint": "eslint src"
   },

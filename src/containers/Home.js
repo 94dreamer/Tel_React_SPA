@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Page1Top from './page1/Page1Top';
-import Page1Middle from './page1/Page1Middle';
-import EnterMain from './page2/EnterMain';
+import Page1Top from '../component/home/Page1Top';
+import Page1Middle from '../component/home/Page1Middle';
 //import './App.css';
 
 class Home extends Component {

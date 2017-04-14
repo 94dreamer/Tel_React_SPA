@@ -30,94 +30,25 @@ webpack.config.js	# 扩展 webpack 配置
 package.json	# 配置入口文件、依赖和 scripts
 ```
 
-# 基本写法
-### `DangerButton.js`
+## 基本写法
 
-```js
-import React, { Component } from 'react';
-import Button from './Button'; // Import a component from another file
+1. 用*require.ensure*来分割代码,打包的时候会把这块的代码独立打成一个文件
 
-class DangerButton extends Component {
-  render() {
-    return <Button color="red" />;
-  }
+```
+const Manage = (location,cb)=>{
+   require.ensure([],require=>{
+        cb(null,require('./manage.js'))
+   })
 }
 
-export default DangerButton;
+<Route path='manage' getComponent={Manage} />
 ```
 
+但是 Webpack2 发布之后，有这种新的写法支持
 
-#### `Button.css`
-
-```css
-.Button {
-  padding: 20px;
-}
 ```
-
-#### `Button.js`
-
-```js
-import React, { Component } from 'react';
-import './Button.css'; // Tell Webpack that Button.js uses these styles
-
-class Button extends Component {
-  render() {
-    // You can use them as regular CSS styles
-    return <div className="Button" />;
-  }
-}
-```
-
-
-For example, this:
-
-```css
-.App {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-```
-
-becomes this:
-
-```css
-.App {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-```
-
-Here is an example:
-
-```js
-import React from 'react';
-import logo from './logo.png'; // Tell Webpack this JS file uses this image
-
-console.log(logo); // /logo.84287d09.png
-
-function Header() {
-  // Import result is the URL of your image
-  return <img src={logo} alt="Logo" />;
-}
-
-export default function Header;
-```
-
-This works in CSS too:
-
-```css
-.Logo {
-  background-image: url(./logo.png);
+getComponent(nextState, cb) {
+    import('./Component.jsx').then(res => cb(null, res.default))
 }
 ```
 
@@ -157,7 +88,10 @@ This works in CSS too:
 
 ### 四、npm
 
-1."build": "set NODE_ENV=production && webpack --colors --profile"时，设置环境变量，window系统下使用set，而mac下需要使用export。
+1."build": "set NODE_ENV=production && webpack --colors --profile"时，设置环境变量，window系统下使用set，而mac下需要使用export，有个额外的插件可以平台通用。
 
+--colors 输出结果带彩色，比如：会用红色显示耗时较长的步骤
+--profile输出性能数据，可以看到每一步的耗时
+--display-modules默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块 这次命令行的结果已经很有参考价值，可以帮助我们定位耗时比较长的步骤
 
 cnpm install --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor

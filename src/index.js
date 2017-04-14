@@ -6,6 +6,7 @@ import Root from './containers/Root';
 
 console.log("环境变量", process.env.NODE_ENV);
 
+
 const initialState = {
   page: 1,
   queuenum: 0,
@@ -32,7 +33,14 @@ const initialState = {
 
 const store = configureStore(initialState);
 
+$(".tel-box").append("<div id='APP'></div>");
 ReactDOM.render(
   <Root store={store}/>,
   document.getElementById("APP")
 );
+
+if (!xkTelInfo.isCallCenter) {
+  $("#tel-bar").addClass("dn")
+}
+
+

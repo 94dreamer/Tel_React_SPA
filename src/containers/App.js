@@ -1,30 +1,31 @@
 /**
  * Created by zz on 2016/12/5.
  */
-import React,{Component} from 'react';
-import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
-import Top from '../component/Top';
-import Home from '../component/Home';
-import Work from '../component/Work';
-import Users from '../component/Users';
-import User from '../component/User';
-import telApp from '../reducers/reducres';
+import React, {Component} from 'react';
+// import {Router,Route,Link,hashHistory,browserHistory,IndexRoute} from 'react-router';
 
-export  default class App extends Component {
-  render() {
-    return (
-      /*<Router history={hashHistory}>
-        <Route path="/" component={Top}>
-          <IndexRoute component={Home}/>
-          <Route path="/work" component={Work}/>
-          <Route path="/users" component={Users}>
-            <Route path="/user/:userId" component={User}/>
-          </Route>
-        </Route>
-      </Router>*/
-      <div>
-        <Home />
-      </div>
-    )
-  }
-}
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,//会渲染它里面的第一个可以匹配的
+} from 'react-router-dom';
+
+import Home from './Home';
+import Work from './Work';
+import Record from './Record';
+import NoMatch from '../component/NoMatch';
+
+
+const App = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/saletel/list/" component={Home}/>
+      <Route path="/saletel/list/work" component={Work}/>
+      <Route path="/saletel/list/record" component={Record}/>
+      <Route component={NoMatch}/>
+    </Switch>
+  </Router>
+);
+
+export default App;

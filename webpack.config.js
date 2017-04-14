@@ -12,7 +12,7 @@ const config = {
   output: {
     path: `${__dirname}/dist`,
     filename: '[name].js',
-    chunkFilename: 'chunk[id].js?ver' + new Date().getTime(),
+    chunkFilename:'chunk[id][name].js?[chunkhash:6]',
     publicPath: 'http://res2.esf.leju.com/Tel_React_SPA/dist/'
   },
   resolve: {
@@ -31,14 +31,14 @@ const config = {
     // loaders 則是放欲使用的 loaders，
     // 在這邊是使用 babel-loader 將所有 .js（這邊用到正則式）相關檔案（
     // 排除了 npm 安裝的套件位置 node_modules）轉譯成瀏覽器可以閱讀的 JavaScript。preset 則是使用的 babel 轉譯規則，這邊使用 react、es2015
-    preLoaders: [
+    /*preLoaders: [
       {
         test: /\.jsx$|\.js$/,
         loader: 'eslint-loader',
         include: `${__dirname}/src`,
         exclude: /bundle\.js$/
       }
-    ],
+    ],*/
     loaders: [
       {
         test: /\.js$/,
