@@ -1,33 +1,33 @@
-import {combineReducers} from 'redux';
+//import {combineReducers} from 'redux';
 
-function page(state = 1, action) {
+// function page(state = 1, action) {
+//   switch (action.type) {
+//     case "CHANGE_page":
+//       return action.page || state;
+//     default:
+//       return state;
+//   }
+// }
+
+export function queuenum(state = 0, action) {
   switch (action.type) {
-    case "CHANGE_page":
-      return action.page || state;
-    default:
-      return state;
-  }
-}
-
-function queuenum(state=0,action) {
-  switch (action.type){
     case "CHANGE_queuenum":
-      return action.queuenum
+      return action.queuenum;
     default:
       return state
   }
 }
 
-function callnum(state=0,action) {
-  switch (action.type){
+export function callnum(state = 0, action) {
+  switch (action.type) {
     case "CHANGE_callnum":
-      return action.callnum
+      return action.callnum;
     default:
       return state
   }
 }
 
-function callblock(state = "uncall", action) {
+export function callblock(state = "uncall", action) {
   switch (action.type) {
     case "CHANGE_callblock":
       return action.block || state;
@@ -36,20 +36,20 @@ function callblock(state = "uncall", action) {
   }
 }
 
-function resultDate(state = {}, action) {
+export function resultDate(state = '', action) {
   switch (action.type) {
     case "CHANGE_resultDate":
-      return {...state, min: action.min, max: action.max}
+      return action.value;
     default:
       return state
   }
 }
 
-function uncallData(state = {}, action) {
+export function uncallData(state = {}, action) {
   switch (action.type) {
     case "ADD_uncallData":
       return {...state, [action.param.type]: action.param.value}
-    case "DEL_uncallData":{
+    case "DEL_uncallData": {
       const newState = {...state};
       delete newState[action.param.type];
       return newState
@@ -59,12 +59,11 @@ function uncallData(state = {}, action) {
   }
 }
 
-function calledData(state = {}, action) {
+export function calledData(state = {}, action) {
   switch (action.type) {
     case "ADD_calledData":
       return {...state, [action.param.type]: action.param.value}
-    case "DEL_calledData":
-    {
+    case "DEL_calledData": {
       const newState = {...state};
       delete newState[action.param.type];
       return newState
@@ -74,20 +73,21 @@ function calledData(state = {}, action) {
   }
 }
 
-function telAgent(state = {}, action) {
+export function telAgent(state = {}, action) {
   switch (action.type) {
     case "NEXT_telAgent":
-      return {...state, ...action.param}
+      return {...state, ...action.param};
     case "CLEAN_telAgent":
       return {}
     default:
       return state
   }
 }
-function workParam(state = {}, action) {
+
+export function workParam(state = {}, action) {
   switch (action.type) {
     case "CHANGE_workParam":
-      return {...state, ...action.param}
+      return {...state, ...action.param};
     case "CLEAN_workParam":
       return {}
     default:
@@ -96,15 +96,15 @@ function workParam(state = {}, action) {
 }
 
 
-const rootReducer = combineReducers({  // 合并reducers函数
-  page,
-  queuenum,
-  callnum,
-  callblock,
-  resultDate,
-  uncallData,
-  calledData,
-  telAgent,
-  workParam
-});
-export default rootReducer;
+// const rootReducer = combineReducers({  // 合并reducers函数
+//   // page,
+//   queuenum,
+//   callnum,
+//   callblock,
+//   resultDate,
+//   uncallData,
+//   calledData,
+//   telAgent,
+//   workParam
+// });
+// export default rootReducer;

@@ -22,9 +22,9 @@ export default class StatItem extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //return (nextProps.mindate !== this.props.mindate || nextProps.maxdate !== this.props.maxdate)//不能这样判断 因为ajax没有改变props
-    return true;
+    // return nextProps.date !== this.props.date; //不能这样判断 因为ajax没有改变props
     //此处日期是否相同，组件减少更新
+    return true;
   }
 
   componentWillUnmount() {//组件移除前停止异步操作。
@@ -32,8 +32,7 @@ export default class StatItem extends Component {
   }
 
   ajax(props){//注意ajax内部this的指向
-    let min=props.min,
-      max=props.max
+    const {date}=props;
     this.ajaxRequest = $.ajax({
       url: '/saleajax/telstatresult/',
       data: {
@@ -41,8 +40,8 @@ export default class StatItem extends Component {
         level: window.xkTel.level,
         group_id: window.xkTel.group_id,//部组id
         jobid: window.xkTel.jobid,//销售工号
-        start_date: min,
-        end_date: max
+        start_date: date,
+        end_date: date
       },
       success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;

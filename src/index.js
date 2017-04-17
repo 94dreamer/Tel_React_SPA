@@ -8,14 +8,10 @@ console.log("环境变量", process.env.NODE_ENV);
 
 
 const initialState = {
-  page: 1,
   queuenum: 0,
   callnum: 0,
   callblock: "uncall",
-  resultDate: {
-    min: null,
-    max: null
-  },
+  resultDate: null,
   uncallData: {
     citycode: window.xkTel.citycode,// 城市编号
     jobid: window.xkTel.jobid,// 销售工号
@@ -33,6 +29,7 @@ const initialState = {
 
 const store = configureStore(initialState);
 
+$("#page1_top,#page1_middle,#page1_bottom").remove();
 $(".tel-box").append("<div id='APP'></div>");
 ReactDOM.render(
   <Root store={store}/>,

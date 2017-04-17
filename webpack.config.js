@@ -20,7 +20,7 @@ const config = {
       //'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),//这些但是demo自定义的
       //'redux-devtools': path.join(__dirname, '..', '..', 'src'),
       'react': path.join(__dirname, 'node_modules', 'react'),
-      'moment': "moment/min/moment-with-locales.min.js"
+      // 'moment': path.join(__dirname,'src','lib','moment.min')
     },
     extensions: ['', '.js', '.css']
   },

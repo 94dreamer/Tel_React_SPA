@@ -11,9 +11,10 @@ import {
   Switch,//会渲染它里面的第一个可以匹配的
 } from 'react-router-dom';
 
-import Home from './Home';
-import Work from './Work';
-import Record from './Record';
+
+import Home from '../containers/Home';
+import Work from '../containers/Work';
+import Record from '../containers/Record';
 import NoMatch from '../component/NoMatch';
 
 

@@ -13,6 +13,7 @@ class Work extends Component {
   }
 
   render() {
+    const {info}=this.props;
     return (
       <section id="tel_work" className="dn" data-uid={info.basicinfo.uid}>
         <WorkAgent />
