@@ -1,4 +1,4 @@
-import React,{PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 import configureStore from './store/configureStore';
@@ -24,7 +24,8 @@ const initialState = {
     tel_group_id: window.xkTel.group_id// 部组id
   },
   telAgent: {},
-  workParam: {}
+  workParam: {},
+  loadNum: 0,
 };
 
 const store = configureStore(initialState);

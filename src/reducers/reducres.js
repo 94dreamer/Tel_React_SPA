@@ -95,6 +95,18 @@ export function workParam(state = {}, action) {
   }
 }
 
+export function loadNum(state = 0, action) {
+  switch (action.type) {
+    case "ADD_loadNum":
+      return state + 1;
+    case "DEL_loadNum":
+      return state - 1;
+    default:
+      return state
+  }
+
+}
+
 
 // const rootReducer = combineReducers({  // 合并reducers函数
 //   // page,

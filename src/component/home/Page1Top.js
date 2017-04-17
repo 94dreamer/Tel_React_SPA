@@ -31,6 +31,8 @@ class Page1Top extends Component {
     })
   }
 
+
+
   /*alertClick(e){
    //e.nativeEvent.stopImmediatePropagation();
    //alert("click");

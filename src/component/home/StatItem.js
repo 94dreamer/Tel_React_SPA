@@ -1,13 +1,13 @@
 /**
  * Created by zz on 2016/8/19.
  */
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 export default class StatItem extends Component {
   constructor(props) {
     super(props);
-    this.ajax=this.ajax.bind(this);
-    this.state={
-      first:true//标识为ajax
+    this.ajax = this.ajax.bind(this);
+    this.state = {
+      first: true//标识为ajax
     }
   }
 
@@ -16,7 +16,7 @@ export default class StatItem extends Component {
     this.ajax(this.props);
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     //console.log('StatItem componentWillReceiveProps');
     this.ajax(nextProps);
   }
@@ -31,8 +31,11 @@ export default class StatItem extends Component {
     this.ajaxRequest.abort();
   }
 
-  ajax(props){//注意ajax内部this的指向
+  ajax(props) {//注意ajax内部this的指向
     const {date}=props;
+    this.props.dispatch({
+      type: "ADD_loadNum",
+    });
     this.ajaxRequest = $.ajax({
       url: '/saleajax/telstatresult/',
       data: {
@@ -46,19 +49,26 @@ export default class StatItem extends Component {
       success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
-          this.state.first=false;
-          this.setState(res.result.data)
+          this.setState({
+            first: false,
+            ...res.result.data
+          })
         } else {
           alert(res.result.message);
         }
+        this.props.dispatch({
+          type: "DEL_loadNum",
+        });
       }.bind(this)
     })
   }
+
   render() {
-    if(this.state.first){
-      //console.log("StatItem firstRender!");
+    if (this.state.first) {
+      console.log("StatItem firstRender!");
       return null
     }
+    console.log("StatItem render");
     var c1 = this.state.conversion_complete / this.state.conversion_target * 100 || 0;
     var c_1 = c1 > 100 ? 100 : c1;
     var c2 = this.state.connect_complete / this.state.connect_target * 100 || 0;
@@ -74,10 +84,11 @@ export default class StatItem extends Component {
           <div className="item-1">
             <div className=" circle1">
               <div className="pie_left">
-                <div className="left" style={c_1>50?{transform:"rotate("+(c_1*3.6-180)+"deg)"}:null}></div>
+                <div className="left"
+                     style={c_1 > 50 ? {transform: "rotate(" + (c_1 * 3.6 - 180) + "deg)"} : null}></div>
               </div>
               <div className="pie_right">
-                <div className="right" style={{transform:"rotate("+(c_1<=50?c_1*3.6:180)+"deg)"}}></div>
+                <div className="right" style={{transform: "rotate(" + (c_1 <= 50 ? c_1 * 3.6 : 180) + "deg)"}}></div>
               </div>
               <div className="mask"><span>{Math.round(c1 === Number.POSITIVE_INFINITY ? 100 : c1)}</span>%</div>
             </div>
@@ -95,10 +106,11 @@ export default class StatItem extends Component {
           <div className="item-2">
             <div className="circle2">
               <div className="pie_left">
-                <div className="left" style={c_2>50?{transform:"rotate("+(c_2*3.6-180)+"deg)"}:null}></div>
+                <div className="left"
+                     style={c_2 > 50 ? {transform: "rotate(" + (c_2 * 3.6 - 180) + "deg)"} : null}></div>
               </div>
               <div className="pie_right">
-                <div className="right" style={{transform:"rotate("+(c_2<=50?c_2*3.6:180)+"deg)"}}></div>
+                <div className="right" style={{transform: "rotate(" + (c_2 <= 50 ? c_2 * 3.6 : 180) + "deg)"}}></div>
               </div>
               <div className="mask"><span>{Math.round(c2 === Number.POSITIVE_INFINITY ? 100 : c2)}</span>%</div>
             </div>
@@ -133,22 +145,26 @@ export default class StatItem extends Component {
             <ul>
               <li className="g-line g-line-1">
                 <span className="tit g-u"><i></i>通话1分钟以下</span>
-                <span className="schedule g-u"><em style={{width:100*this.state.talksection_1/max+"%"}}></em></span>
+                <span className="schedule g-u"><em
+                  style={{width: 100 * this.state.talksection_1 / max + "%"}}></em></span>
                 <q className="result g-lastu">{this.state.talksection_1}个</q>
               </li>
               <li className="g-line g-line-2">
                 <span className="tit g-u"><i></i>通话1-3分钟</span>
-                <span className="schedule g-u"><em style={{width:100*this.state.talksection_2/max+"%"}}></em></span>
+                <span className="schedule g-u"><em
+                  style={{width: 100 * this.state.talksection_2 / max + "%"}}></em></span>
                 <q className="result g-lastu">{this.state.talksection_2}个</q>
               </li>
               <li className="g-line g-line-3">
                 <span className="tit g-u"><i></i>通话3-5分钟 </span>
-                <span className="schedule g-u"><em style={{width:100*this.state.talksection_3/max+"%"}}></em></span>
+                <span className="schedule g-u"><em
+                  style={{width: 100 * this.state.talksection_3 / max + "%"}}></em></span>
                 <q className="result g-lastu">{this.state.talksection_3}个</q>
               </li>
               <li className="g-line g-line-4">
                 <span className="tit g-u"><i></i>通话5分钟以上</span>
-                <span className="schedule g-u"><em style={{width:100*this.state.talksection_4/max+"%"}}></em></span>
+                <span className="schedule g-u"><em
+                  style={{width: 100 * this.state.talksection_4 / max + "%"}}></em></span>
                 <q className="result g-lastu">{this.state.talksection_4}个</q>
               </li>
             </ul>

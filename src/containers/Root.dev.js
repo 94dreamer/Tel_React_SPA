@@ -4,6 +4,7 @@
 import React,{Component} from 'react';
 import {Provider} from 'react-redux';
 import App from '../routes/App';
+import Laoding from '../component/common/Laoding';
 import DevTools from './DevTools';
 
 export  default class Root extends Component {
@@ -13,6 +14,7 @@ export  default class Root extends Component {
       <Provider store={store}>
         <div>
           <App />
+          <Laoding />
           <DevTools />
         </div>
       </Provider>
