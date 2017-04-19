@@ -4,7 +4,12 @@
 import React, {Component} from 'react';
 import UncallBox from './UncallBox';
 import CalledBox from './CalledBox';
+import LockInBox from './LockInBox';
 import {connect} from 'react-redux';
+
+const pointer = {
+  cursor: "pointer",
+};
 
 class Page1Middle extends Component {
   changeBlock = (e) => {
@@ -14,25 +19,36 @@ class Page1Middle extends Component {
   render() {
     const {callblock, queuenum, callnum} = this.props;
     console.log("Page1Middle", this.props);
+    let Content = null;
+    switch (callblock) {
+      case "uncall":
+        Content = <UncallBox />;
+        break;
+      case "called":
+        Content = <CalledBox />;
+        break;
+      case "lockIn":
+        Content = <LockInBox />;
+        break;
+      default:
+        Content = null;
+    }
     return (
       <div id="page1_middle">
         <div className="Telemarketing_main">
           <ul className="main-title">
-            <li className={callblock === "uncall" ? "current" : null} data-type="uncall">
-              <a style={{cursor: "pointer"}} onClick={this.changeBlock}
-                 data-block="uncall">待呼叫<span>{queuenum || 0}</span></a>
+            <li className={callblock === "uncall" ? "current" : null}>
+              <a data-block="uncall" style={pointer} onClick={this.changeBlock}>待呼叫<span>{queuenum || 0}</span></a>
             </li>
-            <li className={callblock === "called" ? "current" : null} data-type="called">
-              <a style={{cursor: "pointer"}} onClick={this.changeBlock}
-                 data-block="called">已呼叫<span>{callnum || 0}</span></a>
+            <li className={callblock === "called" ? "current" : null}>
+              <a data-block="called" style={pointer} onClick={this.changeBlock}>已呼叫<span>{callnum || 0}</span></a>
+            </li>
+            <li className={callblock === "lockIn" ? "current" : null}>
+              <a data-block="lockIn" style={pointer} onClick={this.changeBlock}>锁定中<span>0</span></a>
             </li>
           </ul>
           <div className="tagBox">
-            {callblock === "uncall" ?
-              <UncallBox />
-              :
-              <CalledBox />
-            }
+            {Content}
           </div>
         </div>
       </div>
@@ -44,7 +60,7 @@ function select(state) {
   return {
     queuenum: state.queuenum,
     callnum: state.callnum,
-    callblock: state.callblock
+    callblock: state.callblock,
   }
 }
 export default connect(select)(Page1Middle)
