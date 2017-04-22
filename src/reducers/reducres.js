@@ -45,6 +45,15 @@ export function resultDate(state = '', action) {
   }
 }
 
+export function telstatresult(state = {}, action) {
+  switch (action) {
+    case "GET_telstatresult":
+      return action.value;
+    default:
+      state
+  }
+}
+
 export function uncallData(state = {}, action) {
   switch (action.type) {
     case "ADD_uncallData":

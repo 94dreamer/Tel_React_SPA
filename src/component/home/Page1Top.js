@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import {connect} from 'react-redux';
+import actions from '../../constants';
 
 class Page1Top extends Component {
   // constructor(props) {
@@ -22,15 +23,14 @@ class Page1Top extends Component {
   dateForm = (nT) => {
     var dateH = nT.getFullYear() + "/" + (nT.getMonth() + 1 < 10 ? '0' + (nT.getMonth() + 1) : nT.getMonth() + 1) + "/" + (nT.getDate() < 10 ? '0' + nT.getDate() : nT.getDate());
     return dateH;
-  }
+  };
 
-  dateChange = (e) => {
+  /*dateChange = (e) => {
     this.props.dispatch({
       type: "CHANGE_resultDate",
       value: e.format('YYYY/MM/DD'),
     })
-  }
-
+  }*/
 
 
   /*alertClick(e){
@@ -58,8 +58,8 @@ class Page1Top extends Component {
 
   render() {
     // 通过调用 connect() 注入:
-    const {dispatch, resultDate} = this.props;
-    const date = resultDate?moment(resultDate):moment();
+    const {dispatch, resultDate, changeDate} = this.props;
+    const date = resultDate ? moment(resultDate) : moment();
     return (
       <div id="page1_top">
         <div className="log-stat-hd">
@@ -70,7 +70,9 @@ class Page1Top extends Component {
                           selected={date}
                           dateFormatCalendar="MMMM"
                           locale="zh-cn"
-                          onChange={this.dateChange}
+                          onChange={(e) => {
+                            changeDate(e.format('YYYY/MM/DD'))
+                          }}
               />
               <label htmlFor="result_date" className="time_r fr"><em className="icon-date"/></label>
             </div>
@@ -87,7 +89,12 @@ class Page1Top extends Component {
 
 function select(state) {
   return {
-    resultDate: state.resultDate
+    resultDate: state.resultDate,
   };
 }
-export default connect(select)(Page1Top);
+
+const action = {
+  changeDate: actions.CHANGE_resultDate,
+};
+
+export default connect(select, action)(Page1Top);
