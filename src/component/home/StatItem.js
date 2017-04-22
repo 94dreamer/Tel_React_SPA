@@ -3,33 +3,33 @@
  */
 import React, {Component} from 'react';
 export default class StatItem extends Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     // this.ajax = this.ajax.bind(this);
     // this.state = {
     //   first: true//标识为ajax
     // }
-  }
+  }*/
 
-  componentDidMount() {
-    //console.log('StatItem componentDidMount')
-    //this.ajax(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    //console.log('StatItem componentWillReceiveProps');
-    //this.ajax(nextProps);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // return nextProps.date !== this.props.date; //不能这样判断 因为ajax没有改变props
-    //此处日期是否相同，组件减少更新
-    return true;
-  }
-
-  componentWillUnmount() {//组件移除前停止异步操作。
-    // this.ajaxRequest.abort();
-  }
+  // componentDidMount() {
+  //   //console.log('StatItem componentDidMount')
+  //   //this.ajax(this.props);
+  // }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   //console.log('StatItem componentWillReceiveProps');
+  //   //this.ajax(nextProps);
+  // }
+  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // return nextProps.date !== this.props.date; //不能这样判断 因为ajax没有改变props
+  //   //此处日期是否相同，组件减少更新
+  //   return true;
+  // }
+  //
+  // componentWillUnmount() {//组件移除前停止异步操作。
+  //   // this.ajaxRequest.abort();
+  // }
 
   /*ajax(props) {//注意ajax内部this的指向
     const {date}=props;
