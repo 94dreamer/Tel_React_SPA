@@ -20,17 +20,17 @@ class Page1Top extends Component {
     resultDate: PropTypes.string,
   };
 
-  dateForm = (nT) => {
+  /*dateForm = (nT) => {
     var dateH = nT.getFullYear() + "/" + (nT.getMonth() + 1 < 10 ? '0' + (nT.getMonth() + 1) : nT.getMonth() + 1) + "/" + (nT.getDate() < 10 ? '0' + nT.getDate() : nT.getDate());
     return dateH;
-  };
+  };*/
 
   /*dateChange = (e) => {
-    this.props.dispatch({
-      type: "CHANGE_resultDate",
-      value: e.format('YYYY/MM/DD'),
-    })
-  }*/
+   this.props.dispatch({
+   type: "CHANGE_resultDate",
+   value: e.format('YYYY/MM/DD'),
+   })
+   }*/
 
 
   /*alertClick(e){
@@ -56,9 +56,16 @@ class Page1Top extends Component {
    }
    */
 
+  componentDidMount() {
+    if (!this.props.telstatresult) {
+      this.props.changeDate(this.props.resultDate || moment().format('YYYY/MM/DD'))
+    }
+  }
+
+
   render() {
     // 通过调用 connect() 注入:
-    const {dispatch, resultDate, changeDate} = this.props;
+    const {resultDate, telstatresult, changeDate, dispatch} = this.props;
     const date = resultDate ? moment(resultDate) : moment();
     return (
       <div id="page1_top">
@@ -79,7 +86,8 @@ class Page1Top extends Component {
             <p className="g-lastu">按时间查看统计结果</p>
           </div>
           <div className="stat-item clearfix">
-            <StatItem date={date.format('YYYY/MM/DD')} dispatch={dispatch}/>
+            {/*<StatItem date={date.format('YYYY/MM/DD')} dispatch={dispatch}/>*/}
+            <StatItem data={telstatresult}/>
           </div>
         </div>
       </div>
@@ -90,6 +98,7 @@ class Page1Top extends Component {
 function select(state) {
   return {
     resultDate: state.resultDate,
+    telstatresult: state.telstatresult,
   };
 }
 

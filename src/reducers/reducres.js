@@ -50,7 +50,7 @@ export function telstatresult(state = {}, action) {
     case "GET_telstatresult":
       return action.value;
     default:
-      state
+      return state
   }
 }
 

@@ -12,6 +12,7 @@ const initialState = {
   callnum: 0,
   callblock: "uncall",
   resultDate: null,
+  telstatresult:null,
   uncallData: {
     citycode: window.xkTel.citycode,// 城市编号
     jobid: window.xkTel.jobid,// 销售工号
