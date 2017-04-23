@@ -82432,10 +82432,12 @@
 	});
 	exports.ADD_loadNum = ADD_loadNum;
 	exports.DEL_loadNum = DEL_loadNum;
+	exports.postData = postData;
 	exports.CHANGE_resultDate = CHANGE_resultDate;
 	exports.telstatresultAjax = telstatresultAjax;
 	exports.GET_telstatresult = GET_telstatresult;
 	exports.CHANGE_callblock = CHANGE_callblock;
+	exports.uncallAjax = uncallAjax;
 	/**
 	 * Created by zhouzhen on 2017/4/19.
 	 */
@@ -82453,6 +82455,30 @@
 	  };
 	}
 
+	function postData(url, data, fn, noFn, isAsync, type) {
+	  //封装Ajax
+	  return function (dispatch, getState) {
+	    if (!url) {
+	      return;
+	    }
+	    !data.noLoad && dispatch(ADD_loadNum());
+	    $.ajax({
+	      type: data.ajaxType || type || 'GET',
+	      url: url,
+	      data: data,
+	      async: isAsync !== undefined ? isAsync : true,
+	      success: function success(res) {
+	        var res = typeof res == 'string' ? JSON.parse(res) : res;
+	        if (res.result.code == 0) {
+	          fn ? fn(res) : alert('操作成功');
+	        } else {
+	          noFn ? noFn(res) : alert(res.result.message);
+	        }
+	        !data.noLoad && dispatch(DEL_loadNum());
+	      }
+	    });
+	  };
+	}
 	/**
 	 * Home页结果日期action
 	 */
@@ -82473,27 +82499,16 @@
 	function telstatresultAjax(date) {
 	  //发起ajax
 	  return function (dispatch, getState) {
-	    dispatch(ADD_loadNum());
-	    $.ajax({
-	      url: '/saleajax/telstatresult/',
-	      data: {
-	        citycode: window.xkTel.citycode, //城市编号
-	        level: window.xkTel.level,
-	        group_id: window.xkTel.group_id, //部组id
-	        jobid: window.xkTel.jobid, //销售工号
-	        start_date: date,
-	        end_date: date
-	      },
-	      success: function success(res) {
-	        var res = typeof res == 'string' ? JSON.parse(res) : res;
-	        if (res.result.code == 0) {
-	          dispatch(GET_telstatresult(res.result.data));
-	        } else {
-	          alert(res.result.message);
-	        }
-	        dispatch(DEL_loadNum());
-	      }
-	    });
+	    dispatch(postData('/saleajax/telstatresult/', {
+	      citycode: window.xkTel.citycode, //城市编号
+	      level: window.xkTel.level,
+	      group_id: window.xkTel.group_id, //部组id
+	      jobid: window.xkTel.jobid, //销售工号
+	      start_date: date,
+	      end_date: date
+	    }, function (res) {
+	      dispatch(GET_telstatresult(res.result.data));
+	    }));
 	  };
 	}
 
@@ -82512,6 +82527,12 @@
 	  return {
 	    type: "CHANGE_callblock",
 	    block: block
+	  };
+	}
+
+	function uncallAjax() {
+	  return function (dispatch, getState) {
+	    dispatch(ADD_loadNum());
 	  };
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
