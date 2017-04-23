@@ -21,9 +21,9 @@ class Page1Top extends Component {
   };
 
   /*dateForm = (nT) => {
-    var dateH = nT.getFullYear() + "/" + (nT.getMonth() + 1 < 10 ? '0' + (nT.getMonth() + 1) : nT.getMonth() + 1) + "/" + (nT.getDate() < 10 ? '0' + nT.getDate() : nT.getDate());
-    return dateH;
-  };*/
+   var dateH = nT.getFullYear() + "/" + (nT.getMonth() + 1 < 10 ? '0' + (nT.getMonth() + 1) : nT.getMonth() + 1) + "/" + (nT.getDate() < 10 ? '0' + nT.getDate() : nT.getDate());
+   return dateH;
+   };*/
 
   /*dateChange = (e) => {
    this.props.dispatch({
@@ -58,7 +58,7 @@ class Page1Top extends Component {
 
   componentDidMount() {
     if (!this.props.telstatresult) {
-      this.props.changeDate(this.props.resultDate || moment().format('YYYY/MM/DD'))
+      this.props.changeDate(this.props.resultDate || moment(new Date()).format('YYYY/MM/DD'))
     }
   }
 
@@ -66,7 +66,7 @@ class Page1Top extends Component {
   render() {
     // 通过调用 connect() 注入:
     const {resultDate, telstatresult, changeDate, dispatch} = this.props;
-    const date = resultDate ? moment(resultDate) : moment();
+    const date = resultDate ? moment(new Date(resultDate)) : moment(new Date());
     return (
       <div id="page1_top">
         <div className="log-stat-hd">
@@ -86,7 +86,6 @@ class Page1Top extends Component {
             <p className="g-lastu">按时间查看统计结果</p>
           </div>
           <div className="stat-item clearfix">
-            {/*<StatItem date={date.format('YYYY/MM/DD')} dispatch={dispatch}/>*/}
             <StatItem data={telstatresult}/>
           </div>
         </div>

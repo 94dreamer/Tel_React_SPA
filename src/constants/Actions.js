@@ -45,7 +45,7 @@ export function telstatresultAjax(date) {//发起ajax
       success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
-          dispatch(GET_telstatresult());
+          dispatch(GET_telstatresult(res.result.data));
         } else {
           alert(res.result.message);
         }
@@ -65,16 +65,12 @@ export function GET_telstatresult(data) {//渲染数据
  * Home页结果日期action End
  */
 
-export function ceateAction() {
+export function CHANGE_callblock(block) {
   return {
-    type: "",
+    type: "CHANGE_callblock",
+    block: block,
   }
 }
 
 
-export function createUncallAction(params) {
-  return function () {
-
-  }
-}
 

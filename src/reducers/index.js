@@ -4,7 +4,7 @@
 import * as reducers from './reducres';
 import {combineReducers} from 'redux';
 
-console.log(reducers);
+// console.log(reducers);
 
 const rootReducer=combineReducers({...reducers});
 

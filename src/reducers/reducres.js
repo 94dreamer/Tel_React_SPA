@@ -46,7 +46,7 @@ export function resultDate(state = '', action) {
 }
 
 export function telstatresult(state = {}, action) {
-  switch (action) {
+  switch (action.type) {
     case "GET_telstatresult":
       return action.value;
     default:
