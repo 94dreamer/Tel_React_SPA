@@ -90,26 +90,33 @@
 	console.log("环境变量", (undefined));
 
 	var initialState = {
-	  queuenum: 0,
-	  callnum: 0,
-	  callblock: "uncall",
-	  resultDate: null,
-	  telstatresult: null,
-	  uncallData: {
+	  queuenum: 0, //待呼叫
+	  callnum: 0, //已呼叫
+	  locknum: 0, //锁定中
+	  callblock: "uncall", //显示板块
+	  resultDate: null, //统计日期
+	  telstatresult: null, //统计结果
+	  uncallData: { //
 	    citycode: window.xkTel.citycode, // 城市编号
 	    jobid: window.xkTel.jobid, // 销售工号
 	    tel_group_id: window.xkTel.group_id, // 部组id
 	    callqueue: 1 // 呼叫队列
 	  },
-	  calledData: {
+	  calledData: { //
 	    citycode: window.xkTel.citycode, // 城市编号
 	    jobid: window.xkTel.jobid, // 销售工号
 	    tel_group_id: window.xkTel.group_id // 部组id
 	  },
-	  telAgent: {},
-	  workParam: {},
-	  loadNum: 0
-	};
+	  lockData: {//
+
+	  },
+	  telAgent: {//
+
+	  },
+	  workParam: {//
+
+	  },
+	  loadNum: 0 };
 
 	var store = (0, _configureStore2.default)(initialState);
 
@@ -80834,6 +80841,7 @@
 	          callblock = _props.callblock,
 	          queuenum = _props.queuenum,
 	          callnum = _props.callnum,
+	          locknum = _props.locknum,
 	          changeBlock = _props.changeBlock;
 
 	      console.log("Page1Middle", this.props);
@@ -80862,12 +80870,12 @@
 	            { className: 'main-title' },
 	            _react2.default.createElement(
 	              'li',
-	              { className: callblock === "uncall" ? "current" : null },
+	              { className: callblock === "uncall" ? "current" : null, onClick: function onClick(e) {
+	                  changeBlock("uncall");
+	                } },
 	              _react2.default.createElement(
 	                'a',
-	                { 'data-block': 'uncall', style: pointer, onClick: function onClick(e) {
-	                    changeBlock(e.target.dataset.block);
-	                  } },
+	                { style: pointer },
 	                '\u5F85\u547C\u53EB',
 	                _react2.default.createElement(
 	                  'span',
@@ -80878,12 +80886,12 @@
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              { className: callblock === "called" ? "current" : null },
+	              { className: callblock === "called" ? "current" : null, onClick: function onClick(e) {
+	                  changeBlock("called");
+	                } },
 	              _react2.default.createElement(
 	                'a',
-	                { 'data-block': 'called', style: pointer, onClick: function onClick(e) {
-	                    changeBlock(e.target.dataset.block);
-	                  } },
+	                { style: pointer },
 	                '\u5DF2\u547C\u53EB',
 	                _react2.default.createElement(
 	                  'span',
@@ -80894,17 +80902,17 @@
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              { className: callblock === "lockIn" ? "current" : null },
+	              { className: callblock === "lockIn" ? "current" : null, onClick: function onClick(e) {
+	                  changeBlock("lockIn");
+	                } },
 	              _react2.default.createElement(
 	                'a',
-	                { 'data-block': 'lockIn', style: pointer, onClick: function onClick(e) {
-	                    changeBlock(e.target.dataset.block);
-	                  } },
+	                { style: pointer },
 	                '\u9501\u5B9A\u4E2D',
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  '0'
+	                  locknum || 0
 	                )
 	              )
 	            )
@@ -80926,14 +80934,13 @@
 	  return {
 	    queuenum: state.queuenum,
 	    callnum: state.callnum,
+	    locknum: state.locknum,
 	    callblock: state.callblock
 	  };
 	}
-	function selectAction() {
-	  return {
-	    changeBlock: _constants2.default.CHANGE_callblock
-	  };
-	}
+	var selectAction = {
+	  changeBlock: _constants2.default.CHANGE_callblock
+	};
 	exports.default = (0, _reactRedux.connect)(select, selectAction)(Page1Middle);
 
 /***/ },
