@@ -101,8 +101,14 @@ function select(state) {
   };
 }
 
-const action = {
-  changeDate: actions.CHANGE_resultDate,
-};
+// const mapDispatchToProps = {
+//  changeDate: actions.CHANGE_resultDate,
+// };
 
-export default connect(select, action)(Page1Top);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeDate: (e) => dispatch(actions.CHANGE_resultDate(e)),
+  }
+}
+
+export default connect(select, mapDispatchToProps)(Page1Top);

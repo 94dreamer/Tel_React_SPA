@@ -102,7 +102,7 @@ export function CHANGE_uncallRes(data) {
   }
 }
 
-export function uncallAjax(param = {}) {
+export function uncallAjax(param) {
   return function (dispatch, getState) {
     dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().uncallData, param), function (res) {
       const data = res.result.data;
@@ -112,7 +112,15 @@ export function uncallAjax(param = {}) {
   }
 }
 
-
+export function CHANGE_uncallData(param) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: "ADD_uncallData",
+      param: param,
+    });
+    dispatch(uncallAjax());
+  }
+}
 
 
 

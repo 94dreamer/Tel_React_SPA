@@ -81122,11 +81122,19 @@
 	  };
 	}
 
-	var action = {
-	  changeDate: _constants2.default.CHANGE_resultDate
-	};
+	// const mapDispatchToProps = {
+	//  changeDate: actions.CHANGE_resultDate,
+	// };
 
-	exports.default = (0, _reactRedux.connect)(select, action)(Page1Top);
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    changeDate: function changeDate(e) {
+	      return dispatch(_constants2.default.CHANGE_resultDate(e));
+	    }
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(select, mapDispatchToProps)(Page1Top);
 
 /***/ },
 /* 850 */
@@ -81558,13 +81566,11 @@
 /* 851 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -81607,72 +81613,44 @@
 	var UncallBox = function (_Component) {
 	  _inherits(UncallBox, _Component);
 
-	  function UncallBox(props) {
+	  function UncallBox() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
 	    _classCallCheck(this, UncallBox);
 
-	    var _this = _possibleConstructorReturn(this, (UncallBox.__proto__ || Object.getPrototypeOf(UncallBox)).call(this, props));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
 
-	    _this.turnPage = _this.turnPage.bind(_this);
-	    _this.callout = _this.callout.bind(_this);
-	    _this.ajaxTable = _this.ajaxTable.bind(_this);
-	    _this.changeData = _this.changeData.bind(_this);
-	    return _this;
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UncallBox.__proto__ || Object.getPrototypeOf(UncallBox)).call.apply(_ref, [this].concat(args))), _this), _this.turnPage = function (index) {
+	      _this.props.changeData({
+	        type: "currpage",
+	        value: index
+	      });
+	    }, _this.callout = function (tel, uid) {}, _this.changeData = function (e) {
+	      var dataType = e.target.dataset.type;
+	      var dataId = e.target.dataset.id;
+	      if (!dataType) {
+	        return;
+	      }
+	      _this.props.changeData({
+	        type: dataType,
+	        value: dataId
+	      });
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
 	  _createClass(UncallBox, [{
-	    key: 'turnPage',
-	    value: function turnPage(index) {
-	      this.ajaxTable(index);
-	    }
-	  }, {
-	    key: 'callout',
-	    value: function callout(tel, uid) {}
-	  }, {
-	    key: 'ajaxTable',
-	    value: function ajaxTable(page) {
-	      this.ajaxRequest && this.ajaxRequest.abort();
-	      this.ajaxRequest = $.ajax({
-	        url: '/saleajax/tellist/',
-	        data: _extends({}, this.props.uncallData, { currpage: page }),
-	        success: function (res) {
-	          var res = typeof res == 'string' ? JSON.parse(res) : res;
-	          if (res.result.code == 0) {
-	            this.setState(res.result);
-	          } else {
-	            alert(res.result.message);
-	          }
-	        }.bind(this)
-	      });
-	    }
-	  }, {
-	    key: 'changeData',
-	    value: function changeData(e) {
-	      var dataType = e.target.dataset.type;
-	      var dataId = e.target.dataset.id;
-	      switch (dataType) {
-	        case "callqueue":
-	          this.props.dispatch({
-	            type: "ADD_uncallData",
-	            param: {
-	              type: dataType,
-	              value: dataId
-	            }
-	          });
-	          break;
-	        default:
-	          console.error("未知类型改变", dataType);
-	      }
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.ajaxTable();
+	      this.props.uncallAjax();
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      //组件移除前停止异步操作。
-	      this.ajaxRequest.abort();
+	    value: function componentWillUnmount() {//组件移除前停止异步操作。
+	      //this.ajaxRequest.abort();
 	    }
 	  }, {
 	    key: 'render',
@@ -81680,7 +81658,8 @@
 	      console.log("UncallBox render");
 	      var _props = this.props,
 	          uncallData = _props.uncallData,
-	          uncallRes = _props.uncallRes;
+	          uncallRes = _props.uncallRes,
+	          uncallAjax = _props.uncallAjax;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -81689,7 +81668,7 @@
 	          'div',
 	          { className: 'tag_callCon' },
 	          _react2.default.createElement(_Uncall_btn2.default, null),
-	          _react2.default.createElement(_UncallChoose2.default, { uncallData: uncallData, changeData: this.changeData }),
+	          _react2.default.createElement(_UncallChoose2.default, { uncallData: uncallData, changeData: this.turnPage }),
 	          _react2.default.createElement('div', { className: 'h15' })
 	        ),
 	        _react2.default.createElement(
@@ -81699,7 +81678,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'main-foot' },
-	            _react2.default.createElement(_FootPage2.default, null)
+	            _react2.default.createElement(_FootPage2.default, { turnPage: uncallAjax })
 	          )
 	        )
 	      );
@@ -81716,11 +81695,17 @@
 	  };
 	}
 
-	var selectAction = {
-	  a: _constants2.default.a
-	};
-	exports.default = (0, _reactRedux.connect)(select, selectAction)(UncallBox);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    uncallAjax: function uncallAjax(e) {
+	      return dispatch(_constants2.default.uncallAjax(e));
+	    },
+	    changeData: function changeData(e) {
+	      return dispatch(_constants2.default.CHANGE_uncallData(e));
+	    }
+	  };
+	}
+	exports.default = (0, _reactRedux.connect)(select, mapDispatchToProps)(UncallBox);
 
 /***/ },
 /* 852 */
@@ -82454,6 +82439,7 @@
 	exports.CHANGE_listNum = CHANGE_listNum;
 	exports.CHANGE_uncallRes = CHANGE_uncallRes;
 	exports.uncallAjax = uncallAjax;
+	exports.CHANGE_uncallData = CHANGE_uncallData;
 	/**
 	 * Created by zhouzhen on 2017/4/19.
 	 */
@@ -82563,15 +82549,23 @@
 	  };
 	}
 
-	function uncallAjax() {
-	  var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
+	function uncallAjax(param) {
 	  return function (dispatch, getState) {
 	    dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().uncallData, param), function (res) {
 	      var data = res.result.data;
 	      dispatch(CHANGE_listNum(data));
 	      dispatch(CHANGE_uncallRes(res.result.data));
 	    }));
+	  };
+	}
+
+	function CHANGE_uncallData(param) {
+	  return function (dispatch, getState) {
+	    dispatch({
+	      type: "ADD_uncallData",
+	      param: param
+	    });
+	    dispatch(uncallAjax());
 	  };
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
