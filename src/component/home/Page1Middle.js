@@ -18,7 +18,7 @@ class Page1Middle extends Component {
    };*/
 
   render() {
-    const {callblock, queuenum, callnum,locknum, changeBlock} = this.props;
+    const {callblock, listNum, changeBlock} = this.props;
     console.log("Page1Middle", this.props);
     let Content = null;
     switch (callblock) {
@@ -41,17 +41,17 @@ class Page1Middle extends Component {
             <li className={callblock === "uncall" ? "current" : null} onClick={e => {
               changeBlock("uncall")
             }}>
-              <a style={pointer}>待呼叫<span>{queuenum || 0}</span></a>
+              <a style={pointer}>待呼叫<span>{listNum.queuenum || 0}</span></a>
             </li>
             <li className={callblock === "called" ? "current" : null} onClick={e => {
               changeBlock("called")
             }}>
-              <a style={pointer}>已呼叫<span>{callnum || 0}</span></a>
+              <a style={pointer}>已呼叫<span>{listNum.callnum || 0}</span></a>
             </li>
             <li className={callblock === "lockIn" ? "current" : null} onClick={e => {
               changeBlock("lockIn")
             }}>
-              <a style={pointer}>锁定中<span>{locknum || 0}</span></a>
+              <a style={pointer}>锁定中<span>{listNum.locknum || 0}</span></a>
             </li>
           </ul>
           <div className="tagBox">
@@ -65,13 +65,15 @@ class Page1Middle extends Component {
 
 function select(state) {
   return {
-    queuenum: state.queuenum,
-    callnum: state.callnum,
-    locknum:state.locknum,
+    listNum: state.listNum,
     callblock: state.callblock,
   }
 }
-const selectAction = {
-  changeBlock: actions.CHANGE_callblock,
-};
-export default connect(select, selectAction)(Page1Middle)
+
+function mapDispathToProps(dispatch, ownProps) {
+  return {
+    changeBlock: (e) => dispatch(actions.CHANGE_callblock(e))
+  }
+}
+
+export default connect(select, mapDispathToProps)(Page1Middle)

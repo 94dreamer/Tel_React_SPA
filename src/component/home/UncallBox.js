@@ -1,12 +1,14 @@
 /**
  * Created by zz on 2016/8/19.
  */
-import React,{Component} from 'react';
+
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Uncall_btn from './Uncall_btn'
 import UncallChoose from './UncallChoose';
 import UncallTab from './UncallTab';
 import FootPage from './../common/FootPage';
+import actions from '../../constants';
 
 class UncallBox extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class UncallBox extends Component {
     this.turnPage = this.turnPage.bind(this);
     this.callout = this.callout.bind(this);
     this.ajaxTable = this.ajaxTable.bind(this);
-    this.changeData=this.changeData.bind(this);
+    this.changeData = this.changeData.bind(this);
   }
 
   turnPage(index) {
@@ -41,21 +43,21 @@ class UncallBox extends Component {
     })
   }
 
-  changeData(e){
-    const dataType=e.target.dataset.type;
-    const dataId=e.target.dataset.id;
-    switch (dataType){
+  changeData(e) {
+    const dataType = e.target.dataset.type;
+    const dataId = e.target.dataset.id;
+    switch (dataType) {
       case "callqueue":
         this.props.dispatch({
-          type:"ADD_uncallData",
-          param:{
-            type:dataType,
-            value:dataId
+          type: "ADD_uncallData",
+          param: {
+            type: dataType,
+            value: dataId
           }
         })
         break;
       default :
-        console.error("未知类型改变",dataType);
+        console.error("未知类型改变", dataType);
     }
   }
 
@@ -69,16 +71,16 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
-    const {dispatch} =this.props;
+    const {uncallData, uncallRes} =this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose uncallData={this.props.uncallData} changeData={this.changeData} />
+          <UncallChoose uncallData={uncallData} changeData={this.changeData}/>
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
-          <UncallTab {...this.state} />
+          <UncallTab {...uncallRes} />
           <div className="main-foot">
             <FootPage />
           </div>
@@ -90,7 +92,12 @@ class UncallBox extends Component {
 
 function select(state) {
   return {
-    uncallData: state.uncallData
+    uncallData: state.uncallData,
+    uncallRes: state.uncallRes,
   }
 }
-export default connect(select)(UncallBox);
+
+const selectAction = {
+  a: actions.a
+}
+export default connect(select, selectAction)(UncallBox);

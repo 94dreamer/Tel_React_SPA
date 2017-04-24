@@ -8,20 +8,10 @@
 //       return state;
 //   }
 // }
-
-export function queuenum(state = 0, action) {
+export function listNum(state = {}, action) {
   switch (action.type) {
-    case "CHANGE_queuenum":
-      return action.queuenum;
-    default:
-      return state
-  }
-}
-
-export function callnum(state = 0, action) {
-  switch (action.type) {
-    case "CHANGE_callnum":
-      return action.callnum;
+    case "CHANGE_listNum":
+      return action.value;
     default:
       return state
   }
@@ -68,11 +58,34 @@ export function uncallData(state = {}, action) {
   }
 }
 
+export function uncallRes(state = {}, action) {
+  switch (action.type) {
+    case "CHANGE_uncallRes":
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 export function calledData(state = {}, action) {
   switch (action.type) {
     case "ADD_calledData":
       return {...state, [action.param.type]: action.param.value}
     case "DEL_calledData": {
+      const newState = {...state};
+      delete newState[action.param.type];
+      return newState
+    }
+    default:
+      return state
+  }
+}
+
+export function lockData(state = {}, action) {
+  switch (action.type) {
+    case "ADD_lockData":
+      return {...state, [action.param.type]: action.param.value}
+    case "DEL_lockData": {
       const newState = {...state};
       delete newState[action.param.type];
       return newState

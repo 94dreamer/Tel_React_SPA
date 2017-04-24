@@ -84,12 +84,34 @@ export function CHANGE_callblock(block) {
   }
 }
 
-export function uncallAjax() {
-  return function (dispatch, getState) {
-    dispatch(ADD_loadNum());
-
+export function CHANGE_listNum(data) {
+  return {
+    type: "CHANGE_listNum",
+    value: {
+      queuenum: data.queuenum, //待呼数
+      callnum: data.callnum, // 已呼数
+      locknum: data.locknum,   // 锁定数
+    }
   }
 }
+
+export function CHANGE_uncallRes(data) {
+  return {
+    type: "CHANGE_uncallRes",
+    value: data,
+  }
+}
+
+export function uncallAjax(param = {}) {
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().uncallData, param), function (res) {
+      const data = res.result.data;
+      dispatch(CHANGE_listNum(data));
+      dispatch(CHANGE_uncallRes(res.result.data));
+    }))
+  }
+}
+
 
 
 

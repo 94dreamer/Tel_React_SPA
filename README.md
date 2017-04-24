@@ -3,7 +3,7 @@
 1. 该项目是我之前用JQuery/Template/WebScoket/ES6/Gulp/Webpack实现一个较复杂的单页面Web应用，为真实业务项目。主要是为 *电话销售/直接管理/上层管理* 三种角色提供对应的业务应用功能，主要包括Home页、Work页、Record页。  
 2. 其中 电话销售 根据分配的未拨队列／已拨队列／锁定队列，来进行电话销售，三种队列有不同的配置筛选项（包括地区／队列状态／部组／日期／关键字／客户状态／标签...等等），其中电话销售有部署了呼叫中心接入的WebScoket系统和非呼叫中心入口的区别。  
 3. Work页只有销售才能够进入，其中的展示逻辑和操作流程、提交流程比较复杂，在此不做过多叙述。  
-4. 为什么重构？初衷并不是因为我想拿该项目练手React，而是因为在用原技术路线时候，复杂的业务逻辑和组件展示和视图切换由大量过程式结合少量数据控制视图让我越来越感到没有安全感（其实在项目一开始leader和我就在商榷技术选型是否使用react试水，后考虑到工期的紧迫，使用react技术栈存在一定的填坑风险，只能作罢。事实证明这个选择不能算错，后面和第三个呼叫中心的对接也耗费了大量时间）。
+4. 为什么重构？初衷并不是因为我想拿该项目练手React，而是因为在用原技术路线时候，复杂的业务逻辑和组件展示和视图切换由大量过程式JQuery代码结合模版的数据控制视图来控制，让我越来越感到没有安全感（其实在项目一开始leader和我就在商榷技术选型是否使用react试水，后考虑到工期的紧迫，使用react技术栈存在一定的填坑风险，只能作罢。事实证明这个选择不能算错，后面和第三个呼叫中心的对接也耗费了大量时间）。
 5. 重构之后我试用了Rect+Webpack的经典组合，基于SPA的状态管理十分复杂，我理所当用的引入了Reudx，然后在开发环境中加入了Redux-Devtools。陆续我加入了Redux-Thunk／React-Router。
 6. 用以上篇幅简单对整个React SPA做简要描述，另外也告诉大家这是一个基于真实业务重构的复杂SPA应用，而不是一个简单的React Demo，component和action、reducers我都尽可能考虑贴近真实业务实现。
 7. 感想：完全的数据到视图的映射，让我感觉十分有安全感。在非简易逻辑的交互中，操作数据来声明进而控制视图的改变，比过程时的JQuery代码更容易思考。
@@ -84,9 +84,9 @@ getComponent(nextState, cb) {
 
 #### 二、使用Redux/React-Redux/Redux-DevTools
 
-1. 使用connect连接组件时，注入依赖的select选择的store中的指定细节数据，此时就无法获取父级传递的props。
-2. connect允许传入两个参数，第一个是筛选可用的state来传入props，第二个是筛选可用的action来dispatch。
-3. Redux-DevTools一开始的配置走了坑,附上自己的 [redux-devtools中文文档](https://github.com/94dreamer/Note/tree/master/redux-devtools全攻略)
+1. connect允许传入两个参数，第一个是筛选可用的state来传入props，第二个是筛选可用的action来dispatch，注入到props。
+
+2. Redux-DevTools一开始的配置走了坑,附上自己的 [redux-devtools中文文档](https://github.com/94dreamer/Note/tree/master/redux-devtools全攻略)
 
 #### 三、组件
 
@@ -99,6 +99,8 @@ getComponent(nextState, cb) {
 4. 组件的render优化很大程度靠生命周期的shouldComponentUpdate内的判断，来优化不相干子节点的更新渲染。
 
 5. 慎用setState和大量state存储，尽可能使用props。
+
+6. 把组件划分为容器组件和UI展示组件，容器组件从store拿到数据，向store发起actions，而UI展示组件从props来获取数据，从 props 调用回调函数。
 
 #### 四、npm
 

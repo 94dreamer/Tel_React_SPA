@@ -1,7 +1,7 @@
 /**
  * Created by zhouzhen on 2017/4/17.
  */
-import * as reducers from './reducres';
+import * as reducers from './reducers';
 import {combineReducers} from 'redux';
 
 // console.log(reducers);

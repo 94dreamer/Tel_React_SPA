@@ -1,10 +1,10 @@
 /**
  * Created by zz on 2016/11/7.
  */
-import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+
+import {createStore, applyMiddleware, compose} from 'redux';
+import {persistState} from 'redux-devtools';
 import ReduxThunk from 'redux-thunk'
-// import rootReducer from '../reducers/reducres';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
@@ -21,7 +21,7 @@ function getDebugSessionKey() {
   //你可以编写自定义的逻辑
   //默认情况下我们是这样输入在地址栏中的 ?debug_session=<key>
   const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
-  return (matches && matches.length > 0)? matches[1] : null;
+  return (matches && matches.length > 0) ? matches[1] : null;
 }
 
 export default function configureStore(initialState) {
@@ -30,11 +30,11 @@ export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   // 热重载reducers (requires Webpack or Browserify HMR to be enabled)
-/*  if (module.hot) {
-    module.hot.accept('../reducers/reducres', () =>
-      store.replaceReducer(require('../reducers/reducres')/!*.default if you use Babel 6+ *!/)
-    );
-  }*/
+  /*  if (module.hot) {
+   module.hot.accept('../reducers/reducres', () =>
+   store.replaceReducer(require('../reducers/reducres')/!*.default if you use Babel 6+ *!/)
+   );
+   }*/
 
   return store;
 }
