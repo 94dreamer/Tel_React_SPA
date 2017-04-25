@@ -48,7 +48,7 @@ export function CHANGE_resultDate(date) {//改变日期
       type: "CHANGE_resultDate",
       value: date,
     });
-    dispatch(telstatresultAjax());
+    dispatch(telstatresultAjax(date));
   }
 }
 

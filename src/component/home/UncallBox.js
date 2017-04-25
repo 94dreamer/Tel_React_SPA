@@ -44,18 +44,18 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
-    const {uncallData, uncallRes, uncallAjax} =this.props;
+    const {uncallData, uncallRes, uncallAjax, changeData} =this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose uncallData={uncallData} changeData={this.turnPage}/>
+          <UncallChoose uncallData={uncallData} tellistconfig={tellistconfig} changeData={changeData}/>
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
-          <UncallTab {...uncallRes} />
+          <UncallTab data={uncallRes}/>
           <div className="main-foot">
-            <FootPage turnPage={uncallAjax}/>
+            <FootPage turnPage={this.turnPage}/>
           </div>
         </div>
       </div>

@@ -1,10 +1,12 @@
 /**
  * Created by zz on 2016/10/28.
  */
-import React,{Component} from 'react';
+
+import React, {Component} from 'react';
 import ChoosePosition from './ChoosePosition';
 import ChooseGroup from './ChooseGroup';
 import ChooseKeyword from './ChooseKeyword';
+import ChooseCity from './ChooseCity'
 
 export default class UncallChoose extends Component {
   constructor(props) {
@@ -36,7 +38,8 @@ export default class UncallChoose extends Component {
   }
 
   render() {
-    const {uncallData,changeData}=this.props;
+    const {uncallData, tellistconfig, changeData}=this.props;
+    const {citycode}=window.ROLE;
     const callqueue = {
       "1": "首次邀约",
       "2": "临时指派",
@@ -55,21 +58,23 @@ export default class UncallChoose extends Component {
     console.log("UncallChoose render");
     return (
       <div>
-        <ChoosePosition block={this.state.block} />
+        {citycode == 'hq' && <ChooseCity citycode={uncallData.citycode} citys={tellistconfig.city}/>}
+        <ChoosePosition block={this.state.block}/>
         <div className="item">
           <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
-            {callArr.map(item=>
-              <a style={{cursor:"pointer"}} className={item.key==uncallData.callqueue?"oned":null} onClick={changeData} key={item.key} data-type="callqueue" data-id={item.key}>{item.value}</a>
+            {callArr.map(item =>
+              <a style={{cursor: "pointer"}} className={item.key == uncallData.callqueue ? "oned" : null}
+                 onClick={changeData} key={item.key} data-type="callqueue" data-id={item.key}>{item.value}</a>
             )}
             <h2 className="fl dataCon">队列日期：</h2>
             <div className="visit_time date-box clearfix fl">
               <input className="time_l fl" id="queueDate" placeholder="选择日期"/>
-              <label htmlFor="queueDate" className="time_r fl"><em className="icon-date" /></label>
+              <label htmlFor="queueDate" className="time_r fl"><em className="icon-date"/></label>
             </div>
           </div>
         </div>
-        <ChooseGroup group={this.state.group} />
+        <ChooseGroup group={this.state.group}/>
         <ChooseKeyword />
       </div>
     )
