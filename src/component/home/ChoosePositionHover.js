@@ -1,32 +1,23 @@
 /**
  * Created by zz on 2016/10/28.
  */
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 
 export default class ChoosePositionHover extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   render() {
-    const arr = [];
-    for (let i in this.props.block) {
-      arr.push(this.props.block[i])
-    }
-
-    let outArr = arr.map(function (outItem, outI) {
-      let inArr = outItem.map(function (inItem) {
-        return <a style={{cursor:"pointer"}} data-type="block" data-id={inItem.id} key={inItem.id}>{inItem.name}</a>
-      })
-      return <span><span>{outI}</span>{inArr}</span>
-    })
+    const {blocks, currentBlock}=this.props;
+    let outArr = Object.keys(blocks).map(function (i) {
+      let inArr = blocks[i].map(function (item) {
+        return <a style={{cursor: "pointer"}} data-type="block" data-id={item.id} key={item.id}
+                  className={item.id == currentBlock ? "onend" : null}>{item.name}</a>
+      });
+      return <span><span>{i}</span>{inArr}</span>
+    });
 
     return (
       <div className="choose">
         {outArr}
       </div>
     )
-
   }
 }

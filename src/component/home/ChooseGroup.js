@@ -14,7 +14,7 @@ export default class ChooseGroup extends Component {
 
   render() {
     var arr = [];
-    for (var i in this.props.group) {
+    for (let i in this.props.group) {
       arr.push(
         <a href="javascript:void(0);" data-type="parent" data-json={JSON.stringify(this.props.group[i].group)} data-id={this.props.group[i].id} key={this.props.group[i].id}><i></i>{this.props.group[i].name}
         </a>)
