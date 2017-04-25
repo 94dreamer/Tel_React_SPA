@@ -40265,30 +40265,22 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by zz on 2016/10/28.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-
 	var ChoosePosition = function (_Component) {
 	  _inherits(ChoosePosition, _Component);
 
-	  function ChoosePosition(props) {
+	  function ChoosePosition() {
 	    _classCallCheck(this, ChoosePosition);
 
-	    var _this = _possibleConstructorReturn(this, (ChoosePosition.__proto__ || Object.getPrototypeOf(ChoosePosition)).call(this, props));
-
-	    _this.state = {
-	      currentBlock: null
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, (ChoosePosition.__proto__ || Object.getPrototypeOf(ChoosePosition)).apply(this, arguments));
 	  }
 
 	  _createClass(ChoosePosition, [{
 	    key: 'render',
 	    value: function render() {
-	      var blockArr = [];
-	      for (var i in this.props.block) {
-	        if ({}.hasOwnProperty.call(this.props.block, i)) {
-	          blockArr.push(this.props.block[i]);
-	        }
-	      }
+	      var _props = this.props,
+	          currentDistrict = _props.currentDistrict,
+	          currentBlock = _props.currentBlock,
+	          blocks = _props.blocks;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -40303,22 +40295,22 @@
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { href: 'javascript:void(0);', 'data-type': 'district', className: 'onend' },
+	            { href: 'javascript:;', 'data-type': 'district', className: !currentDistrict ? "onend" : null },
 	            '\u5168\u90E8'
 	          ),
-	          blockArr.map(function (block) {
+	          Object.keys(blocks).map(function (block) {
 	            return _react2.default.createElement(
 	              'a',
-	              { href: 'javascript:void(0);', 'data-type': 'district', 'data-json': JSON.stringify(block.block), 'data-id': block.id, key: block.id },
+	              { href: 'javascript:;', 'data-type': 'district', 'data-id': block.id, key: block.id },
 	              block.name,
 	              _react2.default.createElement('i', null)
 	            );
 	          })
 	        ),
-	        this.state.currentBlock ? _react2.default.createElement(
+	        currentDistrict ? _react2.default.createElement(
 	          'div',
 	          { className: 'line-list' },
-	          _react2.default.createElement(_ChoosePositionHover2.default, this.props.block[this.state.currentBlock])
+	          _react2.default.createElement(_ChoosePositionHover2.default, { blocks: block[currentDistrict] })
 	        ) : null
 	      );
 	    }
@@ -40374,47 +40366,43 @@
 	var UncallChoose = function (_Component) {
 	  _inherits(UncallChoose, _Component);
 
-	  function UncallChoose(props) {
+	  function UncallChoose() {
 	    _classCallCheck(this, UncallChoose);
 
-	    var _this = _possibleConstructorReturn(this, (UncallChoose.__proto__ || Object.getPrototypeOf(UncallChoose)).call(this, props));
-
-	    _this.state = {};
-	    return _this;
+	    return _possibleConstructorReturn(this, (UncallChoose.__proto__ || Object.getPrototypeOf(UncallChoose)).apply(this, arguments));
 	  }
 
 	  _createClass(UncallChoose, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      /*this.ajaxRequest = $.ajax({
-	        url: '/saleajax/gettellistconfig/',
-	        data: {
-	          citycode: window.xkTel.citycode,//城市编号
-	          jobid: window.xkTel.jobid,//销售工号
-	          tel_group_id: window.xkTel.group_id//部组id
-	        },
-	        success: function (res) {
-	          var res = (typeof res == 'string') ? JSON.parse(res) : res;
-	          if (res.result.code == 0) {
-	            this.setState(res.result.data)
-	          } else {
-	            alert(res.result.message);
-	          }
-	        }.bind(this)
-	      });*/
+	       url: '/saleajax/gettellistconfig/',
+	       data: {
+	       citycode: window.xkTel.citycode,//城市编号
+	       jobid: window.xkTel.jobid,//销售工号
+	       tel_group_id: window.xkTel.group_id//部组id
+	       },
+	       success: function (res) {
+	       var res = (typeof res == 'string') ? JSON.parse(res) : res;
+	       if (res.result.code == 0) {
+	       this.setState(res.result.data)
+	       } else {
+	       alert(res.result.message);
+	       }
+	       }.bind(this)
+	       });*/
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      //组件移除前停止异步操作。
-	      this.ajaxRequest.abort();
+	    value: function componentWillUnmount() {//组件移除前停止异步操作。
+	      //this.ajaxRequest.abort();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props,
 	          uncallData = _props.uncallData,
-	          tellistconfig = _props.tellistconfig,
+	          config = _props.config,
 	          changeData = _props.changeData;
 	      var citycode = window.ROLE.citycode;
 
@@ -40437,8 +40425,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        citycode == 'hq' && _react2.default.createElement(_ChooseCity2.default, { citycode: uncallData.citycode, citys: tellistconfig.city }),
-	        _react2.default.createElement(_ChoosePosition2.default, { block: this.state.block }),
+	        citycode == 'hq' && _react2.default.createElement(_ChooseCity2.default, { citycode: uncallData.citycode, citys: config.city }),
+	        _react2.default.createElement(_ChoosePosition2.default, { currentDistrict: uncallData.district, currentBlock: uncallData.block, blocks: config.block }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'item' },
@@ -40450,11 +40438,11 @@
 	              { className: 'fl' },
 	              '\u547C\u53EB\u5217\u961F\uFF1A'
 	            ),
-	            callArr.map(function (item) {
+	            Object.keys(callqueue).map(function (item, index) {
 	              return _react2.default.createElement(
 	                'a',
 	                { style: { cursor: "pointer" }, className: item.key == uncallData.callqueue ? "oned" : null,
-	                  onClick: changeData, key: item.key, 'data-type': 'callqueue', 'data-id': item.key },
+	                  onClick: changeData, key: index, 'data-type': 'callqueue', 'data-id': item.key },
 	                item.value
 	              );
 	            }),
@@ -80582,24 +80570,18 @@
 	var ChoosePositionHover = function (_Component) {
 	  _inherits(ChoosePositionHover, _Component);
 
-	  function ChoosePositionHover(props) {
+	  function ChoosePositionHover() {
 	    _classCallCheck(this, ChoosePositionHover);
 
-	    var _this = _possibleConstructorReturn(this, (ChoosePositionHover.__proto__ || Object.getPrototypeOf(ChoosePositionHover)).call(this, props));
-
-	    _this.state = {};
-	    return _this;
+	    return _possibleConstructorReturn(this, (ChoosePositionHover.__proto__ || Object.getPrototypeOf(ChoosePositionHover)).apply(this, arguments));
 	  }
 
 	  _createClass(ChoosePositionHover, [{
 	    key: "render",
 	    value: function render() {
-	      var arr = [];
-	      for (var i in this.props.block) {
-	        arr.push(this.props.block[i]);
-	      }
+	      var blocks = this.props.blocks;
 
-	      var outArr = arr.map(function (outItem, outI) {
+	      var outArr = Object.keys(blocks).map(function (outItem, outI) {
 	        var inArr = outItem.map(function (inItem) {
 	          return _react2.default.createElement(
 	            "a",
