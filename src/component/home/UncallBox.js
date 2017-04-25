@@ -35,7 +35,8 @@ class UncallBox extends Component {
   }
 
   componentDidMount() {
-    this.props.uncallAjax()
+    this.props.changeData();
+    this.props.getConfig();
   }
 
   componentWillUnmount() {//组件移除前停止异步操作。
@@ -44,12 +45,12 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
-    const {uncallData, uncallRes, uncallAjax, changeData} =this.props;
+    const {uncallData, uncallRes, config, changeData} =this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose uncallData={uncallData} tellistconfig={tellistconfig} changeData={changeData}/>
+          <UncallChoose uncallData={uncallData} config={config} changeData={changeData}/>
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
@@ -67,13 +68,14 @@ function select(state) {
   return {
     uncallData: state.uncallData,
     uncallRes: state.uncallRes,
+    config: state.tellistconfig,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    uncallAjax: (e) => dispatch(actions.uncallAjax(e)),
     changeData: (e) => dispatch(actions.CHANGE_uncallData(e)),
+    getConfig: () => dispatch(actions.GET_uncallConfig())
   }
 }
 export default connect(select, mapDispatchToProps)(UncallBox);

@@ -77,14 +77,14 @@ export function GET_telstatresult(data) {//渲染数据
  * Home页结果日期action End
  */
 
-export function CHANGE_callblock(block) {
+export function CHANGE_callblock(block) {//改变队列板块选择
   return {
     type: "CHANGE_callblock",
     block: block,
   }
 }
 
-export function CHANGE_listNum(data) {
+export function CHANGE_listNum(data) {//得到各队列人数
   return {
     type: "CHANGE_listNum",
     value: {
@@ -95,16 +95,19 @@ export function CHANGE_listNum(data) {
   }
 }
 
-export function CHANGE_uncallRes(data) {
+/**
+ * 待呼叫
+ * */
+export function CHANGE_uncallRes(data) {//得到待呼叫队列
   return {
     type: "CHANGE_uncallRes",
     value: data,
   }
 }
 
-export function uncallAjax(param) {
+export function uncallAjax() {//待呼叫队列AJAX
   return function (dispatch, getState) {
-    dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().uncallData, param), function (res) {
+    dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().uncallData), function (res) {
       const data = res.result.data;
       dispatch(CHANGE_listNum(data));
       dispatch(CHANGE_uncallRes(res.result.data));
@@ -112,15 +115,35 @@ export function uncallAjax(param) {
   }
 }
 
-export function CHANGE_uncallData(param) {
+export function CHANGE_uncallData(param) {//改变待呼叫筛选项
   return function (dispatch, getState) {
-    dispatch({
+    param && dispatch({
       type: "ADD_uncallData",
       param: param,
     });
     dispatch(uncallAjax());
   }
 }
+
+export function GET_uncallConfig() {
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/gettellistconfig/', {
+      citycode: window.xkTel.citycode,//城市编号
+      jobid: window.xkTel.jobid,//销售工号
+      tel_group_id: window.xkTel.group_id,//部组id
+    }, (res) => {
+      dispatch({
+        type: "GET_uncallConfig",
+        value: res.result.data
+      })
+    }))
+  }
+}
+
+/**
+ * 已呼叫
+ * */
+
 
 
 

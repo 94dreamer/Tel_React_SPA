@@ -29,7 +29,7 @@ const initialState = {
     tel_group_id: window.xkTel.group_id,// 部组id
     callqueue: 1// 呼叫队列
   },
-  tellistconfig:null,//待呼叫列表配置
+  uncallConfig:null,//待呼叫列表配置
   uncallRes: null,//res.data
   calledData: { //
     citycode: window.xkTel.citycode,// 城市编号

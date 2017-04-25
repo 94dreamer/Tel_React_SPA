@@ -44,6 +44,9 @@ export function telstatresult(state = {}, action) {
   }
 }
 
+/**
+ * 未呼叫队列
+ * */
 export function uncallData(state = {}, action) {
   switch (action.type) {
     case "ADD_uncallData":
@@ -67,6 +70,17 @@ export function uncallRes(state = {}, action) {
   }
 }
 
+export function uncallConfig(state = {}, action) {
+  switch (action.type) {
+    case "GET_uncallConfig":
+      return action.value;
+    default:
+      return state;
+  }
+}
+/**
+ * 已呼叫队列
+ * */
 export function calledData(state = {}, action) {
   switch (action.type) {
     case "ADD_calledData":
@@ -81,6 +95,9 @@ export function calledData(state = {}, action) {
   }
 }
 
+/**
+ * 锁定中队列
+ * */
 export function lockData(state = {}, action) {
   switch (action.type) {
     case "ADD_lockData":

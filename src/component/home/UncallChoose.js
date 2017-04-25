@@ -15,7 +15,7 @@ export default class UncallChoose extends Component {
   }
 
   componentDidMount() {
-    this.ajaxRequest = $.ajax({
+    /*this.ajaxRequest = $.ajax({
       url: '/saleajax/gettellistconfig/',
       data: {
         citycode: window.xkTel.citycode,//城市编号
@@ -30,7 +30,7 @@ export default class UncallChoose extends Component {
           alert(res.result.message);
         }
       }.bind(this)
-    });
+    });*/
   }
 
   componentWillUnmount() {//组件移除前停止异步操作。
