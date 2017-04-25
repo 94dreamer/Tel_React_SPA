@@ -3,10 +3,12 @@
  */
 
 import React, {Component} from 'react';
+import DatePicker from 'react-datepicker';
 import ChoosePosition from './ChoosePosition';
 import ChooseGroup from './ChooseGroup';
 import ChooseKeyword from './ChooseKeyword';
-import ChooseCity from './ChooseCity'
+import ChooseCity from './ChooseCity';
+import moment from 'moment';
 
 export default class UncallChoose extends Component {
   componentDidMount() {
@@ -57,7 +59,15 @@ export default class UncallChoose extends Component {
             )}
             <h2 className="fl dataCon">队列日期：</h2>
             <div className="visit_time date-box clearfix fl">
-              <input className="time_l fl" id="queueDate" placeholder="选择日期"/>
+              <DatePicker id="queueDate" className="time_l fl"
+                          dateFormat="YYYY/MM/DD"
+                          selected={date}
+                          dateFormatCalendar="MMMM"
+                          locale="zh-cn"
+                          onChange={(e) => {
+                            changeDate(e.format('YYYY/MM/DD'))
+                          }}
+              />
               <label htmlFor="queueDate" className="time_r fl"><em className="icon-date"/></label>
             </div>
           </div>
