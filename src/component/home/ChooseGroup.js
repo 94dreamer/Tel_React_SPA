@@ -1,35 +1,39 @@
 /**
  * Created by zz on 2016/10/28.
  */
-import React,{Component} from 'react';
+
+import React, {Component, PropTypes} from 'react';
 import ChooseGroupHover from './ChooseGroupHover';
 
 export default class ChooseGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: null
-    }
-  }
+  static propTypes = {
+    groups: PropTypes.object.isRequired,
+  };
 
   render() {
-    var arr = [];
-    for (let i in this.props.group) {
-      arr.push(
-        <a href="javascript:void(0);" data-type="parent" data-json={JSON.stringify(this.props.group[i].group)} data-id={this.props.group[i].id} key={this.props.group[i].id}><i></i>{this.props.group[i].name}
-        </a>)
-    }
+    const {currentParent, currentGroup, groups} = this.props;
+    var currentIndex;
+    let parentArr = Object.keys(groups).map((i) => {
+      var classname = '';
+      if (groups[i].id == currentParent) {
+        classname = 'onend';
+        currentIndex = i;
+      }
+      return (<a href="javascript:;" data-type="parent" className={classname} data-id={groups[i].id}
+                 key={groups[i].id}>{groups[i].name}<i /></a>)
+    });
+
     return (
       <div className="item">
         <div className="position clearfix">
           <h2 className="fl">所属部组：</h2>
-          <a href="javascript:void(0);" data-type="parent" className="onend">全部</a>
-          {arr}
+          <a href="javascript:void(0);" data-type="parent" className={!currentParent ? "onend" : null}>全部</a>
+          {parentArr}
         </div>
-        {this.state.current ?
-          <div className="line-list">
-            <ChooseGroupHover {...this.props.group[this.state.current]} />
-          </div> : null
+        {currentGroup &&
+        <div className="line-list">
+          <ChooseGroupHover group={groups[currentIndex].group} currentGroup={currentGroup}/>
+        </div>
         }
       </div>
     )

@@ -2,10 +2,14 @@
  * Created by zz on 2016/10/28.
  */
 
-import React, {Component} from 'react';
+import React, {Component,PropTypes} from 'react';
 import ChoosePositionHover from './ChoosePositionHover';
 
 export default class ChoosePosition extends Component {
+  static propTypes={
+    blocks:PropTypes.object.isRequired,
+  };
+
   render() {
     const {currentDistrict, currentBlock, blocks}=this.props;
     var currentIndex;
@@ -16,7 +20,7 @@ export default class ChoosePosition extends Component {
         currentIndex = i;
       }
       return (<a href="javascript:;" data-type="district" className={classname} data-id={blocks[i].id}
-                 key={blocks[i].id}>{blocks[i].name}<i></i></a>)
+                 key={blocks[i].id}>{blocks[i].name}<i /></a>)
     });
 
     return (
@@ -26,10 +30,10 @@ export default class ChoosePosition extends Component {
           <a href="javascript:;" data-type="district" className={!currentDistrict ? "onend" : null}>全部</a>
           {districtArr}
         </div>
-        {currentDistrict ?
+        {currentDistrict &&
           <div className="line-list">
             <ChoosePositionHover blocks={blocks[currentIndex].block} currentBlock={currentBlock}/>
-          </div> : null
+          </div>
         }
       </div>
     )

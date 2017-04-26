@@ -10,8 +10,8 @@ window.ROLE = {
   isSet: (!window.gArr['saleinfo'] || !window.gArr['saleinfo'].position || window.gArr['saleinfo'].position != 6),
   level: window.xkTel.level,
   isCallCenter: window.xkTel.isCallCenter,
-  telGroupRelationType:window.xkTelInfo.telGroupRelationType,
-  citycode:window.xkTel.citycode,
+  telGroupRelationType: window.xkTelInfo.telGroupRelationType,
+  citycode: window.xkTel.citycode,
 };
 
 const initialState = {
@@ -27,17 +27,17 @@ const initialState = {
     citycode: window.xkTel.citycode,// 城市编号
     jobid: window.xkTel.jobid,// 销售工号
     tel_group_id: window.xkTel.group_id,// 部组id
-    callqueue: 1// 呼叫队列
+    callqueue: 1,// 呼叫队列
   },
-  uncallConfig:null,//待呼叫列表配置
+  uncallConfig: null,//待呼叫列表配置
   uncallRes: null,//res.data
   calledData: { //
     citycode: window.xkTel.citycode,// 城市编号
     jobid: window.xkTel.jobid,// 销售工号
     tel_group_id: window.xkTel.group_id// 部组id
   },
-  callconfig:null,//已呼叫列表配置
-  calledRes:null,//res.data
+  callconfig: null,//已呼叫列表配置
+  calledRes: null,//res.data
   lockData: {//
 
   },

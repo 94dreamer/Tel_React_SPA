@@ -2,7 +2,7 @@
  * Created by zz on 2016/10/28.
  */
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import DatePicker from 'react-datepicker';
 import ChoosePosition from './ChoosePosition';
 import ChooseGroup from './ChooseGroup';
@@ -11,6 +11,12 @@ import ChooseCity from './ChooseCity';
 import moment from 'moment';
 
 export default class UncallChoose extends Component {
+  static propTypes = {
+    uncallData: PropTypes.object.isRequired,
+    config: PropTypes.object,
+    changeData: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
     /*this.ajaxRequest = $.ajax({
      url: '/saleajax/gettellistconfig/',
@@ -35,8 +41,8 @@ export default class UncallChoose extends Component {
   }
 
   render() {
-    const {uncallData, config, changeData}=this.props;
-    const {citycode}=window.ROLE;
+    const {uncallData, config, changeData} = this.props;
+    const {citycode} = window.ROLE;
     const callqueue = {
       "1": "首次邀约",
       "2": "临时指派",
@@ -45,11 +51,13 @@ export default class UncallChoose extends Component {
       "5": "7天到期",
       "6": "7天开通"
     };
+    let date = uncallData.queuedate ? moment(uncallData.queuedate) : moment(new Date());
     console.log("UncallChoose render");
     return (
       <div>
-        {citycode == 'hq' && <ChooseCity citycode={uncallData.citycode} citys={config.city}/>}
-        <ChoosePosition currentDistrict={uncallData.district} currentBlock={uncallData.block} blocks={config.block}/>
+        {citycode == 'hq' && config && <ChooseCity citycode={uncallData.citycode} citys={config.city}/>}
+        {config &&
+        <ChoosePosition currentDistrict={uncallData.district} currentBlock={uncallData.block} blocks={config.block}/>}
         <div className="item">
           <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
@@ -72,7 +80,7 @@ export default class UncallChoose extends Component {
             </div>
           </div>
         </div>
-        <ChooseGroup group={this.state.group}/>
+        {config && <ChooseGroup groups={config.group} currentParent={uncallData.parent} currentGroup={uncallData.group}/>}
         <ChooseKeyword />
       </div>
     )

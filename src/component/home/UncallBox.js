@@ -45,7 +45,7 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
-    const {uncallData, uncallRes, config, changeData} =this.props;
+    const {uncallData, uncallRes, config, changeData} = this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
@@ -68,7 +68,7 @@ function select(state) {
   return {
     uncallData: state.uncallData,
     uncallRes: state.uncallRes,
-    config: state.tellistconfig,
+    config: state.uncallConfig,
   }
 }
 

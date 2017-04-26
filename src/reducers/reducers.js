@@ -95,6 +95,24 @@ export function calledData(state = {}, action) {
   }
 }
 
+export function calledRes(state = {}, action) {
+  switch (action.type) {
+    case "CHANGE_calledRes":
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+export function callconfig(state = {}, action) {
+  switch (action.type) {
+    case "GET_callconfig":
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 /**
  * 锁定中队列
  * */
