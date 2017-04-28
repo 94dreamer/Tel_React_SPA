@@ -32,15 +32,11 @@ class UncallBox extends Component {
       type: dataType,
       value: dataId
     });
-  }
+  };
 
   componentDidMount() {
     this.props.changeData();
     this.props.getConfig();
-  }
-
-  componentWillUnmount() {//组件移除前停止异步操作。
-    //this.ajaxRequest.abort();
   }
 
   render() {
@@ -50,7 +46,9 @@ class UncallBox extends Component {
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
           <Uncall_btn />
-          <UncallChoose uncallData={uncallData} config={config} changeData={changeData}/>
+          <div className="uncall_choose_box">
+            {config && <UncallChoose uncallData={uncallData} config={config} changeData={changeData}/>}
+          </div>
           <div className="h15"></div>
         </div>
         <div className="table_callCon">

@@ -56,8 +56,7 @@ export default class UncallChoose extends Component {
     return (
       <div>
         {citycode == 'hq' && config && <ChooseCity citycode={uncallData.citycode} citys={config.city}/>}
-        {config &&
-        <ChoosePosition currentDistrict={uncallData.district} currentBlock={uncallData.block} blocks={config.block}/>}
+        <ChoosePosition currentDistrict={uncallData.district} currentBlock={uncallData.block} blocks={config.block}/>
         <div className="item">
           <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
@@ -80,7 +79,7 @@ export default class UncallChoose extends Component {
             </div>
           </div>
         </div>
-        {config && <ChooseGroup groups={config.group} currentParent={uncallData.parent} currentGroup={uncallData.group}/>}
+        <ChooseGroup groups={config.group} currentParent={uncallData.parent} currentGroup={uncallData.group}/>
         <ChooseKeyword />
       </div>
     )

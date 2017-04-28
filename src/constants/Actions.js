@@ -131,6 +131,7 @@ export function GET_uncallConfig() {
       citycode: window.xkTel.citycode,//城市编号
       jobid: window.xkTel.jobid,//销售工号
       tel_group_id: window.xkTel.group_id,//部组id
+      noLoad: true,
     }, (res) => {
       dispatch({
         type: "GET_uncallConfig",
