@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import CalledChoose from './CalledChoose';
 import CalledTab from './CalledTab';
 import FootPage from './../common/FootPage';
+import actions from '../../actions';
 
 class CalledBox extends Component {
   turnPage = (index) => {
@@ -37,7 +38,6 @@ class CalledBox extends Component {
   }
 
   render() {
-
     console.log("CalledBox render");
     const {calledData, calledRes, config, changeData} = this.props;
     return (
@@ -52,7 +52,7 @@ class CalledBox extends Component {
           <div className="h15"></div>
         </div>
         <div className="table_callCon">
-          <UncallTab data={calledRes}/>
+          <CalledTab data={calledRes}/>
           <div className="main-foot">
             <FootPage turnPage={this.turnPage}/>
           </div>
@@ -69,4 +69,11 @@ function select(state) {
   }
 }
 
-export default connect(select)(CalledBox);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeData: (e) => dispatch(actions.CHANGE_calledData(e)),
+    getConfig: () => dispatch(actions.GET_calledConfig())
+  }
+}
+
+export default connect(select, mapDispatchToProps)(CalledBox);

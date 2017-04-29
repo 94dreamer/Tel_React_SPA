@@ -17,29 +17,6 @@ export default class UncallChoose extends Component {
     changeData: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
-    /*this.ajaxRequest = $.ajax({
-     url: '/saleajax/gettellistconfig/',
-     data: {
-     citycode: window.xkTel.citycode,//城市编号
-     jobid: window.xkTel.jobid,//销售工号
-     tel_group_id: window.xkTel.group_id//部组id
-     },
-     success: function (res) {
-     var res = (typeof res == 'string') ? JSON.parse(res) : res;
-     if (res.result.code == 0) {
-     this.setState(res.result.data)
-     } else {
-     alert(res.result.message);
-     }
-     }.bind(this)
-     });*/
-  }
-
-  componentWillUnmount() {//组件移除前停止异步操作。
-    //this.ajaxRequest.abort();
-  }
-
   render() {
     const {uncallData, config, changeData} = this.props;
     const {citycode} = window.ROLE;
@@ -81,6 +58,9 @@ export default class UncallChoose extends Component {
         </div>
         <ChooseGroup groups={config.group} currentParent={uncallData.parent} currentGroup={uncallData.group}/>
         <ChooseKeyword />
+        <div class="cleanbox">
+          <a></a>
+        </div>
       </div>
     )
   }

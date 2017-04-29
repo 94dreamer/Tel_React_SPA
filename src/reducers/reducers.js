@@ -104,7 +104,7 @@ export function calledRes(state = {}, action) {
   }
 }
 
-export function callconfig(state = {}, action) {
+export function calledconfig(state = {}, action) {
   switch (action.type) {
     case "GET_callconfig":
       return action.value;

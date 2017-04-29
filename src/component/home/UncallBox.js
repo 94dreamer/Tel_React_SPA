@@ -8,7 +8,7 @@ import Uncall_btn from './Uncall_btn'
 import UncallChoose from './UncallChoose';
 import UncallTab from './UncallTab';
 import FootPage from './../common/FootPage';
-import actions from '../../constants';
+import actions from '../../actions';
 
 class UncallBox extends Component {
   turnPage = (index) => {

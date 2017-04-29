@@ -6,7 +6,7 @@ import UncallBox from './UncallBox';
 import CalledBox from './CalledBox';
 import LockInBox from './LockInBox';
 import {connect} from 'react-redux';
-import actions from '../../constants';
+import actions from '../../actions';
 
 const pointer = {
   cursor: "pointer",

@@ -1,16 +1,26 @@
 /**
  * Created by zz on 2016/8/19.
  */
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class LockInBox extends Component {
   render() {
     console.log("UncallBox render");
-    const {dispatch} =this.props;
+    const {dispatch} = this.props;
     return (
-      <div id="uncall-tag" className="tag_tab">
+      <div id="lockIn-tag" className="tag_tab animated fadeOut">
 
+        <div className="table_callCon">
+          <div className="log-table log-table-sales">
+            <!--("lockIn_tab_temp",{data:data})-->
+            <LockInTab data={calledRes} />
+          </div>
+          <!-- 分页 -->
+          <div className="main-foot">
+            <FootPage turnPage={this.turnPage}/>
+          </div>
+        </div>
       </div>
     )
   }
@@ -21,4 +31,9 @@ function select(state) {
     uncallData: state.uncallData
   }
 }
-export default connect(select)(LockInBox);
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+export default connect(select, mapDispatchToProps)(LockInBox);

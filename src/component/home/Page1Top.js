@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import actions from '../../constants';
+import actions from '../../actions';
 
 class Page1Top extends Component {
   // constructor(props) {

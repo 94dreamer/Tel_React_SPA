@@ -12,6 +12,8 @@ window.ROLE = {
   isCallCenter: window.xkTel.isCallCenter,
   telGroupRelationType: window.xkTelInfo.telGroupRelationType,
   citycode: window.xkTel.citycode,
+  jobid:null,
+  groupid:null,
 };
 
 const initialState = {
@@ -36,7 +38,7 @@ const initialState = {
     jobid: window.xkTel.jobid,// 销售工号
     tel_group_id: window.xkTel.group_id// 部组id
   },
-  callconfig: null,//已呼叫列表配置
+  calledconfig: null,//已呼叫列表配置
   calledRes: null,//res.data
   lockData: {//
 

@@ -145,6 +145,49 @@ export function GET_uncallConfig() {
  * 已呼叫
  * */
 
+export function CHANGE_calledRes(data) {//得到待呼叫队列
+  return {
+    type: "CHANGE_calledRes",
+    value: data,
+  }
+}
+
+export function calledAjax() {//待呼叫队列AJAX
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/tellist/', Object.assign({}, getState().calledData), function (res) {
+      const data = res.result.data;
+      dispatch(CHANGE_listNum(data));
+      dispatch(CHANGE_calledRes(res.result.data));
+    }))
+  }
+}
+
+export function CHANGE_calledData(param) {//改变待呼叫筛选项
+  return function (dispatch, getState) {
+    param && dispatch({
+      type: "ADD_calledData",
+      param: param,
+    });
+    dispatch(calledAjax());
+  }
+}
+
+export function GET_calledConfig() {
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/getcallconfig/', {
+      citycode: window.xkTel.citycode,//城市编号
+      jobid: window.xkTel.jobid,//销售工号
+      tel_group_id: window.xkTel.group_id,//部组id
+      noLoad: true,
+    }, (res) => {
+      dispatch({
+        type: "GET_calledConfig",
+        value: res.result.data
+      })
+    }))
+  }
+}
+
 
 
 
