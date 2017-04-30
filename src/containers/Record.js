@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export default class Record extends Component {
   constructor(props) {
@@ -16,7 +16,11 @@ export default class Record extends Component {
 
   render() {
     return (
-      <div>User</div>
+      <section class="r-c g-lastu">
+        <header class="log-tel-hd clearfix">
+          <h3><em class="ico-n"></em>已呼出明细</h3>
+        </header>
+      </section>
     )
   }
 }

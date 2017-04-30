@@ -79483,7 +79483,7 @@
 	    if (!url) {
 	      return;
 	    }
-	    !data.noLoad && dispatch(ADD_loadNum());
+	    (undefined) && !data.noLoad && dispatch(ADD_loadNum());
 	    $.ajax({
 	      type: data.ajaxType || type || 'GET',
 	      url: url,
@@ -79496,7 +79496,7 @@
 	        } else {
 	          noFn ? noFn(res) : alert(res.result.message);
 	        }
-	        !data.noLoad && dispatch(DEL_loadNum());
+	        (undefined) && !data.noLoad && dispatch(DEL_loadNum());
 	      }
 	    });
 	  };
@@ -81680,7 +81680,9 @@
 	              return _react2.default.createElement(
 	                'a',
 	                { style: { cursor: "pointer" }, className: i == uncallData.callqueue ? "onend" : null,
-	                  onClick: changeData, key: i, 'data-type': 'callqueue', 'data-id': i },
+	                  onClick: function onClick(e) {
+	                    return changeData(e);
+	                  }, key: i, 'data-type': 'callqueue', 'data-id': i },
 	                callqueue[i]
 	              );
 	            }),
@@ -82851,7 +82853,7 @@
 /* 856 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -82884,7 +82886,7 @@
 	  }
 
 	  _createClass(Record, [{
-	    key: 'componentDidMount',
+	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.setState({
 	        // 路由应该通过有用的信息来呈现，例如 URL 的参数
@@ -82893,12 +82895,21 @@
 	      });
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'User'
+	        "section",
+	        { "class": "r-c g-lastu" },
+	        _react2.default.createElement(
+	          "header",
+	          { "class": "log-tel-hd clearfix" },
+	          _react2.default.createElement(
+	            "h3",
+	            null,
+	            _react2.default.createElement("em", { "class": "ico-n" }),
+	            "\u5DF2\u547C\u51FA\u660E\u7EC6"
+	          )
+	        )
 	      );
 	    }
 	  }]);

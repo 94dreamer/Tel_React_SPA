@@ -39,7 +39,7 @@ export default class UncallChoose extends Component {
             <h2 className="fl">呼叫列队：</h2>
             {Object.keys(callqueue).map((i) =>
               <a style={{cursor: "pointer"}} className={i == uncallData.callqueue ? "onend" : null}
-                 onClick={changeData} key={i} data-type="callqueue" data-id={i}>{callqueue[i]}</a>
+                 onClick={(e) => changeData(e)} key={i} data-type="callqueue" data-id={i}>{callqueue[i]}</a>
             )}
             <h2 className="fl dataCon">队列日期：</h2>
             <div className="visit_time date-box clearfix fl">

@@ -18,7 +18,7 @@ export function postData(url, data, fn, noFn, isAsync, type) {//封装Ajax
     if (!url) {
       return
     }
-    !data.noLoad && dispatch(ADD_loadNum());
+    process.env.NODE_ENV && !data.noLoad && dispatch(ADD_loadNum());
     $.ajax({
       type: data.ajaxType || type || 'GET',
       url: url,
@@ -31,7 +31,7 @@ export function postData(url, data, fn, noFn, isAsync, type) {//封装Ajax
         } else {
           noFn ? noFn(res) : alert(res.result.message);
         }
-        !data.noLoad && dispatch(DEL_loadNum());
+        process.env.NODE_ENV && !data.noLoad && dispatch(DEL_loadNum());
       }
     })
   }
