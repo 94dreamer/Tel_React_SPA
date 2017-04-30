@@ -1,7 +1,7 @@
 /**
  * Created by zz on 2016/10/28.
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ChoosePosition from './ChoosePosition';
 import ChooseGroup from './ChooseGroup';
 import ChooseCallstatus from './ChooseCallstatus'
@@ -38,20 +38,20 @@ export default class CalledChoose extends Component {
           </div>
         </div>
         <ChooseCallstatus currentCall_status={calledData.call_status} currentCall_item={calledData.call_item}/>
-        <div class="item">
-          <div class="position clearfix multi" style="display: block;">
-            <h2 class="fl">预约情况：</h2>
-            <a href="javascript:;" data-type="customerintention" class="onend">全部</a>
+        <div className="item">
+          <div className="position clearfix multi" style="display: block;">
+            <h2 className="fl">预约情况：</h2>
+            <a href="javascript:;" data-type="customerintention" className="onend">全部</a>
             <a href="javascript:;" data-type="customerintention" data-id="6">可见面</a>
             <a href="javascript:;" data-type="customerintention" data-id="3">无面见意向</a>
             <a href="javascript:;" data-type="customerintention" data-id="4">离职</a>
             <a href="javascript:;" data-type="customerintention" data-id="5">改行</a>
           </div>
         </div>
-        <div class="item">
-          <div class="position clearfix multi" style="display: block;">
-            <h2 class="fl">核实意向：</h2>
-            <a href="javascript:;" data-type="buylevel" class="onend">全部</a>
+        <div className="item">
+          <div className="position clearfix multi" style="display: block;">
+            <h2 className="fl">核实意向：</h2>
+            <a href="javascript:;" data-type="buylevel" className="onend">全部</a>
             <a href="javascript:;" data-type="buylevel" data-id="2">A+有意向</a>
             <a href="javascript:;" data-type="buylevel" data-id="3">A可以考虑</a>
             <a href="javascript:;" data-type="buylevel" data-id="5">B暂无意向</a>
@@ -77,7 +77,7 @@ export default class CalledChoose extends Component {
           </div>
         </div>
         <ChooseKeyword />
-        <div class="cleanbox">
+        <div className="cleanbox">
           <a></a>
         </div>
       </div>

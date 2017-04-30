@@ -3,6 +3,8 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import LockInTab from './LockInTab';
+import FootPage from '../common/FootPage';
 
 class LockInBox extends Component {
   render() {
@@ -13,10 +15,8 @@ class LockInBox extends Component {
 
         <div className="table_callCon">
           <div className="log-table log-table-sales">
-            <!--("lockIn_tab_temp",{data:data})-->
             <LockInTab data={calledRes} />
           </div>
-          <!-- 分页 -->
           <div className="main-foot">
             <FootPage turnPage={this.turnPage}/>
           </div>

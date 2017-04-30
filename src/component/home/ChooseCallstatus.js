@@ -58,8 +58,8 @@ class ChooseGroupHover extends Component {
   render() {
     const {call_item, currentGroup} = this.props;
     return (
-      <div class="choose multi">
-        <a href="javascript:;" data-type="call_item" class={currentGroup ? null : "onend"}>全部</a>
+      <div className="choose multi">
+        <a href="javascript:;" data-type="call_item" className={currentGroup ? null : "onend"}>全部</a>
         {call_item.map((item) =>
           <a href="javascript:void(0);" data-type="call_item" data-id={item.id} key={item.id} className={item.id==currentGroup?"onend":null}>{item.name}</a>
         )}

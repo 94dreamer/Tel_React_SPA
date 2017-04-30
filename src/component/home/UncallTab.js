@@ -33,7 +33,7 @@ export default class UncallTab extends Component {
             {data.list.map(list=>
               <tr key={list.uid}>
                 <td>{list.number}</td>
-                {window.$_GET.groupid ?
+                {window.ROLE.groupid ?
                   <td>
                     <a rel="noopener noreferrer" href="/saletel/record?citycode={window.xkTel.citycode}&uid={list.basicinfo.uid}&groupid={window.$_GET['groupid']}">{list.basicinfo.name}</a>
                   </td>

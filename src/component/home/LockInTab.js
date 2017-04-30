@@ -3,11 +3,10 @@
  */
 import React, {Component, PropTypes} from 'react';
 
-const {isSet, citycode} = window.ROLE;
-
 export  default  class LockInTab extends Component {
   render() {
     const {data} = this.props;
+    const {isSet, citycode} = window.ROLE;
     if (!data.list.length) {
       return <div classNames="side-null"></div>
     }
@@ -32,6 +31,7 @@ export  default  class LockInTab extends Component {
 class Tr extends Component {
   render() {
     const {list} = this.props;
+    const {isSet, citycode} = window.ROLE;
     return (
       <tr>
         <td>{list.number}</td>

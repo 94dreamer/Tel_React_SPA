@@ -38,7 +38,7 @@ export default class UncallChoose extends Component {
           <div className="position clearfix">
             <h2 className="fl">呼叫列队：</h2>
             {Object.keys(callqueue).map((i) =>
-              <a style={{cursor: "pointer"}} className={i == uncallData.callqueue ? "oned" : null}
+              <a style={{cursor: "pointer"}} className={i == uncallData.callqueue ? "onend" : null}
                  onClick={changeData} key={i} data-type="callqueue" data-id={i}>{callqueue[i]}</a>
             )}
             <h2 className="fl dataCon">队列日期：</h2>
@@ -58,7 +58,7 @@ export default class UncallChoose extends Component {
         </div>
         <ChooseGroup groups={config.group} currentParent={uncallData.parent} currentGroup={uncallData.group}/>
         <ChooseKeyword />
-        <div class="cleanbox">
+        <div className="cleanbox">
           <a></a>
         </div>
       </div>
