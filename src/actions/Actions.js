@@ -24,7 +24,7 @@ export function postData(url, data, fn, noFn, isAsync, type) {//封装Ajax
       url: url,
       data: data,
       async: isAsync !== undefined ? isAsync : true,
-      success: function (res) {
+      /*success: function (res) {
         var res = (typeof res == 'string') ? JSON.parse(res) : res;
         if (res.result.code == 0) {
           fn ? fn(res) : alert('操作成功');
@@ -32,8 +32,16 @@ export function postData(url, data, fn, noFn, isAsync, type) {//封装Ajax
           noFn ? noFn(res) : alert(res.result.message);
         }
         process.env.NODE_ENV && !data.noLoad && dispatch(DEL_loadNum());
+      }*/
+    }).done((res)=>{
+      var res = (typeof res == 'string') ? JSON.parse(res) : res;
+      if (res.result.code == 0) {
+        fn ? fn(res) : alert('操作成功');
+      } else {
+        noFn ? noFn(res) : alert(res.result.message);
       }
-    })
+      process.env.NODE_ENV && !data.noLoad && dispatch(DEL_loadNum());
+    }).fail()
   }
 }
 /**
