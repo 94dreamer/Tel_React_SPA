@@ -164,6 +164,18 @@ export function loadNum(state = 0, action) {
 
 }
 
+/**
+ * 经纪人拜访记录页面
+ * */
+
+export function telagentinfo(state = {}, action) {
+  switch (action.type) {
+    case "GET_telagentinfo":
+      return action.value;
+    default:
+      return state;
+  }
+}
 
 // const rootReducer = combineReducers({  // 合并reducers函数
 //   // page,

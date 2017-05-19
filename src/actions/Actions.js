@@ -25,15 +25,15 @@ export function postData(url, data, fn, noFn, isAsync, type) {//封装Ajax
       data: data,
       async: isAsync !== undefined ? isAsync : true,
       /*success: function (res) {
-        var res = (typeof res == 'string') ? JSON.parse(res) : res;
-        if (res.result.code == 0) {
-          fn ? fn(res) : alert('操作成功');
-        } else {
-          noFn ? noFn(res) : alert(res.result.message);
-        }
-        process.env.NODE_ENV && !data.noLoad && dispatch(DEL_loadNum());
-      }*/
-    }).done((res)=>{
+       var res = (typeof res == 'string') ? JSON.parse(res) : res;
+       if (res.result.code == 0) {
+       fn ? fn(res) : alert('操作成功');
+       } else {
+       noFn ? noFn(res) : alert(res.result.message);
+       }
+       process.env.NODE_ENV && !data.noLoad && dispatch(DEL_loadNum());
+       }*/
+    }).done((res) => {
       var res = (typeof res == 'string') ? JSON.parse(res) : res;
       if (res.result.code == 0) {
         fn ? fn(res) : alert('操作成功');
@@ -195,6 +195,26 @@ export function GET_calledConfig() {
     }))
   }
 }
+
+
+/**
+ * 经纪人拜访记录页面
+ * */
+
+export function agentInfoAjax(param) {//经纪人信息
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/telagentinfo/', {
+      citycode: param.citycode,
+      uid: param.uid,
+    }, (res) => {
+      dispatch({
+        type: "GET_telagentinfo",
+        value: res.result.data.info || res.result.data
+      })
+    }))
+  }
+}
+
 
 
 

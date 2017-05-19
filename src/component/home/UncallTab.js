@@ -1,14 +1,14 @@
 /**
  * Created by zz on 2016/10/28.
  */
-import React,{Component} from 'react';
+import React, {Component} from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 export default class UncallTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     const data = this.props.data || [];
     const isNull = !(data && data.list && data.list.length);
@@ -30,16 +30,37 @@ export default class UncallTab extends Component {
               <th width="20%">待呼叫标识</th>
               <th width="10" className="bor_r0">加入列队的时间</th>
             </tr>
-            {data.list.map(list=>
+            {data.list.map(list =>
               <tr key={list.uid}>
                 <td>{list.number}</td>
-                {window.ROLE.groupid ?
+                {window.ROLE.level == 1 ?
                   <td>
-                    <a rel="noopener noreferrer" href="/saletel/record?citycode={window.xkTel.citycode}&uid={list.basicinfo.uid}&groupid={window.$_GET['groupid']}">{list.basicinfo.name}</a>
-                  </td>
-                  :
+                    <Link
+                      to={{
+                        pathname: `/saletel/list/record/`,
+                        // pathname: `/saletel/list/record/${window.xkTel.citycode}/${list.basicinfo.uid}/${window.ROLE['jobid']}`,
+                        search: `?citycode=${window.xkTel.citycode}&uid=${list.basicinfo.uid}&jobid=${window.ROLE['jobid']}`,
+                        state: {
+                          citycode: window.xkTel.citycode,
+                          uid: list.basicinfo.uid,
+                          jobid: window.ROLE['jobid'],
+                        }
+                      }}>{list.basicinfo.name}</Link>
+                  </td> :
                   <td>
-                    <a rel="noopener noreferrer" href="/saletel/record?citycode={window.xkTel.citycode}&uid={list.basicinfo.uid}&jobid={window.$_GET['jobid']}">{list.basicinfo.name}</a>
+                    <Link
+                      to={{
+                        pathname: '/saletel/list/record/',
+                        search: `?citycode=${window.xkTel.citycode}&uid=${list.basicinfo.uid}&groupid=${window.ROLE['groupid']}`,
+                        state: {
+                          citycode: window.xkTel.citycode,
+                          uid: list.basicinfo.uid,
+                          groupid: window.ROLE['groupid']
+                        },
+                        query:{
+                          page:1
+                        }
+                      }}>{list.basicinfo.name}</Link>
                   </td>
                 }
                 <td>{list.basicinfo.companyshortname} {list.basicinfo.storename}</td>

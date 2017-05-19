@@ -22,8 +22,8 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/saletel/list/" component={Home}/>
-      <Route path="/saletel/list/work" component={Work}/>
-      <Route path="/saletel/list/record" component={Record}/>
+      <Route path="/saletel/list/work/" component={Work}/>
+      <Route path="/saletel/list/record/" component={Record}/>
       <Route component={NoMatch}/>
     </Switch>
   </Router>

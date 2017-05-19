@@ -111,3 +111,26 @@ getComponent(nextState, cb) {
 --display-modules默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块 这次命令行的结果已经很有参考价值，可以帮助我们定位耗时比较长的步骤
 
 cnpm install --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
+
+
+#### 五、react-router4
+
+1. 传递复杂参数带不去过
+
+route 带一个/:id/  是可以的 /:id/:city/ 无法匹配
+最后用的 state
+
+```
+<Link
+    to={{
+    pathname: `/saletel/list/record/`,
+    //pathname: `/saletel/list/record/${window.xkTel.citycode}/`,
+    // search: `?citycode=${window.xkTel.citycode}&uid=${list.basicinfo.uid}&jobid=${window.ROLE['jobid']}`,
+    state: {
+      citycode: window.xkTel.citycode,
+      uid: list.basicinfo.uid,
+      jobid: window.ROLE['jobid'],
+    }
+}}>{list.basicinfo.name}</Link>
+```
+但是这样也有一个问题 复制链接在新页面打开 location的state丢失了，看来只能用location.search手动解析一下的蠢办法。

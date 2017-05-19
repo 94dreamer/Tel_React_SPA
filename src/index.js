@@ -12,8 +12,8 @@ window.ROLE = {
   isCallCenter: window.xkTel.isCallCenter,
   telGroupRelationType: window.xkTelInfo.telGroupRelationType,
   citycode: window.xkTel.citycode,
-  jobid:null,
-  groupid:null,
+  jobid:window.gArr.userinfo.jobid,
+  groupid:window.xkTel.groupid,
 };
 
 const initialState = {
@@ -50,6 +50,9 @@ const initialState = {
 
   },
   loadNum: 0,//loading
+
+  telagentinfo:null,//经纪人信息
+
 };
 
 const store = configureStore(initialState);

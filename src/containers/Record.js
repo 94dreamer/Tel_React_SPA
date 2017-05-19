@@ -1,26 +1,40 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import User from '../component/record/User';
+import History from '../component/record/History';
+import {connect} from 'react-redux';
+import actions from '../actions';
 
-export default class Record extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
+const Record = (props) => {
+  //解析参数
+  console.log(props);
+  let {search}=props.location;
+  search=search.slice(1).split('&');
+  var params={};
+  search.map(item=>{
+    let param=item.split('=');
+    params[param[0]]=param[1];
+  });
+  return (
+    <section className="r-c g-lastu">
+      <header className="log-tel-hd clearfix">
+        <h3><em className="ico-n"></em>已呼出明细</h3>
+      </header>
+      <User params={params} agentInfoAjax={props.agentInfoAjax} telagentinfo={props.telagentinfo}/>
+      <History params={params} />
+    </section>
+  )
+};
 
-  componentDidMount() {
-    this.setState({
-      // 路由应该通过有用的信息来呈现，例如 URL 的参数
-      // user: findUserById(this.props.params.userId)
-      user: this.props.params.userId
-    })
+const mapStateToProps = (state) => {
+  return {
+    telagentinfo: state.telagentinfo
   }
+};
 
-  render() {
-    return (
-      <section class="r-c g-lastu">
-        <header class="log-tel-hd clearfix">
-          <h3><em class="ico-n"></em>已呼出明细</h3>
-        </header>
-      </section>
-    )
+const mapDispatchToProps = (dispatch) => {
+  return {
+    agentInfoAjax: (e) => dispatch(actions.agentInfoAjax(e))
   }
-}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Record);
