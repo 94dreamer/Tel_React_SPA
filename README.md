@@ -72,7 +72,8 @@ getComponent(nextState, cb) {
 
 2. fetch暂时不支持中断，没有相关API。
 
-3. *extra* 尴尬的是因为后来把ajax放到了dispatch的action函数中，而不是在组件进行ajax交互，导致ajax的abort功能也一直没有用到。。。
+3. *extra* 尴尬的是因为后来把ajax放到了redux dispatch的action函数中，而不是在组件进行ajax交互，导致ajax的abort功能也一直没有用到。。。
+4. 反而可以考虑fetch。。jquery的包太大，但是有时候也无法避免需要使用jq的api。
 
 因为这个原因所以没有办法在react的es6语法环境中，在不使用isMounted()的情况下使用类似ajax的abort()方法在组件卸载的生命周期内停止异步操作，防止报错。
 
@@ -84,9 +85,11 @@ getComponent(nextState, cb) {
 
 #### 二、使用Redux/React-Redux/Redux-DevTools
 
-1. connect允许传入两个参数，第一个是筛选可用的state来传入props，第二个是筛选可用的action来dispatch，注入到props。
+- 最理想的组件化开发方式是依托组件树的结构，每个组件完成自己内部事务的处理。当组件之间出现通信需求的时候，不得不借助于Redux之类的库来做转发，但是Redux的理念，又不仅仅是只定位于做转发，它更是期望能管理整个应用的状态，这反过来对组件的实现，甚至应用的整体架构造成了较大的影响。 ​​​​
 
-2. Redux-DevTools一开始的配置走了坑,附上自己的 [redux-devtools中文文档](https://github.com/94dreamer/Note/tree/master/redux-devtools全攻略)
+- connect允许传入两个参数，第一个是筛选可用的state来传入props，第二个是筛选可用的action来dispatch，注入到props。
+
+- Redux-DevTools一开始的配置走了坑,附上自己的 [redux-devtools中文文档](https://github.com/94dreamer/Note/tree/master/redux-devtools全攻略)
 
 #### 三、组件
 
