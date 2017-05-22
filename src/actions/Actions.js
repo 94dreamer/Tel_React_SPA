@@ -215,6 +215,22 @@ export function agentInfoAjax(param) {//经纪人信息
   }
 }
 
+export function visitListAjax(param) {
+  return function (dispatch, getState) {
+    dispatch(postData('/saleajax/telagentvisitlist/', {
+      citycode: param.citycode,
+      uid: param.uid,
+      type: param.type,//类型，1为销售拜访记录，2为电销拜访记录
+      currpage: param.currpage || 1,
+    }, (res) => {
+      dispatch({
+        type:'GET_visitlist',
+        value:res.result.data
+      })
+    }));
+  }
+}
+
 
 
 

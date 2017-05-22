@@ -10,25 +10,28 @@ export  default class History extends Component {
     }
   }
 
-  changeType = (type) => {
+  componentDidMount() {
+    this.props.visitListAjax({...this.props.params, type: this.state.type});
+  }
+
+  handleClick = (type) => {
     this.setState({type: type});
   };
 
   render() {
-    if(!this.props.data){
-      return null
-    }
-    const {tel_total, total, list, tel_list} = this.props.data ;
+    const {tel_total, total, list, tel_list} = this.props.visitlist || {};
     return (
       <div className="record_newCon">
         <div className="record_4">
           <h2><em />拜访历史</h2>
           <div className="con">
             <ul className="main-title">
-              <li className={this.state.type == 2 ? "current" : null}><a> 电销呼叫历史（{tel_total}）</a></li>
-              <li className={this.state.type == 1 ? "current" : null}><a> 销售拜访历史（{total}）</a></li>
+              <li className={this.state.type == 2 ? "current" : null} onClick={() => this.handleClick(2)}><a>
+                电销呼叫历史（{tel_total}）</a></li>
+              <li className={this.state.type == 1 ? "current" : null} onClick={() => this.handleClick(1)}><a>
+                销售拜访历史（{total}）</a></li>
             </ul>
-            {!list.length && !tel_list.length ?
+            {!(list && list.length) && !(tel_list && tel_list.length) ?
               <div className="side-null"/>
               :
               <div className="log-table log-table-tel detail-table">

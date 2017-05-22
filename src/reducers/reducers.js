@@ -177,6 +177,15 @@ export function telagentinfo(state = {}, action) {
   }
 }
 
+export function visitlist(state = {}, action) {
+  switch (action.type) {
+    case "GET_visitlist":
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 // const rootReducer = combineReducers({  // 合并reducers函数
 //   // page,
 //   queuenum,

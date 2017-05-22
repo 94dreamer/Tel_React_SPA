@@ -53,6 +53,8 @@ const initialState = {
 
   telagentinfo:null,//经纪人信息
 
+  visitlist:null,//拜访记录
+
 };
 
 const store = configureStore(initialState);

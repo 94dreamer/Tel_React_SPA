@@ -52,7 +52,7 @@ export default class CalledTab extends Component {
                 <td>{list.saleinfo.parent_name}-{list.saleinfo.group_name}</td>
                 <td>{list.visitinfo.ctime_view}</td>
                 <td>{list.visitinfo.customerintention == 7 ? "--" : list.visitinfo.talk_time}</td>
-                <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark.slice(0,30)}</td>
+                <td title={list.visitinfo.remark} style={{cursor: "help"}}>{list.visitinfo.remark && list.visitinfo.remark.slice(0,30)}</td>
                 <td>{list.visitinfo.buylevel_view}</td>
                 <td>{list.visitinfo.customerintention == 7 ? "呼叫失败" : "呼叫成功"}</td>
                 <td>{list.visitinfo.visitlabel_view}</td>

@@ -7,12 +7,12 @@ import actions from '../actions';
 const Record = (props) => {
   //解析参数
   console.log(props);
-  let {search}=props.location;
-  search=search.slice(1).split('&');
-  var params={};
-  search.map(item=>{
-    let param=item.split('=');
-    params[param[0]]=param[1];
+  let {search} = props.location;
+  search = search.slice(1).split('&');
+  var params = {};
+  search.map(item => {
+    let param = item.split('=');
+    params[param[0]] = param[1];
   });
   return (
     <section className="r-c g-lastu">
@@ -20,20 +20,22 @@ const Record = (props) => {
         <h3><em className="ico-n"></em>已呼出明细</h3>
       </header>
       <User params={params} agentInfoAjax={props.agentInfoAjax} telagentinfo={props.telagentinfo}/>
-      <History params={params} />
+      <History params={params} visitListAjax={props.visitListAjax} visitlist={props.visitlist}/>
     </section>
   )
 };
 
 const mapStateToProps = (state) => {
   return {
-    telagentinfo: state.telagentinfo
+    telagentinfo: state.telagentinfo,
+    visitlist: state.visitlist,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    agentInfoAjax: (e) => dispatch(actions.agentInfoAjax(e))
+    agentInfoAjax: (e) => dispatch(actions.agentInfoAjax(e)),
+    visitListAjax: (e) => dispatch(actions.visitListAjax(e)),
   }
 };
 
