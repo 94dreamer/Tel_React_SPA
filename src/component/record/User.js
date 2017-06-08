@@ -68,7 +68,7 @@ export default class User extends Component {
                   {$info.payinfo.all &&
                   <li>
                     {$info.payinfo.all.map(item => {
-                      return (<p>
+                      return (<p key={item.ucid}>
                         <strong>{item.ucname.replace('V', '<em className="v-s">V</em>')}</strong><q>|</q><span>{item.startdate}-{item.enddate}</span>
                       </p>)
                     })}
@@ -98,7 +98,7 @@ export default class User extends Component {
                   <li className="fl g-last">
                     {Object.keys($info.visitinfo.network).map(index => {
                       let item = $info.visitinfo.network[index];
-                      return (<p><a href="">{item.name}</a><q>|</q><em
+                      return (<p key={item.name}><a href="">{item.name}</a><q>|</q><em
                         className={item.num > 0 ? 'c_red' : 'c_gray'}>{item.num > 0 ? '有' : '无'}成交</em>
                       </p>)
                     })}
@@ -124,7 +124,7 @@ export default class User extends Component {
                     <li className="g-lastu">
                       {$info.visitinfo.tradelist.map(item => {
                         return (
-                          <p>{item.tradetime}
+                          <p key={item.tradetime+item.sinaid+item.communityname}>{item.tradetime}
                             <q>|</q>{item.communityname}<q>|</q>{item.room}居<q>|</q>{item.buildingarea}平<q>|</q>{item.tradeprice}万元
                           </p>
                         )
@@ -139,7 +139,7 @@ export default class User extends Component {
                     <li className="g-lastu">
                       <p>
                         {Object.keys($info.statinfo.not_standard_item_list).map((index, dex) => {
-                          return (<span>
+                          return (<span key={dex}>
                             {dex = !0 && <q>|</q>}
                             <a>{$info.statinfo.not_standard_item_list[index]}</a>
                           </span>)
@@ -153,7 +153,7 @@ export default class User extends Component {
                     <li className="g-u l-tit"><span className="tag t-7tdq"><q
                       className="col-w">7天到期</q><em>{$info.statinfo.expire_after_7days}</em></span></li>
                     <li className="g-lastu">
-                      {$info.payinfo.end.map(item => <p>
+                      {$info.payinfo.end.map(item => <p key={item.ucid}>
                         <strong>{item.ucname.replace('V', '<em className="v-s">V</em>')}</strong><q>|</q>&nbsp;{item.enddate}
                       </p>)}
                     </li>
@@ -163,7 +163,7 @@ export default class User extends Component {
                     <li className="g-u l-tit"><span className="tag t-7tkt"><q
                       className="col-w">7天开通</q><em>{$info.statinfo.open_in_7days}</em></span></li>
                     <li className="g-lastu">
-                      {$info.payinfo.start.map(item => <p>
+                      {$info.payinfo.start.map(item => <p key={item.ucid}>
                         <strong>{item.ucname.replace('V', '<em className="v-s">V</em>')}</strong><q>|</q>&nbsp;{$info.payinfo.start[index].startdate}
                       </p>)}
                     </li>
@@ -173,7 +173,7 @@ export default class User extends Component {
                     <li className="g-u l-tit"><span
                       className="tag t-60txx"><q>60天下线</q><em>{$info.statinfo.expire_in_60days_ago}</em></span></li>
                     <li className="g-lastu">
-                      {$info.payinfo.down60.map(item => <p>
+                      {$info.payinfo.down60.map(item => <p key={item.ucid}>
                         <strong>{item.ucname.replace('V', '<em className="v-s">V</em>')}</strong><q>|</q>&nbsp;{item.enddate}
                       </p>)}
                     </li>

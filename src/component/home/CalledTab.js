@@ -11,7 +11,6 @@ export default class CalledTab extends Component {
 
   render() {
     const data = this.props.data;
-    console.log(data)
     let isNull = !(data && data.list && data.list.length);
     return (
       isNull ?

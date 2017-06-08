@@ -11,7 +11,7 @@ const config = {
   },
   output: {
     path: `${__dirname}/dist`,
-    filename: '[name].js',
+    filename: '[name].js?[chunkhash:6]',
     chunkFilename:'chunk[id][name].js?[chunkhash:6]',
     publicPath: 'http://res2.esf.leju.com/Tel_React_SPA/dist/'
   },

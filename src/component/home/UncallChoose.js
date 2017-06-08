@@ -28,7 +28,7 @@ export default class UncallChoose extends Component {
       "5": "7天到期",
       "6": "7天开通"
     };
-    let date = uncallData.queuedate ? moment(uncallData.queuedate) : moment(new Date());
+    let date = uncallData.queuedate ? moment(new Date(uncallData.queuedate)) : moment(new Date());
     console.log("UncallChoose render");
     return (
       <div>
@@ -49,7 +49,7 @@ export default class UncallChoose extends Component {
                           dateFormatCalendar="MMMM"
                           locale="zh-cn"
                           onChange={(e) => {
-                            changeDate(e.format('YYYY/MM/DD'))
+                            changeData(null, {type: 'queuedate', value: e.format('YYYY/MM/DD')})
                           }}
               />
               <label htmlFor="queueDate" className="time_r fl"><em className="icon-date"/></label>

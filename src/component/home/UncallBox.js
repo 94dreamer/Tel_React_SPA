@@ -22,16 +22,23 @@ class UncallBox extends Component {
 
   };
 
-  changeData = (e) => {
-    const dataType = e.target.dataset.type;
-    const dataId = e.target.dataset.id;
-    if (!dataType) {
-      return
+  changeData = (e,params) => {
+    let action=null;
+    if(e){
+      const dataType = e.target.dataset.type;
+      const dataId = e.target.dataset.id;
+      if (!dataType) {
+        return
+      }
+      action={
+        type: dataType,
+        value: dataId
+      }
+    }else {
+      action=params;
     }
-    this.props.changeData({
-      type: dataType,
-      value: dataId
-    });
+    console.log(action);
+    this.props.changeData(action);
   };
 
   componentDidMount() {

@@ -10,20 +10,39 @@ import {
   Link,
   Switch,//会渲染它里面的第一个可以匹配的
 } from 'react-router-dom';
+import Bundle from '../component/common/bundle';
 
+// 异步引入
+import Home from 'bundle-loader?lazy&name=[name]!../containers/Home';
+const HomePage = () => (
+  <Bundle load={Home}>
+    {(Home) => <Home/>}
+  </Bundle>
+);
 
-import Home from '../containers/Home';
-import Work from '../containers/Work';
-import Record from '../containers/Record';
+import Work from 'bundle-loader?lazy&name=[name]!../containers/Work';
+const WorkPage = () => (
+  <Bundle load={Work}>
+    {(Work) => <Work/>}
+  </Bundle>
+);
+
+import Record from 'bundle-loader?lazy&name=[name]!../containers/Record';
+const RecordPage = () => (
+  <Bundle load={Record}>
+    {(Record) => <Record/>}
+  </Bundle>
+);
+
 import NoMatch from '../component/NoMatch';
 
 
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path="/saletel/list/" component={Home}/>
-      <Route path="/saletel/list/work/" component={Work}/>
-      <Route path="/saletel/list/record/" component={Record}/>
+      <Route exact path="/saletel/list/" component={HomePage}/>
+      <Route path="/saletel/list/work/" component={WorkPage}/>
+      <Route path="/saletel/list/record/" component={RecordPage}/>
       <Route component={NoMatch}/>
     </Switch>
   </Router>
