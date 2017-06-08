@@ -137,3 +137,7 @@ route 带一个/:id/  是可以的 /:id/:city/ 无法匹配
 }}>{list.basicinfo.name}</Link>
 ```
 但是这样也有一个问题 复制链接在新页面打开 location的state丢失了，看来只能用location.search手动解析一下的蠢办法。
+
+2. react-router-redux
+
+让我们可以在redux改变路由，而不重新加载页面。

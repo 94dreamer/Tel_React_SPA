@@ -41,9 +41,9 @@ export default class UncallTab extends Component {
                         // pathname: `/saletel/list/record/${window.xkTel.citycode}/${list.basicinfo.uid}/${window.ROLE['jobid']}`,
                         search: `?citycode=${window.xkTel.citycode}&uid=${list.basicinfo.uid}&jobid=${window.ROLE['jobid']}`,
                         state: {
-                          citycode: window.xkTel.citycode,
-                          uid: list.basicinfo.uid,
-                          jobid: window.ROLE['jobid'],
+                          // citycode: window.xkTel.citycode,
+                          // uid: list.basicinfo.uid,
+                          // jobid: window.ROLE['jobid'],
                         }
                       }}>{list.basicinfo.name}</Link>
                   </td> :
@@ -53,9 +53,9 @@ export default class UncallTab extends Component {
                         pathname: '/saletel/list/record/',
                         search: `?citycode=${window.xkTel.citycode}&uid=${list.basicinfo.uid}&groupid=${window.ROLE['groupid']}`,
                         state: {
-                          citycode: window.xkTel.citycode,
-                          uid: list.basicinfo.uid,
-                          groupid: window.ROLE['groupid']
+                          // citycode: window.xkTel.citycode,
+                          // uid: list.basicinfo.uid,
+                          // groupid: window.ROLE['groupid']
                         },
                         query:{
                           page:1

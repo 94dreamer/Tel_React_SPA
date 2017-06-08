@@ -1,16 +1,21 @@
 /**
  * Created by zz on 2016/11/7.
  */
-
 import {createStore, applyMiddleware, compose} from 'redux';
 import {persistState} from 'redux-devtools';
 import ReduxThunk from 'redux-thunk'
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory();
+const middleware = [ ReduxThunk,routerMiddleware(history)];
+
 const enhancer = compose(
   // 你想在开发环境使用的Middleware:
-  applyMiddleware(ReduxThunk),
+  applyMiddleware(...middleware),
   // 这是必需的! 使用你选择的附带monitors的Redux DevTools
   DevTools.instrument(),
   //参数，让你输入?debug_session=<key> 在地址栏中持续地debug会话

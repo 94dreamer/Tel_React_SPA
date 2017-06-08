@@ -1,10 +1,8 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
-
-console.log("环境变量", process.env.NODE_ENV);
+// console.log("环境变量", process.env.NODE_ENV);
 
 window.ROLE = {
   isSet: (!window.gArr['saleinfo'] || !window.gArr['saleinfo'].position || window.gArr['saleinfo'].position != 6),
@@ -12,8 +10,8 @@ window.ROLE = {
   isCallCenter: window.xkTel.isCallCenter,
   telGroupRelationType: window.xkTelInfo.telGroupRelationType,
   citycode: window.xkTel.citycode,
-  jobid:window.gArr.userinfo.jobid,
-  groupid:window.xkTel.groupid,
+  jobid: window.gArr.userinfo.jobid,
+  groupid: window.xkTel.groupid,
 };
 
 const initialState = {
@@ -51,9 +49,9 @@ const initialState = {
   },
   loadNum: 0,//loading
 
-  telagentinfo:null,//经纪人信息
+  telagentinfo: null,//经纪人信息
 
-  visitlist:null,//拜访记录
+  visitlist: null,//拜访记录
 
 };
 
@@ -61,6 +59,7 @@ const store = configureStore(initialState);
 
 $("#page1_top,#page1_middle,#page1_bottom").remove();
 $(".tel-box").append("<div id='APP'></div>");
+
 ReactDOM.render(
   <Root store={store}/>,
   document.getElementById("APP")

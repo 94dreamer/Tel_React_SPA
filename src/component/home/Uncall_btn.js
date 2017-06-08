@@ -12,7 +12,7 @@ export default class Uncall_btn extends Component {
             <a href="javascript:;" id="startWork" className="btn_blue">正在登录</a>
             <a href="javascript:;" id="quitWork" className="btn_red">置忙</a>
             </span> :
-              <a href="javascript:;" id="startWork" className="btn_blue">开始工作</a>
+              <a href="javascript:;" id="startWork" className="btn_blue"  onClick={this.props.startWork}>开始工作</a>
           )
           : null
         }

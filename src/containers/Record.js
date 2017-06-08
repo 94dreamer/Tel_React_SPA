@@ -6,8 +6,7 @@ import actions from '../actions';
 
 const Record = (props) => {
   //解析参数
-  console.log(props);
-  let {search} = props.location;
+  let {search} = props.location || window.location;
   search = search.slice(1).split('&');
   var params = {};
   search.map(item => {
@@ -25,10 +24,11 @@ const Record = (props) => {
   )
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,ownProps) => {
   return {
     telagentinfo: state.telagentinfo,
     visitlist: state.visitlist,
+    location:ownProps.location
   }
 };
 

@@ -22,6 +22,10 @@ class UncallBox extends Component {
 
   };
 
+  startWork=()=>{
+
+  };
+
   changeData = (e,params) => {
     let action=null;
     if(e){
@@ -52,7 +56,7 @@ class UncallBox extends Component {
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
-          <Uncall_btn />
+          <Uncall_btn startWork={this.startWork}/>
           <div className="uncall_choose_box">
             {config && <UncallChoose uncallData={uncallData} config={config} changeData={this.changeData}/>}
           </div>
@@ -69,7 +73,7 @@ class UncallBox extends Component {
   }
 }
 
-function select(state) {
+function mapStateToProps(state) {
   return {
     uncallData: state.uncallData,
     uncallRes: state.uncallRes,
@@ -80,7 +84,8 @@ function select(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeData: (e) => dispatch(actions.CHANGE_uncallData(e)),
-    getConfig: () => dispatch(actions.GET_uncallConfig())
+    getConfig: () => dispatch(actions.GET_uncallConfig()),
+
   }
 }
-export default connect(select, mapDispatchToProps)(UncallBox);
+export default connect(mapStateToProps, mapDispatchToProps)(UncallBox);

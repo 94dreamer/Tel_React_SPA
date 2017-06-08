@@ -3,9 +3,11 @@
  */
 import * as reducers from './reducers';
 import {combineReducers} from 'redux';
+import {routerReducer} from 'react-router-redux'
 
-// console.log(reducers);
-
-const rootReducer=combineReducers({...reducers});
+const rootReducer = combineReducers({
+  ...reducers,
+  router: routerReducer
+});
 
 export default rootReducer;

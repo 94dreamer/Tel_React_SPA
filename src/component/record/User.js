@@ -10,7 +10,6 @@ export default class User extends Component {
 
   render() {
     const $info = this.props.telagentinfo;
-    console.log($info);
     if (!$info) {
       return null;
     }

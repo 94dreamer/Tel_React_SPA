@@ -196,6 +196,57 @@ export function GET_calledConfig() {
   }
 }
 
+/**
+ * 开始工作
+ * */
+export function startWork() {
+  return function (dispatch, getState) {
+    if (getState().uncallData.citycode == "hq") {
+      alert("请选择城市");
+      return false;
+    }
+    dispatch(postData('/saleajax/tellist/', {
+      ...getState().uncallData,
+      is_work: 1
+    }, (res) => {
+      if (!res.result.data.list.length) {
+        alert("呼叫队列没有号码");
+        return false;
+      }
+      var uid = res.result.data.list[0].uid;
+      var tel = res.result.data.list[0].basicinfo.mobile;
+
+      if (!tel || !uid) {
+        alert("呼出参数不全");
+        return false;
+      }
+
+      /*保存一份本次取出来的信息*/
+      // window.TEL_AGENT = $.extend({}, res.result.data.list[0]);
+      SET_TEL_AGENT(res.result.data.list[0]);
+
+      window.WORK_PARAM = {
+        work_type: 1,
+        calltype: 2
+      };//工作参数
+
+      //telSales.startWork(tel, uid);//逻辑判断在第二页
+
+      dispatch();
+      
+    }))
+  }
+}
+
+
+/*经纪人*/
+export function SET_TEL_AGENT(list) {
+  return {
+    type:"TEL_AGENT",
+    value:list,
+  }
+}
+
 
 /**
  * 经纪人拜访记录页面
@@ -224,8 +275,8 @@ export function visitListAjax(param) {
       currpage: param.currpage || 1,
     }, (res) => {
       dispatch({
-        type:'GET_visitlist',
-        value:res.result.data
+        type: 'GET_visitlist',
+        value: res.result.data
       })
     }));
   }
