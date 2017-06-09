@@ -7,11 +7,6 @@ import WorkAgent from '../component/work/WorkAgent';
 import FootPage from '../component/common/FootPage';
 
 class Work extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   render() {
     const {info}=this.props;
     return (

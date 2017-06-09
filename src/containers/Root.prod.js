@@ -12,7 +12,7 @@ export default class Root extends Component{
     return (
       <Provider store={store}>
         <div>
-          <App/>
+          <App store={store}/>
           <Laoding />
         </div>
       </Provider>

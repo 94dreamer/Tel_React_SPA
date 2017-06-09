@@ -12,7 +12,7 @@ import {
 import {ConnectedRouter, routerReducer, routerMiddleware, push} from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory()
+const history = createHistory();
 
 import Bundle from '../component/common/bundle';
 // 异步引入
@@ -40,17 +40,18 @@ const RecordPage = (props) => {
 };
 import NoMatch from '../component/NoMatch';
 
-const App = () => {
+const App = (props) => {
+  console.warn(props);
   return (
     <ConnectedRouter history={history}>
-      <Router>
+      {/*<Router>*/}
         <Switch>
           <Route exact path="/saletel/list/" component={HomePage}/>
           <Route path="/saletel/list/work/" component={WorkPage}/>
           <Route path="/saletel/list/record/" component={RecordPage}/>
           <Route component={NoMatch}/>
         </Switch>
-      </Router>
+      {/*</Router>*/}
     </ConnectedRouter>
   )
 };

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import User from '../component/record/User';
 import History from '../component/record/History';
 import {connect} from 'react-redux';
@@ -16,7 +16,7 @@ const Record = (props) => {
   return (
     <section className="r-c g-lastu">
       <header className="log-tel-hd clearfix">
-        <h3><em className="ico-n"></em>已呼出明细</h3>
+        <h3><em className="ico-n" />已呼出明细</h3>
       </header>
       <User params={params} agentInfoAjax={props.agentInfoAjax} telagentinfo={props.telagentinfo}/>
       <History params={params} visitListAjax={props.visitListAjax} visitlist={props.visitlist}/>

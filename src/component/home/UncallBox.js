@@ -1,7 +1,6 @@
 /**
  * Created by zz on 2016/8/19.
  */
-
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Uncall_btn from './Uncall_btn'
@@ -16,14 +15,6 @@ class UncallBox extends Component {
       type: "currpage",
       value: index,
     });
-  };
-
-  callout = (tel, uid) => {
-
-  };
-
-  startWork=()=>{
-
   };
 
   changeData = (e,params) => {
@@ -52,11 +43,11 @@ class UncallBox extends Component {
 
   render() {
     console.log("UncallBox render");
-    const {uncallData, uncallRes, config} = this.props;
+    const {uncallData, uncallRes, config,startWork} = this.props;
     return (
       <div id="uncall-tag" className="tag_tab">
         <div className="tag_callCon">
-          <Uncall_btn startWork={this.startWork}/>
+          <Uncall_btn startWork={startWork}/>
           <div className="uncall_choose_box">
             {config && <UncallChoose uncallData={uncallData} config={config} changeData={this.changeData}/>}
           </div>
@@ -85,7 +76,7 @@ function mapDispatchToProps(dispatch) {
   return {
     changeData: (e) => dispatch(actions.CHANGE_uncallData(e)),
     getConfig: () => dispatch(actions.GET_uncallConfig()),
-
+    startWork:()=>dispatch(actions.startWork()),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UncallBox);

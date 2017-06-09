@@ -1,6 +1,8 @@
 /**
  * Created by zhouzhen on 2017/4/19.
  */
+import { push } from 'react-router-redux'
+
 export function ADD_loadNum() { //加载loading显示 +1
   return {
     type: "ADD_loadNum",
@@ -201,10 +203,15 @@ export function GET_calledConfig() {
  * */
 export function startWork() {
   return function (dispatch, getState) {
+    debugger;
     if (getState().uncallData.citycode == "hq") {
       alert("请选择城市");
       return false;
     }
+
+    dispatch(push('/saletel/list/work/'));
+    return false;
+
     dispatch(postData('/saleajax/tellist/', {
       ...getState().uncallData,
       is_work: 1
@@ -223,7 +230,7 @@ export function startWork() {
 
       /*保存一份本次取出来的信息*/
       // window.TEL_AGENT = $.extend({}, res.result.data.list[0]);
-      SET_TEL_AGENT(res.result.data.list[0]);
+      dispatch(SET_telAgent(res.result.data.list[0]));
 
       window.WORK_PARAM = {
         work_type: 1,
@@ -232,7 +239,7 @@ export function startWork() {
 
       //telSales.startWork(tel, uid);//逻辑判断在第二页
 
-      dispatch();
+      // dispatch();
       
     }))
   }
@@ -240,9 +247,9 @@ export function startWork() {
 
 
 /*经纪人*/
-export function SET_TEL_AGENT(list) {
+export function SET_telAgent(list) {
   return {
-    type:"TEL_AGENT",
+    type:"SET_telAgent",
     value:list,
   }
 }
